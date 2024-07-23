@@ -1,0 +1,12 @@
+
+.arr {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    box-sizing: border-box;
+    /* gap: 0.2rem; */
+
+
+  }

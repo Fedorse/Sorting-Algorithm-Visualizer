@@ -1,0 +1,19 @@
+.bar {
+    background-color: aquamarine;
+    border: 0.1rem solid #666;
+    transition: background-color 0.5s, transform 0.5s;
+    margin: 0 0.1rem; 
+
+
+  }
+  
+  .bar.active {
+    background-color: coral;
+  }
+
+  .bar.compare{
+    background-color: rgb(77, 83, 83);
+  }
+  .bar.pivot{
+    background-color: blue;
+  }
