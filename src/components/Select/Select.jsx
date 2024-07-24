@@ -6,6 +6,8 @@ const Select = ({selectedAlgorithm, onChange}) => {
     <option value="selection">Selection algorithm</option>
     <option value="bubble">Bubble sort</option>
     <option value="quick">Quick sort</option>
+    <option value="insertion">insertion sort</option>
+
   </select>
   )
 }

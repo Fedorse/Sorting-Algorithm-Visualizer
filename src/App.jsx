@@ -7,6 +7,7 @@ import { quickSort } from "./components/algorithms/quickSort"
 import Button from "./components/Button/Button"
 import Array from "./components/Array/Array"
 import Select from "./components/Select/Select"
+import { insertionSort } from "./components/algorithms/insertionSort"
 
 
 const App = () => {
@@ -16,7 +17,6 @@ const App = () => {
   const [compareIndex, setCompareIndex] = useState(null)
   const [pivotIndex, setPivotIndex] = useState(null)
   const [algorithm, setAlgorithm] = useState('selection')
-
 
 
   useEffect(()=>{
@@ -41,7 +41,9 @@ const App = () => {
           await bubbleSort(array,setArray,setActiveIndex, setCompareIndex)
         } else if (algorithm === 'quick') {
           await quickSort(array, setActiveIndex, setArray , setPivotIndex, setCompareIndex);
-                }
+      } else if(algorithm ==='insertion'){
+          await insertionSort(array,setArray,setActiveIndex,setCompareIndex)
+        }
         setSorting(false)
   }
 
