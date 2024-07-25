@@ -2,13 +2,17 @@ import { sleep } from "../../utils/sleep"
 
 
 
-export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex) => {
+export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex,cancelSort) => {
 
     let arr = [...array]
     let count = 0
     for (let i = 0; i < arr.length; i++) {
-        for(let j = 0; j < arr.length - i - 1; j++) {
+        if(cancelSort.current ) return undefined
+        for(let j = 0; j < arr.length - i - 1 ; j++) {
+            if(cancelSort.current ) return undefined
+
             if(arr[j + 1] < arr[j]){
+
                 setActiveIndex(j)
                 setCompareIndex(j + 1)
 
@@ -19,7 +23,7 @@ export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex
                     arr[j] = arr[j + 1]
                     arr[j + 1] = tmp
                     setArray([...arr])
-                    await sleep(500)
+                    await sleep(100)
 
                 }
                 count +=1
@@ -28,6 +32,6 @@ export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex
         
     }
     setActiveIndex(null)
+    setCompareIndex(null)
 
-    console.log(count)
 }

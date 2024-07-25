@@ -66,16 +66,19 @@ import { sleep } from "../../utils/sleep";
 
 
 
-const partition = async (arr, start, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex) => {
+const partition = async (arr, start, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex, cancelSort) => {
     const pivotElement = arr[end];
     let partitionIndex = start; 
     setActiveIndex(end);
     setPivotIndex(partitionIndex)
-    await sleep(50);
+    await sleep(500);
+
+
 
     for (let i = start; i < end; i++) {
+        if(cancelSort.current) return undefined
         setCompareIndex(i);
-        await sleep(20);
+        await sleep(200);
 
         if (arr[i] < pivotElement) {
             [arr[i], arr[partitionIndex]] = [arr[partitionIndex], arr[i]];
@@ -92,19 +95,20 @@ const partition = async (arr, start, end, setActiveIndex, setArray, setCompareIn
     return partitionIndex;
 };
 
-const quickSortRecursive = async (arr, start, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex) => {
+const quickSortRecursive = async (arr, start, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex,cancelSort) => {
     if (start >= end) {
         return;
     }
+    if(cancelSort.current) return undefined
 
-    const index = await partition(arr, start, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex);
+    const index = await partition(arr, start, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex,cancelSort);
 
-    await quickSortRecursive(arr, start, index - 1, setActiveIndex, setArray, setCompareIndex, setPivotIndex);
-    await quickSortRecursive(arr, index + 1, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex);
+    await quickSortRecursive(arr, start, index - 1, setActiveIndex, setArray, setCompareIndex, setPivotIndex, cancelSort);
+    await quickSortRecursive(arr, index + 1, end, setActiveIndex, setArray, setCompareIndex, setPivotIndex,cancelSort);
 };
 
-export const quickSort = async (array, setActiveIndex, setArray, setCompareIndex, setPivotIndex) => {
-    await quickSortRecursive(array, 0, array.length - 1, setActiveIndex, setArray, setCompareIndex, setPivotIndex);
+export const quickSort = async (array, setActiveIndex, setArray, setCompareIndex, setPivotIndex, cancelSort) => {
+    await quickSortRecursive(array, 0, array.length -1, setActiveIndex, setArray, setCompareIndex, setPivotIndex, cancelSort);
 
     setActiveIndex(null);
     setCompareIndex(null);
