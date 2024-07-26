@@ -2,7 +2,7 @@ import { sleep } from "../../utils/sleep"
 
 
 
-export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex,cancelSort) => {
+export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex,cancelSort, speed) => {
 
     let arr = [...array]
     let count = 0
@@ -23,7 +23,7 @@ export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex
                     arr[j] = arr[j + 1]
                     arr[j + 1] = tmp
                     setArray([...arr])
-                    await sleep(100)
+                    await sleep(100, speed.current)
 
                 }
                 count +=1

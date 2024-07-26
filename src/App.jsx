@@ -2,10 +2,10 @@
 import { useEffect, useRef, useState } from "react"
 import { generateRandomArray } from "./utils/generateRandomArray"
 import { selectionSort } from "./components/algorithms/selectionSort"
-import { bubbleSort } from './components/algorithms/bubbleSort'
 import { quickSort } from "./components/algorithms/quickSort"
 import Button from "./components/Button/Button"
 import Array from "./components/Array/Array"
+import { bubbleSort } from './components/algorithms/bubbleSort'
 import Select from "./components/Select/Select"
 import { insertionSort } from "./components/algorithms/insertionSort"
 
@@ -17,6 +17,9 @@ const App = () => {
   const [compareIndex, setCompareIndex] = useState(null)
   const [pivotIndex, setPivotIndex] = useState(null)
   const [algorithm, setAlgorithm] = useState('selection')
+  // const [speed, SetSpeed] = useState(1)
+  const speed = useRef(1)
+
 
   const cancelSort = useRef(false)
 
@@ -45,13 +48,13 @@ const App = () => {
         setSorting(true)
         cancelSort.current = false
         if(algorithm === 'selection'){
-          await selectionSort(array, setArray, setActiveIndex,setCompareIndex,cancelSort)
+          await selectionSort(array, setArray, setActiveIndex,setCompareIndex,cancelSort, speed)
         } else if (algorithm === 'bubble') {
-          await bubbleSort(array,setArray,setActiveIndex, setCompareIndex, cancelSort)
+          await bubbleSort(array,setArray,setActiveIndex, setCompareIndex, cancelSort, speed)
         } else if (algorithm === 'quick') {
-          await quickSort(array, setActiveIndex, setArray , setPivotIndex, setCompareIndex, cancelSort);
+          await quickSort(array, setActiveIndex, setArray , setPivotIndex, setCompareIndex, cancelSort,speed);
       } else if(algorithm ==='insertion'){
-          await insertionSort(array,setArray,setActiveIndex,setCompareIndex, cancelSort)
+          await insertionSort(array,setArray,setActiveIndex,setCompareIndex, cancelSort, speed)
         }
         setSorting(false)
   }
@@ -67,6 +70,10 @@ const App = () => {
 
   const barWidth = window.screen.width / array.length;
   
+const handleSpeed = (event) => {
+  speed.current = event.target.value
+  
+}
 
 
   return (
@@ -78,6 +85,10 @@ const App = () => {
     <Button onClick={handleSort}>
     Sort array
     </Button>
+    <input type="range"  id="speed" min={0.10} max={10} step={0.10} onChange={handleSpeed}/>
+    <label htmlFor="speed">Speed</label>
+    <h3>Speed: {speed.current}</h3>
+
     <Array array={array} activeIndex={activeIndex} barWidth={barWidth} compareIndex={compareIndex} pivotIndex={pivotIndex}/>
   </section>
   )

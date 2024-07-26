@@ -1,4 +1,4 @@
-export const sleep = (ms) => {
+export const sleep = (ms,speedFactor) => {
     return new Promise((resolve) => 
-      setTimeout((resolve), ms))
+      setTimeout((resolve), ms * speedFactor ))
   }
