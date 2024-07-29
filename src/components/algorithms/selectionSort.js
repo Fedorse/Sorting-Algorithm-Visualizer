@@ -1,20 +1,17 @@
 import { sleep } from "../../utils/sleep";
 
 export const selectionSort = async (array, setArray, setActiveIndex, setCompareIndex, cancelSort,speed) => {
-    console.log(speed.current)
     let arr = [...array];
     let count = 0;
 
     for (let i = 0; i < arr.length; i++) { 
-        if(cancelSort.current)
-            return undefined
+        if(cancelSort.current) return undefined
         
         let indexMin = i;
         setActiveIndex(indexMin);
 
         for (let j = i + 1; j < arr.length; j++) {
-            if(cancelSort.current)
-                return undefined
+            if(cancelSort.current) return undefined
             
             setCompareIndex(j);
             await sleep(50,speed.current); // Задержка для визуализации сравнения
@@ -33,10 +30,11 @@ export const selectionSort = async (array, setArray, setActiveIndex, setCompareI
         setArray([...arr]);
 
         await sleep(200,speed.current); // Задержка для визуализации обмена
-        setCompareIndex(null); // Сброс индекса сравнения после обмена
+        setCompareIndex(null); 
     }
 
     setActiveIndex(null); // Сброс активного индекса после завершения сортировки
     setCompareIndex(null); // Сброс индекса сравнения после завершения сортировки
+    return arr
 
 };
