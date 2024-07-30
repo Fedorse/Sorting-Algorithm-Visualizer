@@ -87,20 +87,20 @@ const handleSpeed = (event) => {
   speed.current = event.target.value
   
 }
-const selectedSize = (size) => {
-  if(size === 'low') {
-    setArray(generateRandomArray(10, 400, 600))
-  } else if(size === 'medium'){
-    setArray(generateRandomArray(50, 50, 600))
-  } else if(size ==='large') {
-    setArray(generateRandomArray(100,10,600))
-  }
-}
-const handleSizeChange = (event)=>{
-  const value = event.target.value
-  setSize(value)
-  selectedSize(value)
-}
+// const selectedSize = (size) => {
+//   if(size === 'low') {
+//     setArray(generateRandomArray(10, 400, 600))
+//   } else if(size === 'medium'){
+//     setArray(generateRandomArray(50, 50, 600))
+//   } else if(size ==='large') {
+//     setArray(generateRandomArray(100,10,600))
+//   }
+// }
+// const handleSizeChange = (event)=>{
+//   const value = event.target.value
+//   setSize(value)
+//   selectedSize(value)
+// }
 const stopSort = () => {
   if(sorting){
     cancelSort.current = true
@@ -124,11 +124,11 @@ const stopSort = () => {
     <label htmlFor="speed">Speed</label>
     <h3>Speed: {speed.current}</h3>
     {/* <button className="button" onClick={stopSort}>{textButton}</button> */}
-<select  className="select"  onChange={handleSizeChange} value={size}>
+{/* <select  className="select"  onChange={handleSizeChange} value={size}>
   <option value="low">low size arr</option>
   <option value="medium">medium size arr</option>
   <option value="large">large size arr</option>
-</select>
+</select> */}
 
     <Array array={array} activeIndex={activeIndex} barWidth={barWidth} compareIndex={compareIndex} pivotIndex={pivotIndex}/>
   </section>

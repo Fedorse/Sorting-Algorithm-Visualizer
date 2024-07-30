@@ -23,7 +23,6 @@ export const selectionSort = async (array, setArray, setActiveIndex, setCompareI
             count += 1;
         }
 
-        // Обмен элементов
         let tmp = arr[i];
         arr[i] = arr[indexMin];
         arr[indexMin] = tmp;
@@ -33,8 +32,8 @@ export const selectionSort = async (array, setArray, setActiveIndex, setCompareI
         setCompareIndex(null); 
     }
 
-    setActiveIndex(null); // Сброс активного индекса после завершения сортировки
-    setCompareIndex(null); // Сброс индекса сравнения после завершения сортировки
+    setActiveIndex(null); 
+    setCompareIndex(null); 
     return arr
 
 };
