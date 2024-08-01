@@ -1,29 +1,33 @@
 import { sleep } from "../../utils/sleep"
+import { pause } from "../../utils/pause"
 
 
 
-export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex,cancelSort, speed) => {
+export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex, evalStateRef, speedRef) => {
 
     let arr = [...array]
     let count = 0
-    for (let i = 0; i < arr.length; i++) {
-        if(cancelSort.current ) return undefined
+  for (let i = 0; i < arr.length; i++) {
         for(let j = 0; j < arr.length - i - 1 ; j++) {
-            if(cancelSort.current ) return undefined
+            await pause(evalStateRef)
+            if(evalStateRef.current === 'notStarted'){
+                throw new Error('cancelSort')
+                
+            }
 
             if(arr[j + 1] < arr[j]){
 
                 setActiveIndex(j)
                 setCompareIndex(j + 1)
 
-                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                // [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
 
 
-                    // let tmp = arr[j]
-                    // arr[j] = arr[j + 1]
-                    // arr[j + 1] = tmp
+                    let tmp = arr[j]
+                    arr[j] = arr[j + 1]
+                    arr[j + 1] = tmp
                     setArray([...arr])
-                    await sleep(100, speed.current)
+                    await sleep(100, speedRef.current)
 
                 }
                 count +=1
@@ -33,6 +37,5 @@ export const  bubbleSort = async(array, setArray ,setActiveIndex,setCompareIndex
     }
     setActiveIndex(null)
     setCompareIndex(null)
-    return arr
 
 }
