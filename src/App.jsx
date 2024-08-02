@@ -31,10 +31,15 @@ const App = () => {
     const {
         evalState,
         speed,
+        history,
+        currentStep,
         evalStateRef,
         setSpeed,
         setEvalState,
-        speedRef
+        speedRef,
+        updateHistory,
+        goToNextStep,
+        goToPreviousStep
     } = useEvaluationState()
 
     const [shouldSort, setShouldSort] = useState(false);
@@ -65,7 +70,7 @@ const App = () => {
         setEvalState('started')
 
         if(selectedAlgorithm === 'selection'){
-            await selectionSort(array, setArray, setActiveIndex,setCompareIndex, evalStateRef, speedRef)
+            await selectionSort(array, setArray, setActiveIndex,setCompareIndex, evalStateRef, speedRef,updateHistory)
          } else if (selectedAlgorithm === 'bubble') {
             await bubbleSort(array,setArray,setActiveIndex, setCompareIndex, evalStateRef, speedRef)
          } else if (selectedAlgorithm === 'quick') {
@@ -120,10 +125,13 @@ const barWidth = window.screen.width / array.length;
     <Button onClick={handleAlgorithmRun}>
     {getButtonText()}
     </Button>
-    <input type="range"  id="speed" value={speed} min={0.10} max={10} step={0.10} onChange={(e) => setSpeed(e.target.value)}/>
+    <Button onClick={goToNextStep} > next</Button>
+    <Button onClick={goToPreviousStep} > prev</Button>
+
+    <input type="range"  id="speed" value={speed} min={0.10} max={100} step={0.10} onChange={(e) => setSpeed(e.target.value)}/>
     <label htmlFor="speed">Speed</label>
     <h3>Speed: {speed}</h3>
-    <Array  array={array} activeIndex={activeIndex} barWidth={barWidth} compareIndex={compareIndex} pivotIndex={pivotIndex}/>
+    <Array  array={array} activeIndex={activeIndex} barWidth={barWidth} compareIndex={compareIndex} pivotIndex={pivotIndex} history={history} currentStep={currentStep}/>
   </section>
   )
 }

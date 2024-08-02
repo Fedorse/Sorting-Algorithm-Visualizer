@@ -1,24 +1,26 @@
 import Bar from '../Bar/Bar'
 import './Array.css'
 
- const Array = ({array, activeIndex, barWidth, compareIndex, pivotIndex}) => (
-  
-    <div className="arr">
+ const Array = ({array, activeIndex, barWidth, compareIndex, pivotIndex, history,currentStep}) => {
+  const displayState = history[currentStep] || { array, activeIndex, compareIndex, pivotIndex };
+    return (
+      <div className="arr">
       {
-        array.map((heightPx, index)=>(
+        displayState.array.map((heightPx, index)=>(
           <Bar
           key={index}
           width={barWidth}
           height={heightPx}
-          isActive={index === activeIndex}
-          isCompare={index === compareIndex} 
-          isPivot = {index === pivotIndex}
+          isActive={index === displayState.activeIndex}
+          isCompare={index === displayState.compareIndex}
+          isPivot={index === displayState.pivotIndex}
   
           />
         ))
       }
     </div>
+    )
 
-  )
+    }
 
   export default Array

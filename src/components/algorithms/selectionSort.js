@@ -1,7 +1,7 @@
 import { sleep } from "../../utils/sleep";
 import { pause } from "../../utils/pause";
 
-export const selectionSort = async (array, setArray, setActiveIndex, setCompareIndex, evalStateRef, speedRef) => {
+export const selectionSort = async (array, setArray, setActiveIndex, setCompareIndex, evalStateRef, speedRef, updateHistory) => {
     let arr = [...array];
     let count = 0;
 
@@ -28,7 +28,14 @@ export const selectionSort = async (array, setArray, setActiveIndex, setCompareI
         let tmp = arr[i];
         arr[i] = arr[indexMin];
         arr[indexMin] = tmp;
+
         setArray([...arr]);
+        updateHistory({
+            array: [...arr],
+            activeIndex: indexMin,
+            compareIndex: null, // Обновить после выхода из внутреннего цикла
+            pivotIndex: null, // Если алгоритм не использует pivotIndex, можно оставить null
+          });
 
         await sleep(100,speedRef.current); // Задержка для визуализации обмена
         setCompareIndex(null); 
