@@ -1,6 +1,5 @@
 
 import { useEffect, useRef, useState } from "react"
-import { generateRandomArray } from "./utils/generateRandomArray"
 import { selectionSort } from "./components/algorithms/selectionSort"
 import { quickSort } from "./components/algorithms/quickSort"
 import Button from "./components/Button/Button"
@@ -8,68 +7,10 @@ import Array from "./components/Array/Array"
 import { bubbleSort } from './components/algorithms/bubbleSort'
 import Select from "./components/Select/Select"
 import { insertionSort } from "./components/algorithms/insertionSort"
+import { useAlgorithmState } from "./components/hooks/useAlgorithmState"
+import { useEvaluationState } from "./components/hooks/useEvaluationState"
 
 // type AlgState = 'started' | 'notStarted' | 'paused' | 'finished'
-
-const useAlgorithmState = () => {
-    const [array, setArray] = useState(generateRandomArray(15,100,700))
-    const [selectedAlgorithm, setSelectedAlgorithm] = useState('insertion')
-    const [activeIndex, setActiveIndex] = useState(null)
-    const [compareIndex, setCompareIndex] = useState(null)
-    const [pivotIndex, setPivotIndex] = useState(null)
-
-    const resetArray = () => {
-        setArray(generateRandomArray(10, 100, 700));
-        setActiveIndex(null);
-        setCompareIndex(null)
-        setPivotIndex(null)
-      }
-    const resetTracking = () => {
-        setActiveIndex(null);
-        setCompareIndex(null)
-        setPivotIndex(null)
-    }
-    return {
-        array,
-        selectedAlgorithm,
-        activeIndex,
-        compareIndex,
-        pivotIndex,
-        resetArray,
-        resetTracking,
-        setArray,
-        setSelectedAlgorithm,
-        setActiveIndex,
-        setCompareIndex,
-        setPivotIndex
-    }
-}
-
-const useEvaluationState = () => {
-    const [evalState, setEvalState] = useState('notStarted')
-    const [speed, setSpeed] = useState(2)
-
-    const evalStateRef = useRef(evalState)
-    const speedRef = useRef(speed)
-
-    useEffect(()=> {
-        evalStateRef.current = evalState
-    }, [evalState])
-
-    useEffect(() => {
-        speedRef.current = speed
-    }, [speed])
-
-    return {
-        evalState,
-        speed,
-        evalStateRef,
-        setSpeed,
-        setEvalState,
-        speedRef
-    }
-}
-
 
 const App = () => {
     const {
@@ -118,8 +59,6 @@ const App = () => {
             setShouldSort(true)
         }
     }
-
-
 
     const handleSort = async () => {
        try {
