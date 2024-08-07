@@ -13,7 +13,6 @@ export const selectionSort = async (array, setArray, setActiveIndex, setCompareI
             await pause(evalStateRef)
             if(evalStateRef.current === 'notStarted'){
                 throw new Error('cancelSort')
-                
             }
             setCompareIndex(j);
             await sleep(100,speedRef.current); // Задержка для визуализации сравнения

@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { selectionSort } from "./components/algorithms/selectionSort"
 import { quickSort } from "./components/algorithms/quickSort"
 import Button from "./components/Button/Button"
@@ -9,6 +9,13 @@ import Select from "./components/Select/Select"
 import { insertionSort } from "./components/algorithms/insertionSort"
 import { useAlgorithmState } from "./components/hooks/useAlgorithmState"
 import { useEvaluationState } from "./components/hooks/useEvaluationState"
+import Player from "./components/Player/Player"
+import PlayIcon from "./components/icon/PlayIcon"
+import PauseIcon from "./components/icon/PauseIcon"
+import ResumePlay from "./components/icon/ResumePlay"
+import { ResetIcon } from "./components/icon/ResetIcon"
+import { NextStepIcon } from "./components/icon/NextStepIcon"
+import { PreviousStepIcon } from "./components/icon/PreviousStepIcon"
 
 // type AlgState = 'started' | 'notStarted' | 'paused' | 'finished'
 
@@ -91,13 +98,13 @@ const App = () => {
 
 const getButtonText = () => {
     if(evalState === 'notStarted') {
-        return 'start'
+        return <ResumePlay/>
     } else if (evalState === 'started'){
-        return 'paused'
+        return <PauseIcon/>
     } else if (evalState === 'paused'){
-        return 'resume'
+        return <ResumePlay/>
     } else {
-       return 'reset and resume'
+       return <PlayIcon/>
     }
 }
 
@@ -118,7 +125,7 @@ const barWidth = window.screen.width / array.length;
 
   return (
   <section>
-    <Select selectedAlgorithm={selectedAlgorithm} onChange={selectAlgorithm}/>
+    {/* <Select selectedAlgorithm={selectedAlgorithm} onChange={selectAlgorithm}/>
     <Button onClick={resetAlgorithm}>
     Update array
     </Button>
@@ -129,9 +136,16 @@ const barWidth = window.screen.width / array.length;
     <Button onClick={goToPreviousStep} > prev</Button>
 
     <input type="range"  id="speed" value={speed} min={0.10} max={100} step={0.10} onChange={(e) => setSpeed(e.target.value)}/>
-    <label htmlFor="speed">Speed</label>
-    <h3>Speed: {speed}</h3>
+    <h3>Speed: {speed}</h3> */}
+    
     <Array  array={array} activeIndex={activeIndex} barWidth={barWidth} compareIndex={compareIndex} pivotIndex={pivotIndex} history={history} currentStep={currentStep}/>
+    <div className="player">
+    <Select selectedAlgorithm={selectedAlgorithm} onChange={selectAlgorithm}/>
+    <Button onClick={resetAlgorithm}><ResetIcon/></Button>
+    <Button onClick={goToPreviousStep}><PreviousStepIcon/></Button>
+    <Button onClick={handleAlgorithmRun}>{getButtonText()}</Button>
+    <Button onClick={goToNextStep}><NextStepIcon/></Button>
+    </div>
   </section>
   )
 }

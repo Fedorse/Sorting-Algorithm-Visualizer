@@ -2,14 +2,14 @@ import { useState } from "react"
 import { generateRandomArray } from "../../utils/generateRandomArray"
 
 export const useAlgorithmState = () => {
-    const [array, setArray] = useState(generateRandomArray(100,100,700))
+    const [array, setArray] = useState(generateRandomArray(60,100,700))
     const [selectedAlgorithm, setSelectedAlgorithm] = useState('selection')
     const [activeIndex, setActiveIndex] = useState(null)
     const [compareIndex, setCompareIndex] = useState(null)
     const [pivotIndex, setPivotIndex] = useState(null)
 
     const resetArray = () => {
-        setArray(generateRandomArray(100, 100, 700));
+        setArray(generateRandomArray(60, 100, 700));
         setActiveIndex(null);
         setCompareIndex(null)
         setPivotIndex(null)

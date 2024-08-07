@@ -2,7 +2,7 @@ import { useEffect, useState,useRef } from "react"
 
 export const useEvaluationState = () => {
     const [evalState, setEvalState] = useState('notStarted')
-    const [speed, setSpeed] = useState(2)
+    const [speed, setSpeed] = useState(100)
     const [history, setHistory] = useState([])
     const [currentStep, setCurrentStep] = useState(0)
 
@@ -27,6 +27,7 @@ export const useEvaluationState = () => {
     const goToNextStep = () =>{
         setCurrentStep((prevStep)=> Math.min(prevStep + 1, history.length -1))
     }
+
 
 
     return {

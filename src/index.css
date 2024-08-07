@@ -3,4 +3,23 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+body{
+	background-color: rgb(98, 97, 97);
 
+}
+section{
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+}
+.player{
+	background-color: rgb(17, 35, 15);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	height: auto;
+	align-items: center;
+	flex-grow: 1;
+	
+}

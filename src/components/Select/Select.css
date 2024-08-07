@@ -1,8 +1,9 @@
 .select {
     padding: 10px 20px;
     margin: 5px;
-    font-size: 1rem;
+    /* font-size: 1rem; */
     border-radius: 0.5rem;
     border: 1px solid #ccc;
     background-color: beige;
+    width: 30px;
 }
