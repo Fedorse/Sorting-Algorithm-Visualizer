@@ -1,5 +1,26 @@
 .player-container {
-    background: #000;
-    width: 1000px;
-    height: 300px;
+  width: 400px;
+  height: auto;
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1000;
+  background-color: black;
+  opacity: 80%;
+  border-top-right-radius: 20px;
+}
+.controls {
+  display: flex;
+  justify-content: space-around;
+}
+
+.speed-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+  margin-bottom: 10px;
+}
+.controls-speed {
+  justify-content: center;
+  display: flex;
+  color: wheat;
 }

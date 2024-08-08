@@ -6,6 +6,7 @@ export const useEvaluationState = () => {
     const [history, setHistory] = useState([])
     const [currentStep, setCurrentStep] = useState(0)
 
+
     const evalStateRef = useRef(evalState)
     const speedRef = useRef(speed)
 
@@ -17,15 +18,22 @@ export const useEvaluationState = () => {
         speedRef.current = speed
     }, [speed])
 
-    const updateHistory = (newArray)=> {
-        setHistory((prevHistory) => [...prevHistory, newArray])
+    const updateHistory = (newState)=> {
+        setHistory((prevHistory) => [...prevHistory, newState])
         setCurrentStep((prevStep)=> prevStep + 1)
     }
     const goToPreviousStep = () =>{
         setCurrentStep((prevStep)=> Math.max(prevStep - 1, 0))
+
+        
     }
     const goToNextStep = () =>{
-        setCurrentStep((prevStep)=> Math.min(prevStep + 1, history.length -1))
+        setCurrentStep((prevStep)=> Math.min(prevStep + 1, history.length - 1))
+
+    }
+    const resetHistory = () => {
+        setHistory([])
+        setCurrentStep(0)
     }
 
 
@@ -41,6 +49,8 @@ export const useEvaluationState = () => {
         currentStep,
         updateHistory,
         goToPreviousStep,
-        goToNextStep
+        goToNextStep,
+        resetHistory,
+        
     }
 }
