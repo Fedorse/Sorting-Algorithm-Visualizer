@@ -20,14 +20,9 @@ section {
   margin-top: 50px;
   font-size: xx-large;
   text-transform: capitalize;
+  z-index: 1100;
 }
 
-/* @media (max-width: 768px) {
-	.player {
-		justify-content: space-around;
-		padding-left: 0px;
-	}
-} */
 
 @media (max-width: 768px) {
   .title-algorithm {

@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import { selectionSort } from "./components/algorithms/selectionSort";
-import { quickSort } from "./components/algorithms/quickSort";
-import Array from "./components/Array/Array";
-import { bubbleSort } from "./components/algorithms/bubbleSort";
-import { insertionSort } from "./components/algorithms/insertionSort";
-import { useAlgorithmState } from "./components/hooks/useAlgorithmState";
-import { useEvaluationState } from "./components/hooks/useEvaluationState";
-import PlayIcon from "./components/icon/PlayIcon";
-import PauseIcon from "./components/icon/PauseIcon";
-import ResumePlay from "./components/icon/ResumePlay";
-import Player from "./components/Player/Player";
-import { disableScroll } from "./utils/disableScroll";
+import { useEffect, useState } from 'react';
+import { selectionSort } from './components/algorithms/selectionSort';
+import { quickSort } from './components/algorithms/quickSort';
+import Array from './components/Array/Array';
+import { bubbleSort } from './components/algorithms/bubbleSort';
+import { insertionSort } from './components/algorithms/insertionSort';
+import { useAlgorithmState } from './components/hooks/useAlgorithmState';
+import { useEvaluationState } from './components/hooks/useEvaluationState';
+import PlayIcon from './components/icon/PlayIcon';
+import PauseIcon from './components/icon/PauseIcon';
+import ResumePlay from './components/icon/ResumePlay';
+import Player from './components/Player/Player';
+import { disableScroll } from './utils/disableScroll';
 
 // type AlgState = 'started' | 'notStarted' | 'paused' | 'finished'
 
@@ -55,13 +55,13 @@ const App = () => {
   }, [shouldSort]);
 
   const handleAlgorithmRun = async () => {
-    if (evalState === "notStarted") {
+    if (evalState === 'notStarted') {
       await handleSort();
-    } else if (evalState === "started") {
-      setEvalState("paused");
-    } else if (evalState === "paused") {
-      setEvalState("started");
-    } else if (evalState === "finished") {
+    } else if (evalState === 'started') {
+      setEvalState('paused');
+    } else if (evalState === 'paused') {
+      setEvalState('started');
+    } else if (evalState === 'finished') {
       resetArray();
       resetHistory();
       setShouldSort(true);
@@ -70,8 +70,8 @@ const App = () => {
 
   const handleSort = async () => {
     try {
-      setEvalState("started");
-      if (selectedAlgorithm === "selection") {
+      setEvalState('started');
+      if (selectedAlgorithm === 'selection') {
         await selectionSort(
           array,
           setArray,
@@ -81,7 +81,7 @@ const App = () => {
           speedRef,
           updateHistory,
         );
-      } else if (selectedAlgorithm === "bubble") {
+      } else if (selectedAlgorithm === 'bubble') {
         await bubbleSort(
           array,
           setArray,
@@ -89,8 +89,9 @@ const App = () => {
           setCompareIndex,
           evalStateRef,
           speedRef,
+          updateHistory,
         );
-      } else if (selectedAlgorithm === "quick") {
+      } else if (selectedAlgorithm === 'quick') {
         await quickSort(
           array,
           setActiveIndex,
@@ -99,8 +100,9 @@ const App = () => {
           setCompareIndex,
           evalStateRef,
           speedRef,
+          updateHistory,
         );
-      } else if (selectedAlgorithm === "insertion") {
+      } else if (selectedAlgorithm === 'insertion') {
         await insertionSort(
           array,
           setArray,
@@ -108,24 +110,25 @@ const App = () => {
           setCompareIndex,
           evalStateRef,
           speedRef,
+          updateHistory,
         );
       }
-      setEvalState("finished");
+      setEvalState('finished');
       resetTracking();
     } catch (e) {
-      if (e.message === "cancelSort") {
-        console.log("Sort cancelled");
+      if (e.message === 'cancelSort') {
+        console.log('Sort cancelled');
         resetTracking();
       }
     }
   };
 
   const getButtonText = () => {
-    if (evalState === "notStarted") {
+    if (evalState === 'notStarted') {
       return <ResumePlay />;
-    } else if (evalState === "started") {
+    } else if (evalState === 'started') {
       return <PauseIcon />;
-    } else if (evalState === "paused") {
+    } else if (evalState === 'paused') {
       return <ResumePlay />;
     } else {
       return <PlayIcon />;
@@ -134,21 +137,21 @@ const App = () => {
 
   const selectAlgorithm = (newAlgorithm) => {
     resetTracking();
-    setEvalState("notStarted");
+    setEvalState('notStarted');
     setSelectedAlgorithm(newAlgorithm);
     resetHistory();
     resetArray();
   };
 
   const resetAlgorithm = () => {
-    setEvalState("notStarted");
+    setEvalState('notStarted');
     resetTracking();
     resetArray();
     resetHistory();
   };
 
   const barWidth = window.screen.width / array.length;
-  disableScroll()
+  disableScroll();
 
   return (
     <section>

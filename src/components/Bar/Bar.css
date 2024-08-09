@@ -1,21 +1,26 @@
 .bar {
-  background: linear-gradient(to top, rgb(3, 54, 2), rgb(67, 162, 48), rgb(208, 246, 210)); /* Градиент под углом 45 градусов от aquamarine к lightblue и violet */
-    transition: background-color 0.5s, transform 0.5s;
-    margin: 0 0.1rem; 
-    border: 0.01rem solid #3c3a3a ;
-    border-radius: 3px;
+  background: linear-gradient(
+    to top,
+    rgb(3, 54, 2),
+    rgb(67, 162, 48),
+    rgb(208, 246, 210)
+  );
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+  margin: 0 0.1rem;
+  border: 0.01rem solid #3c3a3a;
+  border-radius: 3px;
+}
 
+.bar.active {
+  background-color: rgb(254, 0, 0);
+  z-index: 100;
+}
 
-  }
-  
-  .bar.active {
-    background-color: rgb(254, 0, 0);
-    z-index: 100;
-  }
-
-  .bar.compare{
-    background-color: rgb(77, 83, 83);
-  }
-  .bar.pivot{
-    background-color: blue;
-  }
+.bar.compare {
+  background-color: rgb(77, 83, 83);
+}
+.bar.pivot {
+  background-color: blue;
+}

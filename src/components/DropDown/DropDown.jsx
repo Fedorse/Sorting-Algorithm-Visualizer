@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
-import "./DropDown.css";
-import useClickOutside from "../hooks/useClickOutside";
-import DropDownIcon from "../icon/DropDownIcon";
+import { useState, useEffect } from 'react';
+import './DropDown.css';
+import useClickOutside from '../hooks/useClickOutside';
+import DropDownIcon from '../icon/DropDownIcon';
+import { algorithms } from '../../constants';
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
 const DropDown = ({ onSelect, selectedAlgorithm }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const algorithms = ["selection", "bubble", "quick", "insertion"];
 
   const toggleDropDown = () => {
     setIsOpen(!isOpen);
@@ -17,14 +18,10 @@ const DropDown = ({ onSelect, selectedAlgorithm }) => {
   };
   useClickOutside(() => {
     if (isOpen) setIsOpen(false);
-  }, "dropdown");
-
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  }, 'dropdown');
 
   return (
-    <div className={`dropdown ${isOpen ? "open" : ""}`}>
+    <div className={`dropdown ${isOpen ? 'open' : ''}`}>
       <span className="dropdown-span" onClick={toggleDropDown}>
         <DropDownIcon />
       </span>
@@ -33,7 +30,7 @@ const DropDown = ({ onSelect, selectedAlgorithm }) => {
           <li
             key={index}
             onClick={() => handleSelect(algorithm)}
-            className={algorithm === selectedAlgorithm ? "selected" : ""}
+            className={algorithm === selectedAlgorithm ? 'selected' : ''}
           >
             {capitalizeFirstLetter(algorithm)} Sort
           </li>

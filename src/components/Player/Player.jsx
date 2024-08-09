@@ -5,6 +5,8 @@ import { ResetIcon } from "../icon/ResetIcon";
 import DropDown from "../DropDown/DropDown";
 import Button from "../Button/Button";
 import { useRef } from "react";
+import InputRange from "../InputRange/InputRange";
+import { speedOptions } from "../../constants";
 
 const Player = ({
   selectAlgorithm,
@@ -80,22 +82,11 @@ const Player = ({
       </div>
       <div className="controls-speed">
         <div>
-          <input
-            style={{ width: "320px", opacity: '70%' }}
-            type="range"
-            id="speed"
-            value={speed}
-            min={0.1}
-            max={100}
-            step={0.1}
-            onChange={(e) => setSpeed(e.target.value)}
-          />
+          <InputRange speed={speed} setSpeed={setSpeed}/>
           <div className="speed-scale">
-            <span>1x</span>
-            <span>2x</span>
-            <span>3x</span>
-            <span>4x</span>
-            <span>5x</span>
+            {speedOptions.map(option =>(
+                <span key={option}>{option}x</span>
+            ))}
           </div>
         </div>
       </div>
