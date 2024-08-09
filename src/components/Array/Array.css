@@ -5,10 +5,9 @@
   justify-content: center;
   align-items: end;
   box-sizing: border-box;
-  /* gap: 0.2rem; */
 }
 @media (max-width: 768px) {
   .arr {
-    height: 85vh;
+    height: 84vh;
   }
 }

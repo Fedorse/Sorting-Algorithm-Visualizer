@@ -6,6 +6,7 @@
 body {
   background-color: rgb(98, 97, 97);
 }
+
 section {
   display: flex;
   height: 100vh;
@@ -14,7 +15,7 @@ section {
 }
 
 .title-algorithm {
-  color: white;
+  color: rgb(255, 253, 253);
   text-align: center;
   margin-top: 50px;
   font-size: xx-large;

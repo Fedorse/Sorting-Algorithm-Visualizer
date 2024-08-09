@@ -10,6 +10,7 @@ import PlayIcon from "./components/icon/PlayIcon";
 import PauseIcon from "./components/icon/PauseIcon";
 import ResumePlay from "./components/icon/ResumePlay";
 import Player from "./components/Player/Player";
+import { disableScroll } from "./utils/disableScroll";
 
 // type AlgState = 'started' | 'notStarted' | 'paused' | 'finished'
 
@@ -147,6 +148,7 @@ const App = () => {
   };
 
   const barWidth = window.screen.width / array.length;
+  disableScroll()
 
   return (
     <section>
@@ -160,7 +162,6 @@ const App = () => {
         history={history}
         currentStep={currentStep}
       />
-      {/* <Select selectedAlgorithm={selectedAlgorithm} onChange={selectAlgorithm}/> */}
       <Player
         selectAlgorithm={selectAlgorithm}
         goToNextStep={goToNextStep}

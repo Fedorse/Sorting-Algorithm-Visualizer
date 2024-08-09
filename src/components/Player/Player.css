@@ -1,12 +1,14 @@
 .player-container {
-  width: 400px;
+  width: 700px;
   height: auto;
   position: fixed;
-  inset: auto 0 0 0;
+  inset: auto 0 0 30%;
   z-index: 1000;
   background-color: black;
   opacity: 80%;
   border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+
 }
 .controls {
   display: flex;
@@ -23,4 +25,14 @@
   justify-content: center;
   display: flex;
   color: wheat;
+}
+
+@media(max-width: 768px){
+  .player-container{
+    width:100%; 
+    inset: auto 0 0 0;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+  }
+
 }

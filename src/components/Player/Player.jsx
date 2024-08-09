@@ -4,6 +4,7 @@ import { NextStepIcon } from "../icon/NextStepIcon";
 import { ResetIcon } from "../icon/ResetIcon";
 import DropDown from "../DropDown/DropDown";
 import Button from "../Button/Button";
+import { useRef } from "react";
 
 const Player = ({
   selectAlgorithm,
@@ -16,6 +17,32 @@ const Player = ({
   handleAlgorithmRun,
   selectedAlgorithm,
 }) => {
+
+  const intervalRef = useRef(null)
+
+  const startInterval = (action) => {
+    if(intervalRef.current === null){
+      intervalRef.current = setInterval(()=>{
+          action()
+      },100)
+    }
+  }
+
+  const clearTimer = () => {
+    if(intervalRef.current !== null){
+      clearInterval(intervalRef.current)
+    }
+    intervalRef.current = null
+  }
+
+  const handleMouseDown = (action) =>{
+    action()
+    startInterval(action)
+  } 
+  const handleMouseUpOrLeave = () =>{
+    clearTimer()
+  }
+
   return (
     <div className="player-container">
       <div className="controls">
@@ -24,11 +51,26 @@ const Player = ({
           selectedAlgorithm={selectedAlgorithm}
         />
         <div className="step-buttons">
-          <Button onClick={goToPreviousStep}>
+          <Button 
+            onMouseDown={() => handleMouseDown(goToPreviousStep)}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
+            onTouchStart={()=> handleMouseDown(goToPreviousStep)}
+            onTouchEnd={handleMouseUpOrLeave}
+            onTouchCancel = {handleMouseUpOrLeave}
+            
+            >
             <PreviousStepIcon />
           </Button>
           <Button onClick={handleAlgorithmRun}>{getButtonText()}</Button>
-          <Button onClick={goToNextStep}>
+          <Button 
+                    onMouseDown={()=>handleMouseDown(goToNextStep)}
+                    onMouseUp = {handleMouseUpOrLeave}
+                    onMouseLeave = {handleMouseUpOrLeave}
+                    onTouchStart={()=> handleMouseDown(goToNextStep)}
+                    onTouchEnd={handleMouseUpOrLeave}
+                    onTouchCancel = {handleMouseUpOrLeave}
+>
             <NextStepIcon />
           </Button>
         </div>
@@ -39,7 +81,7 @@ const Player = ({
       <div className="controls-speed">
         <div>
           <input
-            style={{ width: "320px" }}
+            style={{ width: "320px", opacity: '70%' }}
             type="range"
             id="speed"
             value={speed}
