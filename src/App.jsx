@@ -175,6 +175,7 @@ const App = () => {
         setSpeed={setSpeed}
         handleAlgorithmRun={handleAlgorithmRun}
         selectedAlgorithm={selectedAlgorithm}
+        evalState={evalState}
       />
     </section>
   );

@@ -8,7 +8,6 @@
   opacity: 85%;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-
 }
 .controls {
   display: flex;
@@ -26,13 +25,18 @@
   display: flex;
   color: wheat;
 }
+.step-buttons {
+  display: flex;
+}
+.step-buttons button:disabled {
+  opacity: 30%;
+}
 
-@media(max-width: 768px){
-  .player-container{
-    width:100%; 
+@media (max-width: 768px) {
+  .player-container {
+    width: 100%;
     inset: auto 0 0 0;
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
   }
-
 }

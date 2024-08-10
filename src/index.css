@@ -22,11 +22,67 @@ section {
   text-transform: capitalize;
   z-index: 1100;
 }
-
+.pause-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.play-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.resume-play-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.prev-step-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.next-step-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.reset-icon {
+  width: 2rem;
+  height: 2rem;
+}
+.drop-down-icon {
+  width: 2rem;
+  height: 1.5rem;
+}
 
 @media (max-width: 768px) {
   .title-algorithm {
     font-size: large;
     margin-top: 30px;
+  }
+  .pause-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .play-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .resume-play-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .prev-step-icon {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+  .next-step-icon {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+  .reset-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .drop-down-icon {
+    width: 1rem;
+    height: 0.8rem;
   }
 }
