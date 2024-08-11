@@ -9,90 +9,90 @@ import InputRange from '../InputRange/InputRange';
 import { speedOptions } from '../../constants';
 
 const Player = ({
-  selectAlgorithm,
-  goToNextStep,
-  getButtonText,
-  goToPreviousStep,
-  resetAlgorithm,
-  setSpeed,
-  speed,
-  handleAlgorithmRun,
-  selectedAlgorithm,
-  evalState,
+    selectAlgorithm,
+    goToNextStep,
+    getButtonText,
+    goToPreviousStep,
+    resetAlgorithm,
+    setSpeed,
+    speed,
+    handleAlgorithmRun,
+    selectedAlgorithm,
+    evalState,
 }) => {
-  const intervalRef = useRef(null);
-  console.log(evalState);
-  const startInterval = (action) => {
-    if (intervalRef.current === null) {
-      intervalRef.current = setInterval(() => {
+    const intervalRef = useRef(null);
+
+    const startInterval = (action) => {
+        if (intervalRef.current === null) {
+            intervalRef.current = setInterval(() => {
+                action();
+            }, 100);
+        }
+    };
+
+    const clearTimer = () => {
+        if (intervalRef.current !== null) {
+            clearInterval(intervalRef.current);
+        }
+        intervalRef.current = null;
+    };
+
+    const handleMouseDown = (action) => {
         action();
-      }, 100);
-    }
-  };
+        startInterval(action);
+    };
+    const handleMouseUpOrLeave = () => {
+        clearTimer();
+    };
 
-  const clearTimer = () => {
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = null;
-  };
-
-  const handleMouseDown = (action) => {
-    action();
-    startInterval(action);
-  };
-  const handleMouseUpOrLeave = () => {
-    clearTimer();
-  };
-
-  return (
-    <div className="player-container">
-      <div className="controls">
-        <DropDown
-          onSelect={selectAlgorithm}
-          selectedAlgorithm={selectedAlgorithm}
-        />
-        <div className="step-buttons">
-          <Button
-            onMouseDown={() => handleMouseDown(goToPreviousStep)}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-            onTouchStart={() => handleMouseDown(goToPreviousStep)}
-            onTouchEnd={handleMouseUpOrLeave}
-            onTouchCancel={handleMouseUpOrLeave}
-            disabled={!(evalState === 'paused' || evalState === 'finished')}
-          >
-            <PreviousStepIcon />
-          </Button>
-          <Button onClick={handleAlgorithmRun}>{getButtonText()}</Button>
-          <Button
-            onMouseDown={() => handleMouseDown(goToNextStep)}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-            onTouchStart={() => handleMouseDown(goToNextStep)}
-            onTouchEnd={handleMouseUpOrLeave}
-            onTouchCancel={handleMouseUpOrLeave}
-            disabled={!(evalState === 'paused' || evalState === 'finished')}
-          >
-            <NextStepIcon />
-          </Button>
+    return (
+        <div className="player-container">
+            <div className="controls">
+                <DropDown
+                    onSelect={selectAlgorithm}
+                    selectedAlgorithm={selectedAlgorithm}
+                />
+                <div className="step-buttons">
+                    <Button
+                        onMouseDown={() => handleMouseDown(goToPreviousStep)}
+                        onMouseUp={handleMouseUpOrLeave}
+                        onMouseLeave={handleMouseUpOrLeave}
+                        onTouchStart={() => handleMouseDown(goToPreviousStep)}
+                        onTouchEnd={handleMouseUpOrLeave}
+                        onTouchCancel={handleMouseUpOrLeave}
+                        disabled={!(evalState === 'paused' || evalState === 'finished')}
+                    >
+                        <PreviousStepIcon />
+                    </Button>
+                    <Button onClick={handleAlgorithmRun}>{getButtonText()}</Button>
+                    <Button
+                        onMouseDown={() => handleMouseDown(goToNextStep)}
+                        onMouseUp={handleMouseUpOrLeave}
+                        onMouseLeave={handleMouseUpOrLeave}
+                        onTouchStart={() => handleMouseDown(goToNextStep)}
+                        onTouchEnd={handleMouseUpOrLeave}
+                        onTouchCancel={handleMouseUpOrLeave}
+                        disabled={!(evalState === 'paused' || evalState === 'finished')}
+                    >
+                        <NextStepIcon />
+                    </Button>
+                </div>
+                <Button onClick={resetAlgorithm}>
+                    <ResetIcon />
+                </Button>
+            </div>
+            <div className="controls-speed">
+                <div>
+                    <InputRange speed={speed} setSpeed={setSpeed} />
+                    <div className="speed-scale">
+                        {speedOptions.map((option) => (
+                            <span key={option}>{option}x</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
-        <Button onClick={resetAlgorithm}>
-          <ResetIcon />
-        </Button>
-      </div>
-      <div className="controls-speed">
-        <div>
-          <InputRange speed={speed} setSpeed={setSpeed} />
-          <div className="speed-scale">
-            {speedOptions.map((option) => (
-              <span key={option}>{option}x</span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Player;
