@@ -14,7 +14,7 @@ export const useHistoryState = () => {
 
     const isHistoryEnd = useCallback(() => {
         return currentTrack === history.length - 1
-    }, [currentTrack, history.length]);
+    }, [currentTrack, history]);
 
 
     const trackRef = useRef({ currentTrack, incrementTrack, decrementTrack, setCurrentTrack, isHistoryEnd })
@@ -26,7 +26,9 @@ export const useHistoryState = () => {
 
     const updateHistory = useCallback((newState) => {
         setHistory((prevHistory) => [...prevHistory, newState]);
-        incrementTrack()
+        console.log('history.length', history.length);
+
+        setCurrentTrack(history.length);
     }, [setHistory, incrementTrack]);
 
     const resetHistory = () => {
@@ -36,6 +38,8 @@ export const useHistoryState = () => {
 
     return {
         history,
+        setHistory,
+        setCurrentTrack,
         currentTrack,
         updateHistory,
         resetHistory,

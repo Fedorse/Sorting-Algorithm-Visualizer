@@ -13,15 +13,13 @@ export const usePlayerState = () => {
 
     const speedStateRef = useRef(speed)
 
-    const playerStateRef = useRef(playerState)
+    const playerStateRef = useRef({ playerState, setPlayerState })
 
     useEffect(() => {
-        playerStateRef.current = playerState
-    }, [playerState])
+        playerStateRef.current = { playerState, setPlayerState }
+    }, [playerState, setPlayerState])
 
     useEffect(() => {
-        console.log('SPEED', speed);
-
         speedStateRef.current = speed
     }, [speed])
 

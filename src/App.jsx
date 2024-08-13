@@ -22,7 +22,9 @@ const App = () => {
         updateHistory,
         resetHistory,
         trackRef,
-        isHistoryEnd
+        isHistoryEnd,
+        setHistory,
+        setCurrentTrack
     } = useHistoryState();
 
     const {
@@ -52,7 +54,7 @@ const App = () => {
         setActiveIndex,
         setCompareIndex,
         setPivotIndex,
-    } = useAlgorithmState({ updateHistory });
+    } = useAlgorithmState();
 
 
     const [shouldSort, setShouldSort] = useState(false);
@@ -79,19 +81,23 @@ const App = () => {
     };
 
     const updateArray = useCallback((newArray) => {
-        updateHistory({
-            array: [...newArray],
-            activeIndex,
-            compareIndex,
-            pivotIndex,
+        setHistory((prevHistory) => {
+            const nextHistory = [...prevHistory, {
+                array: [...newArray],
+                activeIndex,
+                compareIndex,
+                pivotIndex,
+            }]
+            setCurrentTrack(nextHistory.length - 1)
+            return nextHistory
         })
-
         setArray([...newArray])
-    }, [activeIndex, compareIndex, pivotIndex, setArray, updateHistory])
+    }, [activeIndex, compareIndex, pivotIndex, setArray, setHistory, setCurrentTrack])
 
     const handleSort = async () => {
         try {
             setEvalState('started');
+
             await algorithms[selectedAlgorithm](
                 array,
                 updateArray,
@@ -143,6 +149,7 @@ const App = () => {
     // disableScroll();
 
     const data = evalState === 'paused' && !isHistoryEnd() ? history[currentTrack] : { array, activeIndex, compareIndex, pivotIndex }
+    // console.log('DATA', history, currentTrack);
 
     return (
         <section>

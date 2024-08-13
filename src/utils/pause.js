@@ -1,23 +1,20 @@
 import { sleep } from './sleep';
 
 export const pause = async (evalStateRef, playerStateRef, trackRef, speedRef) => {
-    console.log('evalStateRef, playerStateRef, trackRef', evalStateRef, playerStateRef, trackRef);
-
     if (evalStateRef.current === 'paused') {
-        if (playerStateRef.current === 'backward') {
-            trackRef.current.setPlayerState(null);
+        if (playerStateRef.current.playerState === 'backward') {
+            playerStateRef.current.setPlayerState(null);
             trackRef.current.decrementTrack()
-        } else if (playerStateRef.current === 'forward' && !trackRef.current.isHistoryEnd()) {
-            trackRef.current.setPlayerState(null);
+        } else if (playerStateRef.current.playerState === 'forward' && !trackRef.current.isHistoryEnd()) {
+            playerStateRef.current.setPlayerState(null);
             trackRef.current.incrementTrack()
-        } else if (playerStateRef.current === 'forward') {
-            trackRef.current.setPlayerState(null);
-            pause(evalStateRef, playerStateRef, trackRef)
+        } else if (playerStateRef.current.playerState === 'forward') {
+            playerStateRef.current.setPlayerState(null);
             return
-        } else {
-            await sleep(speedRef.current);
-            return pause(evalStateRef);
         }
+
+        await sleep(speedRef.current);
+        return pause(evalStateRef, playerStateRef, trackRef, speedRef);
     } else {
         return;
     }
