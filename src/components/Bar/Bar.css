@@ -1,25 +1,28 @@
 .bar {
-  background: linear-gradient(
+  /* background: linear-gradient(
     to top,
     rgb(3, 54, 2),
     rgb(67, 162, 48),
     rgb(208, 246, 210)
-  );
+  ); */
   transition:
     background-color 0.5s,
     transform 0.5s;
   margin: 0 0.1rem;
   border: 0.01rem solid #3c3a3a;
   border-radius: 3px;
+  background-color: rgba(165, 165, 231, 0.976);
+  z-index: 100;
 }
 
 .bar.active {
   background-color: rgb(254, 0, 0);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .bar.compare {
-  background-color: rgb(77, 83, 83);
+  background-color: rgb(40, 250, 250);
+  z-index: 1000;
 }
 .bar.pivot {
   background-color: blue;

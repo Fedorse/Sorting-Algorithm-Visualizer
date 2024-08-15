@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import './DropDown.css';
+import { useState } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
 import DropDownIcon from '../icon/DropDownIcon';
 import { algorithms } from '../../constants';
