@@ -2,82 +2,90 @@ import { useCallback, useState } from "react";
 import { generateRandomArray } from "../utils/generateRandomArray";
 import { algorithms } from "../algorithms";
 
+type AlgorithmState = 'notStarted' | 'started' | 'finished';
 
 export const useAlgorithm = ({ history, player }) => {
-    const [array, setArray] = useState(generateRandomArray(10, 150, 650));
     const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubble');
-    const [activeIndex, setActiveIndex] = useState(null);
-    const [compareIndex, setCompareIndex] = useState(null);
-    const [pivotIndex, setPivotIndex] = useState(null);
+    const [algorithmState, setAlgorithmState] = useState<AlgorithmState>('notStarted');
+    const [array, setArray] = useState(generateRandomArray(10, 150, 650));
+    const [tracking, setTracking] = useState({
+        activeIndex: null,
+        compareIndex: null,
+        pivotIndex: null
+    });
 
-
-    const selectAlgorithm = (name) => {
-        player.setEvalState('notStarted');
-        history.resetHistory();
-        resetAlgorithm();
-        setSelectedAlgorithm(name);
-    }
-
-
-    const resetAlgorithm = () => {
-        player.setEvalState('notStarted');
-        history.resetHistory();
-
+    const resetAlgorithm = useCallback(() => {
         setArray(generateRandomArray(10, 150, 650));
-        setActiveIndex(null);
-        setCompareIndex(null);
-        setPivotIndex(null);
-    };
+        setAlgorithmState('notStarted');
+        setTracking({
+            activeIndex: null,
+            compareIndex: null,
+            pivotIndex: null
+        })
+    }, [setArray, setAlgorithmState, setTracking]);
 
-    const resetTracking = () => {
-        setActiveIndex(null);
-        setCompareIndex(null);
-        setPivotIndex(null);
-    };
+    const resetAll = useCallback(() => {
+        resetAlgorithm();
+        history.resetHistory();
+        player.setPlayerState(null);
+    }, [resetAlgorithm, history, player]);
 
-    const updateArray = useCallback((newArray, activeIndex, compareIndex, pivotIndex) => {
+    const updateArray = useCallback((newArray) => {
         setArray([...newArray]);
-        setActiveIndex(activeIndex);
-        setCompareIndex(compareIndex);
-        setPivotIndex(pivotIndex);
+        history.updateHistory({ array: [...newArray], tracking });
+    }, [setArray, history, tracking]);
 
-        // console.log('activeIndex, compareIndex, pivotIndex', activeIndex, compareIndex, pivotIndex);
+    const updateTracking = useCallback((newTracking) => {
+        setTracking(current => {
+            const nextTracking = { ...current, ...newTracking }
+            history.updateHistory({ array: [...array], tracking: nextTracking });
+            return nextTracking
+        })
+    }, [setTracking, history, array, tracking]);
 
+    const selectAlgorithm = useCallback((name) => {
+        resetAll();
+        setSelectedAlgorithm(name);
+    }, [setSelectedAlgorithm, resetAll]);
 
-        history.updateHistory({ array: [...newArray], activeIndex, compareIndex, pivotIndex });
-    }, [setArray, history, activeIndex, compareIndex, pivotIndex]);
+    const runAlgorithm = useCallback(async () => {
+        const { playerRef, setPlayerState } = player;
+        const { historyRef } = history;
 
-    const runAlgorithm = useCallback(async (name) => {
-        player.setEvalState('started');
-        const algorithm = algorithms[name];
+        setPlayerState('play');
+        setAlgorithmState('started');
+        const algorithm = algorithms[selectedAlgorithm];
+
         await algorithm({
             array,
             updateArray,
-            history,
-            player,
+            updateTracking,
+            history: historyRef,
+            player: playerRef,
         })
 
-        setActiveIndex(null);
-        setCompareIndex(null);
-        setPivotIndex(null);
+        setAlgorithmState('finished');
+    }, [selectedAlgorithm, array, history, player, updateArray, setAlgorithmState, updateTracking]);
 
-        player.setEvalState('finished');
-    }, [array, updateArray, setActiveIndex, setCompareIndex, history, player]);
+    const getCurrentStep = useCallback(() => {
+        const { getCurrentHistoryItem } = history;
+        const { playerState } = player;
+
+        if (!playerState || playerState === 'play') {
+            return { array, tracking }
+        } else {
+            return getCurrentHistoryItem()
+        }
+    }, [array, tracking, history, player]);
 
     return {
         array,
         selectedAlgorithm,
-        activeIndex,
-        compareIndex,
-        pivotIndex,
+        algorithmState,
         selectAlgorithm,
         resetAlgorithm,
-        resetTracking,
-        setArray,
-        setSelectedAlgorithm,
-        setActiveIndex,
-        setCompareIndex,
-        setPivotIndex,
-        runAlgorithm
+        resetAll,
+        runAlgorithm,
+        getCurrentStep
     };
 }

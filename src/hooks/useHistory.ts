@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useHistory = () => {
     const [history, setHistory] = useState([]);
@@ -9,9 +9,7 @@ export const useHistory = () => {
     }, [setCurrentTrack]);
 
     const decrementTrack = useCallback(() => {
-        setCurrentTrack((prevTrack) => {
-            return Math.max(0, prevTrack - 1);
-        });
+        setCurrentTrack((prevTrack) => Math.max(0, prevTrack - 1));
     }, [setCurrentTrack]);
 
     const isHistoryEnd = useCallback(() => {
@@ -20,31 +18,39 @@ export const useHistory = () => {
 
     const updateHistory = useCallback(
         (newState) => {
-            setHistory((prevHistory) => ([...prevHistory, newState]))
+            setHistory((prevHistory) => {
+                setCurrentTrack(prevHistory.length);
+
+                return [...prevHistory, newState]
+            })
         },
         [setHistory, incrementTrack],
     );
 
-    useEffect(() => {
-        setCurrentTrack(Math.max(0, history.length - 1));
-    }, [history, setCurrentTrack])
-
     const resetHistory = useCallback(() => {
         setHistory([]);
-    }, [setHistory]);
+        setCurrentTrack(0);
+    }, [setHistory, setCurrentTrack]);
 
     const getCurrentHistoryItem = useCallback(() => {
         return history[currentTrack]
     }, [history, currentTrack])
 
+
+    const historyRef = useRef({ updateHistory, incrementTrack, decrementTrack, isHistoryEnd })
+
+    useEffect(() => {
+        historyRef.current = { updateHistory, incrementTrack, decrementTrack, isHistoryEnd }
+    }, [updateHistory, incrementTrack, decrementTrack, isHistoryEnd])
+
     return {
         history,
+        historyRef,
         currentTrack,
         getCurrentHistoryItem,
         updateHistory,
         resetHistory,
         incrementTrack,
         decrementTrack,
-        isHistoryEnd,
     };
 };

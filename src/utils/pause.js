@@ -4,28 +4,28 @@ export const pause = async ({
     player,
     history,
 }) => {
-    await sleep(player.speed);
+    await sleep(player.current.speed);
 
-    if (player.evalStateRef.current === 'paused') {
-        if (player.playerStateRef.current === 'backward') {
-            player.setPlayerState(null);
-            history.decrementTrack();
+    if (player.current.playerState === 'play') {
+        return
+    } else {
+        if (player.current.playerState === 'backward') {
+            player.current.setPlayerState('pause');
+            history.current.decrementTrack();
         } else if (
-            player.playerStateRef.current === 'forward' &&
-            !history.isHistoryEnd()
+            player.current.playerState === 'forward' &&
+            !history.current.isHistoryEnd()
         ) {
-            player.setPlayerState(null);
-            history.incrementTrack();
-        } else if (player.playerStateRef.current === 'forward') {
-            player.setPlayerState(null);
-            return;
+            player.current.setPlayerState('pause');
+            history.current.incrementTrack();
+        } else if (player.current.playerState === 'forward') {
+            player.current.setPlayerState('pause');
+            return sleep(player.current.speed);
         }
 
         return pause({
             player,
             history,
         });
-    } else {
-        return sleep(player.speed);
     }
 };

@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import Array from './components/Array/Array';
 import { usePlayer, useHistory, useAlgorithm } from './hooks';
-import PlayIcon from './components/icon/PlayIcon';
+import { ResetIcon } from './components/icon/ResetIcon';
 import PauseIcon from './components/icon/PauseIcon';
-import ResumePlay from './components/icon/ResumePlay';
+import PlayIcon from './components/icon/PlayIcon';
 import Player from './components/Player/Player';
-// import { algorithms } from './components/algorithms';
 import { disableScroll } from './utils/disableScroll';
 
 const App = () => {
@@ -15,69 +14,63 @@ const App = () => {
 
     const {
         array,
+        algorithmState,
         selectedAlgorithm,
-        activeIndex,
-        compareIndex,
-        pivotIndex,
         selectAlgorithm,
-        resetAlgorithm,
-        // resetTracking,
-        // setArray,
-        // setSelectedAlgorithm,
-        // setActiveIndex,
-        // setCompareIndex,
-        // setPivotIndex,
-        runAlgorithm
+        resetAll,
+        runAlgorithm,
+        getCurrentStep,
     } = useAlgorithm({ history, player });
 
+    // Handles Play button
     const handleAlgorithmRun = useCallback(async () => {
-        if (player.evalState === 'notStarted') {
-            await runAlgorithm(selectedAlgorithm, player.evalState);
-        } else if (player.evalState === 'started') {
-            player.setEvalState('paused');
-        } else if (player.evalState === 'paused') {
-            player.setEvalState('started');
-        } else if (player.evalState === 'finished') {
-            resetAlgorithm();
+        if (algorithmState === 'notStarted') {
+            await runAlgorithm();
+        } else if (algorithmState === 'finished') {
+            return resetAll();
         }
-    }, [player, selectedAlgorithm, runAlgorithm, resetAlgorithm]);
+
+        if (player.playerState === 'play') {
+            player.setPlayerState('pause');
+        } else if (player.playerState === 'pause') {
+            player.setPlayerState('play');
+        }
+    }, [player, runAlgorithm, resetAll, algorithmState]);
 
 
+    // refactor - move logic to Player
     const getButtonText = useCallback(() => {
-        if (player.evalState === 'notStarted') {
-            return <ResumePlay />;
-        } else if (player.evalState === 'started') {
+        if (algorithmState === 'notStarted') {
+            return <PlayIcon />;
+        } else if (algorithmState === 'finished') {
+            return <ResetIcon />;
+        }
+
+        if (player.playerState === 'play') {
             return <PauseIcon />;
-        } else if (player.evalState === 'paused') {
-            return <ResumePlay />;
-        } else if (player.evalState === 'finished') {
+        } {
             return <PlayIcon />;
         }
-    }, [player.evalState]);
+    }, [algorithmState, player]);
 
 
+    // refactor - use CSS instead of JS logic  (hint: media queries, dvh units)
     const barWidth = window.screen.width / array.length;
     disableScroll();
 
-    const data =
-        player.evalState === 'paused' && !history.isHistoryEnd()
-            ? history.getCurrentHistoryItem()
-            : { array, activeIndex, compareIndex, pivotIndex };
-
-    // console.log('DATA', data);
-
+    const step = getCurrentStep();
 
     return (
         <section>
             <span className="title-algorithm">{selectedAlgorithm} Sort</span>
-            <Array {...data} barWidth={barWidth} />
+            <Array {...step} barWidth={barWidth} />
             <Player
                 selectAlgorithm={selectAlgorithm}
                 goToNextStep={() => player.setPlayerState('forward')}
                 getButtonText={getButtonText}
                 goToPreviousStep={() => player.setPlayerState('backward')}
                 speed={player.speed}
-                resetAlgorithm={resetAlgorithm}
+                resetAlgorithm={resetAll}
                 setSpeed={(speed) => player.setSpeed(speed)}
                 handleAlgorithmRun={handleAlgorithmRun}
                 selectedAlgorithm={selectedAlgorithm}

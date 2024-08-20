@@ -1,33 +1,22 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type PlayerState = 'forward' | 'backward' | null;
-type EvalState = 'notStarted' | 'started' | 'paused' | 'finished';
+type PlayerState = 'forward' | 'backward' | 'pause' | 'play' | null;
 
 export const usePlayer = () => {
     const [playerState, setPlayerState] = useState<PlayerState>(null);
-    const [evalState, setEvalState] = useState<EvalState>('notStarted');
     const [speed, setSpeed] = useState(100);
 
-    const evalStateRef = useRef(evalState);
-    const updateEvalState = (newState: EvalState) => {
-        setEvalState(newState);
-        evalStateRef.current = newState;
-    };
+    const playerRef = useRef({ playerState, setPlayerState, speed, setSpeed });
 
-    const playerStateRef = useRef(playerState);
-    const updatePlayerState = (newState: PlayerState) => {
-        setPlayerState(newState);
-        playerStateRef.current = newState;
-    };
+    useEffect(() => {
+        playerRef.current = { playerState, setPlayerState, speed, setSpeed };
+    }, [playerState, setPlayerState, speed, setSpeed]);
 
     return {
         playerState,
+        setPlayerState,
         speed,
-        evalState,
-        evalStateRef,
-        playerStateRef,
-        setEvalState: updateEvalState,
-        setPlayerState: updatePlayerState,
+        playerRef,
         setSpeed,
     }
 }
