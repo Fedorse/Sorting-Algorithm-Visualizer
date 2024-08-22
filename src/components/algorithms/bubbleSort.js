@@ -6,7 +6,6 @@ export const bubbleSort = async (
   updateArray,
   setActiveIndex,
   setCompareIndex,
-  evalStateRef,
   speedRef,
   playerStateRef,
   trackRef,
@@ -14,7 +13,7 @@ export const bubbleSort = async (
   let arr = [...array];
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
-      await pause(evalStateRef, playerStateRef, trackRef, speedRef);
+      await pause(playerStateRef, trackRef, speedRef);
 
       if (evalStateRef.current === 'notStarted') {
         throw new Error('cancelSort');
