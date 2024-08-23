@@ -1,20 +1,31 @@
-import { useCallback, useRef } from 'react';
-
+import React, { useCallback, useRef } from 'react';
 import { speedOptions } from '../../constants';
-
 import ResetIcon from '../icon/ResetIcon';
 import NextStepIcon from '../icon/NextStepIcon';
 import PreviousStepIcon from '../icon/PreviousStepIcon';
 import PlayIcon from '../icon/PlayIcon';
-
 import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
 import PauseIcon from '../icon/PauseIcon';
 import DropDown from '../DropDown/DropDown';
+import { AlgorithmState, PlayerState } from '../../types';
 
 import './Player.css';
 
-const Player = ({
+type PlayerProps = {
+  selectAlgorithm: (algorithm: string) => void;
+  goToNextStep: () => void;
+  goToPreviousStep: () => void;
+  resetAlgorithm: () => void;
+  setSpeed: (speed: number) => void;
+  handleAlgorithmRun: () => void;
+  speed: number;
+  selectedAlgorithm: string;
+  algorithmState: AlgorithmState;
+  playerState: PlayerState;
+};
+
+const Player: React.FC<PlayerProps> = ({
   selectAlgorithm,
   goToNextStep,
   goToPreviousStep,
@@ -24,10 +35,11 @@ const Player = ({
   handleAlgorithmRun,
   selectedAlgorithm,
   algorithmState,
-  player,
+  playerState,
 }) => {
-  const intervalRef = useRef(null);
-  const startInterval = (action) => {
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
       intervalRef.current = setInterval(() => {
         action();
@@ -42,7 +54,7 @@ const Player = ({
     intervalRef.current = null;
   };
 
-  const handleMouseDown = (action) => {
+  const handleMouseDown = (action: () => void) => {
     action();
     startInterval(action);
   };
@@ -50,7 +62,7 @@ const Player = ({
     clearTimer();
   };
 
-  const getButtonText = useCallback(() => {
+  const getButtonIcon = useCallback(() => {
     if (algorithmState === 'notStarted') {
       return <PlayIcon />;
     }
@@ -58,13 +70,13 @@ const Player = ({
       return <ResetIcon />;
     }
 
-    if (player.playerState === 'play') {
+    if (playerState === 'play') {
       return <PauseIcon />;
     }
     {
       return <PlayIcon />;
     }
-  }, [algorithmState, player]);
+  }, [algorithmState, playerState]);
 
   return (
     <div className="player-container">
@@ -84,7 +96,7 @@ const Player = ({
           >
             <PreviousStepIcon />
           </Button>
-          <Button onClick={handleAlgorithmRun}>{getButtonText()}</Button>
+          <Button onClick={handleAlgorithmRun}>{getButtonIcon()}</Button>
 
           <Button
             onMouseDown={() => handleMouseDown(goToNextStep)}

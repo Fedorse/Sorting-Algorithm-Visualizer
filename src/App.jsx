@@ -57,7 +57,7 @@ const App = () => {
         selectedAlgorithm={selectedAlgorithm}
         currentTrack={history.currentTrack}
         algorithmState={algorithmState}
-        player={player}
+        playerState={player.playerState}
       />
     </section>
   );

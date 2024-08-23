@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
 import { generateRandomArray } from '../utils/generateRandomArray';
 import { algorithms } from '../algorithms';
-
-type AlgorithmState = 'notStarted' | 'started' | 'finished';
+import { AlgorithmState } from '../types';
 
 export const useAlgorithm = ({ history, player }) => {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('quick');

@@ -1,9 +1,11 @@
-export const PreviousStepIcon = () => {
+import React from 'react';
+
+const PlayIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className="prev-step-icon"
+      className="play-icon"
     >
       <path
         fill="none"
@@ -11,10 +13,10 @@ export const PreviousStepIcon = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        d="M21 5v14l-8-7zM10 5v14l-8-7z"
+        d="M7 4v16l13-8z"
       />
     </svg>
   );
 };
 
-export default PreviousStepIcon;
+export default PlayIcon;

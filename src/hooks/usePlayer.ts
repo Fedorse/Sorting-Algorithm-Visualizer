@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-
-type PlayerState = 'forward' | 'backward' | 'pause' | 'play' | null;
+import { PlayerState } from '../types';
 
 export const usePlayer = () => {
   const [playerState, setPlayerState] = useState<PlayerState>(null);
