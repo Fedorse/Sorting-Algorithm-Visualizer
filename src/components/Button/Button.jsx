@@ -10,7 +10,6 @@ const Button = ({
   onTouchCancel,
   onTouchStart,
   onTouchEnd,
-  disabled,
 }) => {
   return (
     <button
@@ -22,7 +21,6 @@ const Button = ({
       onTouchEnd={onTouchEnd}
       onTouchCancel={onTouchCancel}
       onTouchStart={onTouchStart}
-      disabled={disabled}
     >
       {children}
     </button>

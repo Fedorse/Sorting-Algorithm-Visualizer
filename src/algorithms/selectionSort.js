@@ -1,43 +1,26 @@
-import { sleep } from '../../utils/sleep';
-import { pause } from '../../utils/pause';
+import { pause } from '../utils/pause';
 
-export const selectionSort = async (
+export const selectionSort = async ({
   array,
   updateArray,
-  setActiveIndex,
-  setCompareIndex,
-  evalStateRef,
-  speedRef,
-  playerStateRef,
-  trackRef,
-) => {
-  let arr = [...array];
-  for (let i = 0; i < arr.length; i++) {
+  updateTracking,
+  history,
+  player,
+}) => {
+  for (let i = 0; i < array.length; i++) {
     let indexMin = i;
-    setActiveIndex(indexMin);
-    updateArray([...arr], indexMin, null, null);
-    for (let j = i + 1; j < arr.length; j++) {
-      setCompareIndex(j);
-      updateArray([...arr], indexMin, j, null);
-      await pause(evalStateRef, playerStateRef, trackRef, speedRef);
-      if (evalStateRef.current === 'notStarted') {
-        throw new Error('cancelSort');
-      }
-
-      if (arr[j] < arr[indexMin]) {
+    for (let j = i + 1; j < array.length; j++) {
+      await pause({ history, player });
+      updateTracking({ activeIndex: indexMin, compareIndex: j });
+      if (array[j] < array[indexMin]) {
         indexMin = j;
-        setActiveIndex(indexMin);
-        updateArray([...arr], indexMin, null, null);
       }
     }
 
-    let tmp = arr[i];
-    arr[i] = arr[indexMin];
-    arr[indexMin] = tmp;
+    let tmp = array[i];
+    array[i] = array[indexMin];
+    array[indexMin] = tmp;
 
-    updateArray([...arr], indexMin, null, null);
-
-    await sleep(100, speedRef.current);
-    setCompareIndex(null);
+    updateArray(array);
   }
 };

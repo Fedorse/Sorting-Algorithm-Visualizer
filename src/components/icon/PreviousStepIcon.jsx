@@ -1,11 +1,9 @@
-import React from 'react';
-
 export const PreviousStepIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className='prev-step-icon'
+      className="prev-step-icon"
     >
       <path
         fill="none"
@@ -18,3 +16,5 @@ export const PreviousStepIcon = () => {
     </svg>
   );
 };
+
+export default PreviousStepIcon;

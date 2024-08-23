@@ -1,6 +1,6 @@
 import './DropDown.css';
 import { useState } from 'react';
-import useClickOutside from '../hooks/useClickOutside';
+import useClickOutside from '../../actions/useClickOutside';
 import DropDownIcon from '../icon/DropDownIcon';
 import { algorithms } from '../../constants';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';

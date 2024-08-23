@@ -1,28 +1,32 @@
-import './Player.css';
-import { PreviousStepIcon } from '../icon/PreviousStepIcon';
-import { NextStepIcon } from '../icon/NextStepIcon';
-import { ResetIcon } from '../icon/ResetIcon';
-import DropDown from '../DropDown/DropDown';
-import Button from '../Button/Button';
-import { useRef } from 'react';
-import InputRange from '../InputRange/InputRange';
+import { useCallback, useRef } from 'react';
+
 import { speedOptions } from '../../constants';
+
+import ResetIcon from '../icon/ResetIcon';
+import NextStepIcon from '../icon/NextStepIcon';
+import PreviousStepIcon from '../icon/PreviousStepIcon';
+import PlayIcon from '../icon/PlayIcon';
+
+import InputRange from '../InputRange/InputRange';
+import Button from '../Button/Button';
+import PauseIcon from '../icon/PauseIcon';
+import DropDown from '../DropDown/DropDown';
+
+import './Player.css';
 
 const Player = ({
   selectAlgorithm,
   goToNextStep,
-  getButtonText,
   goToPreviousStep,
   resetAlgorithm,
   setSpeed,
   speed,
   handleAlgorithmRun,
   selectedAlgorithm,
-  evalState,
-  currentTrack,
+  algorithmState,
+  player,
 }) => {
   const intervalRef = useRef(null);
-
   const startInterval = (action) => {
     if (intervalRef.current === null) {
       intervalRef.current = setInterval(() => {
@@ -46,6 +50,22 @@ const Player = ({
     clearTimer();
   };
 
+  const getButtonText = useCallback(() => {
+    if (algorithmState === 'notStarted') {
+      return <PlayIcon />;
+    }
+    if (algorithmState === 'finished') {
+      return <ResetIcon />;
+    }
+
+    if (player.playerState === 'play') {
+      return <PauseIcon />;
+    }
+    {
+      return <PlayIcon />;
+    }
+  }, [algorithmState, player]);
+
   return (
     <div className="player-container">
       <div className="controls">
@@ -61,13 +81,6 @@ const Player = ({
             onTouchStart={() => handleMouseDown(goToPreviousStep)}
             onTouchEnd={handleMouseUpOrLeave}
             onTouchCancel={handleMouseUpOrLeave}
-            disabled={
-              !evalState === 'paused' ||
-              evalState === 'finished' ||
-              evalState === 'started' ||
-              evalState === 'notStarted' ||
-              currentTrack === 0
-            }
           >
             <PreviousStepIcon />
           </Button>
@@ -80,12 +93,6 @@ const Player = ({
             onTouchStart={() => handleMouseDown(goToNextStep)}
             onTouchEnd={handleMouseUpOrLeave}
             onTouchCancel={handleMouseUpOrLeave}
-            disabled={
-              !evalState === 'paused' ||
-              evalState === 'finished' ||
-              evalState === 'started' ||
-              evalState === 'notStarted'
-            }
           >
             <NextStepIcon />
           </Button>

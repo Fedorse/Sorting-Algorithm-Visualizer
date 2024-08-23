@@ -1,150 +1,93 @@
-import { sleep } from '../../utils/sleep';
-import { pause } from '../../utils/pause';
+import { pause } from '../utils/pause';
 
-const partition = async (
+const partition = async ({
   arr,
   start,
   end,
-  setActiveIndex,
-  setCompareIndex,
-  setPivotIndex,
-  evalStateRef,
-  speedRef,
-  playerStateRef,
-  trackRef,
   updateArray,
-) => {
+  updateTracking,
+  history,
+  player,
+}) => {
   const pivotElement = arr[end];
   let partitionIndex = start;
-  // setActiveIndex(end);
-  // setPivotIndex(partitionIndex);
-  // await sleep(100, speedRef.current);
 
   for (let i = start; i < end; i++) {
-    await pause(evalStateRef, playerStateRef, trackRef, speedRef);
-    if (evalStateRef === 'notStarted') {
-      throw new Error('cancelSort');
-    }
-    setCompareIndex(i);
-    // await sleep(100, speedRef.current);
-    console.log('arrrr,', arr);
+    await pause({ history, player });
+    updateTracking({ activeIndex: partitionIndex, pivotIndex: end });
 
     if (arr[i] < pivotElement) {
       [arr[i], arr[partitionIndex]] = [arr[partitionIndex], arr[i]];
 
-      updateArray([...arr], null, null, null);
-      await sleep(20, speedRef.current);
       partitionIndex++;
     }
   }
 
   [arr[partitionIndex], arr[end]] = [arr[end], arr[partitionIndex]];
-  updateArray([...arr], null, null, null);
-  await sleep(50, speedRef.current);
+  updateArray(arr);
 
   return partitionIndex;
 };
 
-const quickSortRecursive = async (
+const quickSortRecursive = async ({
   arr,
   start,
   end,
-  setActiveIndex,
-  setCompareIndex,
-  setPivotIndex,
-  evalStateRef,
-  speedRef,
-  playerStateRef,
-  trackRef,
   updateArray,
-) => {
+  updateTracking,
+  history,
+  player,
+}) => {
   if (start >= end) {
     return;
   }
-  await pause(evalStateRef, playerStateRef, speedRef, trackRef);
-  if (evalStateRef === 'notStarted') {
-    throw new Error('cancelSort');
-  }
+  await pause({ history, player });
 
-  const index = await partition(
+  const index = await partition({
     arr,
     start,
     end,
-    setActiveIndex,
-    setCompareIndex,
-    setPivotIndex,
-    evalStateRef,
-    speedRef,
-    playerStateRef,
-    trackRef,
     updateArray,
-  );
+    updateTracking,
+    history,
+    player,
+  });
 
-  await quickSortRecursive(
+  await quickSortRecursive({
     arr,
     start,
-    index - 1,
-    setActiveIndex,
-    setCompareIndex,
-    setPivotIndex,
-    evalStateRef,
-    speedRef,
-    playerStateRef,
-    trackRef,
+    end: index - 1,
     updateArray,
-  );
-  await quickSortRecursive(
+    updateTracking,
+    history,
+    player,
+  });
+  await quickSortRecursive({
     arr,
-    index + 1,
+    start: index + 1,
     end,
-    setActiveIndex,
-    setCompareIndex,
-    setPivotIndex,
-    evalStateRef,
-    speedRef,
-    playerStateRef,
-    trackRef,
     updateArray,
-  );
+    updateTracking,
+    history,
+    player,
+  });
 };
 
-// array,
-// updateArray,
-// setActiveIndex,
-// setCompareIndex,
-// evalStateRef,
-// speedStateRef,
-// playerStateRef,
-// trackRef,
-
-export const quickSort = async (
+export const quickSort = async ({
   array,
   updateArray,
-  setActiveIndex,
-  setCompareIndex,
-  setPivotIndex,
-  evalStateRef,
-  speedRef,
-  playerStateRef,
-  trackRef,
-) => {
-  await quickSortRecursive(
-    array,
-    0,
-    array.length - 1,
-    setActiveIndex,
-    setCompareIndex,
-    setPivotIndex,
-    evalStateRef,
-    speedRef,
-    playerStateRef,
-    trackRef,
+  updateTracking,
+  history,
+  player,
+}) => {
+  await quickSortRecursive({
+    arr: array,
+    start: 0,
+    end: array.length - 1,
     updateArray,
-  );
-
-  setActiveIndex(null);
-  setCompareIndex(null);
-  setPivotIndex(null);
-
+    updateTracking,
+    history,
+    player,
+  });
   return array;
 };

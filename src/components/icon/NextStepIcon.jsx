@@ -1,6 +1,4 @@
-import React from 'react';
-
-export const NextStepIcon = () => {
+const NextStepIcon = () => {
   return (
     <div>
       <svg
@@ -20,3 +18,4 @@ export const NextStepIcon = () => {
     </div>
   );
 };
+export default NextStepIcon;

@@ -1,11 +1,11 @@
 import { bubbleSort } from './bubbleSort';
-// import { insertionSort } from './insertionSort';
-// import { quickSort } from './quickSort';
-// import { selectionSort } from './selectionSort';
+import { insertionSort } from './insertionSort';
+import { selectionSort } from './selectionSort';
+import { quickSort } from './quickSort';
 
 export const algorithms = {
-    bubble: bubbleSort,
-    // selection: selectionSort,
-    // quick: quickSort,
-    // insertion: insertionSort
-}
+  bubble: bubbleSort,
+  insertion: insertionSort,
+  selection: selectionSort,
+  quick: quickSort,
+};

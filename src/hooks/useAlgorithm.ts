@@ -5,7 +5,7 @@ import { algorithms } from '../algorithms';
 type AlgorithmState = 'notStarted' | 'started' | 'finished';
 
 export const useAlgorithm = ({ history, player }) => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubble');
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState('quick');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
   const [array, setArray] = useState(generateRandomArray(10, 150, 650));
@@ -63,7 +63,7 @@ export const useAlgorithm = ({ history, player }) => {
     const { historyRef } = history;
 
     setPlayerState('play');
-    setAlgorithmState('started');  
+    setAlgorithmState('started');
     const algorithm = algorithms[selectedAlgorithm];
 
     await algorithm({
