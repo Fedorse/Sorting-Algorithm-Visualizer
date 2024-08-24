@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { speedOptions } from '../../constants';
 import ResetIcon from '../icon/ResetIcon';
 import NextStepIcon from '../icon/NextStepIcon';
@@ -8,7 +8,8 @@ import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
 import PauseIcon from '../icon/PauseIcon';
 import DropDown from '../DropDown/DropDown';
-import { AlgorithmState, PlayerState } from '../../types';
+import { AlgorithmState } from '../../types';
+import { PlayerState } from '../../hooks';
 
 import './Player.css';
 
@@ -37,7 +38,7 @@ const Player: React.FC<PlayerProps> = ({
   algorithmState,
   playerState,
 }) => {
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
@@ -82,7 +83,7 @@ const Player: React.FC<PlayerProps> = ({
     <div className="player-container">
       <div className="controls">
         <DropDown
-          onSelect={selectAlgorithm}
+          selectAlgorithm={selectAlgorithm}
           selectedAlgorithm={selectedAlgorithm}
         />
         <div className="step-buttons">

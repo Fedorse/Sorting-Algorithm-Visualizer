@@ -1,9 +1,18 @@
 import { useEffect } from 'react';
 
-const useClickOutside = (callback, targetClass) => {
+type useClickOutsideProps = {
+  callback: () => void;
+  targetClass: string;
+};
+
+const useClickOutside = ({
+  callback,
+  targetClass,
+}: useClickOutsideProps): void => {
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.target.closest(`.${targetClass}`)) {
+    const handleClickOutside = (event: MouseEvent): void => {
+      const target = event.target as HTMLElement | null;
+      if (target && !target.closest(`.${targetClass}`)) {
         callback();
       }
     };

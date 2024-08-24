@@ -1,24 +1,40 @@
-import './DropDown.css';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import useClickOutside from '../../actions/useClickOutside';
-import DropDownIcon from '../icon/DropDownIcon';
 import { algorithms } from '../../constants';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
+import DropDownIcon from '../icon/DropDownIcon';
 
-const DropDown = ({ onSelect, selectedAlgorithm }) => {
+import './DropDown.css';
+
+type DropDowmProps = {
+  selectAlgorithm: (select: string) => void;
+  selectedAlgorithm: string;
+};
+
+const DropDown: React.FC<DropDowmProps> = ({
+  selectAlgorithm,
+  selectedAlgorithm,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropDown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
-  const handleSelect = (algorithm) => {
-    onSelect(algorithm);
-    setIsOpen(false);
-  };
-  useClickOutside(() => {
-    if (isOpen) setIsOpen(false);
-  }, 'dropdown');
+  const handleSelect = useCallback(
+    (algorithm: string) => {
+      selectAlgorithm(algorithm);
+      setIsOpen(false);
+    },
+    [selectAlgorithm, setIsOpen],
+  );
+
+  useClickOutside({
+    callback: (): void => {
+      if (isOpen) setIsOpen(false);
+    },
+    targetClass: 'dropdown',
+  });
 
   return (
     <div className={`dropdown ${isOpen ? 'open' : ''}`}>

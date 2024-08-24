@@ -2,7 +2,7 @@ import { sleep } from './sleep';
 
 export const pause = async ({ player, history }) => {
   await sleep(player.current.speed);
-
+  console.log('speed in pause', player.current.speed);
   if (player.current.playerState === 'play') {
     return;
   } else {

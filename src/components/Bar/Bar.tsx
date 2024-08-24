@@ -1,6 +1,20 @@
 import './Bar.css';
 
-const Bar = ({ width, height, isActive, isCompare, isPivot }) => {
+type BarProps = {
+  width: number;
+  height: number;
+  isActive: boolean | null;
+  isCompare: boolean | null;
+  isPivot: boolean | null;
+};
+
+const Bar: React.FC<BarProps> = ({
+  width,
+  height,
+  isActive,
+  isCompare,
+  isPivot,
+}) => {
   const barStyles = {
     height: `${height}px`,
     width: `${width}px`,

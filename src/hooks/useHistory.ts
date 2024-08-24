@@ -1,9 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export const useHistory = () => {
-  const [history, setHistory] = useState([]);
+type HistoryRef<T> = {
+  updateHistory: (newState: T) => void;
+  incrementTrack: () => void;
+  decrementTrack: () => void;
+  isHistoryEnd: () => boolean;
+};
+
+export const useHistory = <T>() => {
+  const [history, setHistory] = useState<T[]>([]);
   const [currentTrack, setCurrentTrack] = useState(0);
-  console.log(history);
+
   const incrementTrack = useCallback(() => {
     setCurrentTrack((prevTrack) => prevTrack + 1);
   }, [setCurrentTrack]);
@@ -17,7 +24,7 @@ export const useHistory = () => {
   }, [currentTrack, history]);
 
   const updateHistory = useCallback(
-    (newState) => {
+    (newState: T) => {
       setHistory((prevHistory) => {
         setCurrentTrack(prevHistory.length);
         return [...prevHistory, newState];
@@ -35,7 +42,7 @@ export const useHistory = () => {
     return history[currentTrack];
   }, [history, currentTrack]);
 
-  const historyRef = useRef({
+  const historyRef = useRef<HistoryRef<T>>({
     updateHistory,
     incrementTrack,
     decrementTrack,

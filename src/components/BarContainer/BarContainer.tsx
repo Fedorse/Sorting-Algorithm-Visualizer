@@ -1,9 +1,18 @@
 import Bar from '../Bar/Bar';
+import { Tracking } from '../../types';
 
 import './BarContainer.css';
 
-const Array = ({ barWidth, array, tracking }) => {
+type BarContainerProps = {
+  array: number[];
+  tracking: Tracking;
+};
+
+const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
   const { activeIndex, compareIndex, pivotIndex } = tracking;
+
+  //Calculate width each column in array
+  const barWidth = window.screen.width / array.length;
 
   return (
     <div className="arr">
@@ -21,4 +30,4 @@ const Array = ({ barWidth, array, tracking }) => {
   );
 };
 
-export default Array;
+export default BarContainer;

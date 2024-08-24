@@ -37,15 +37,15 @@ const App = () => {
   }, [player, runAlgorithm, resetAll, algorithmState]);
 
   // refactor - use CSS instead of JS logic  (hint: media queries, dvh units)
-  const barWidth = window.screen.width / array.length;
   disableScroll();
 
   const step = getCurrentStep();
+  console.log(step);
 
   return (
     <section>
       <span className="title-algorithm">{selectedAlgorithm} Sort</span>
-      <BarContainer {...step} barWidth={barWidth} />
+      <BarContainer {...step} />
       <Player
         selectAlgorithm={selectAlgorithm}
         goToNextStep={() => player.setPlayerState('forward')}
