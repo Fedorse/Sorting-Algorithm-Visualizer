@@ -19,7 +19,7 @@ type PlayerProps = {
   goToPreviousStep: () => void;
   resetAlgorithm: () => void;
   setSpeed: (speed: number) => void;
-  handleAlgorithmRun: () => void;
+  handlePlay: () => void;
   speed: number;
   selectedAlgorithm: AlgorithmKeys;
   algorithmState: AlgorithmState;
@@ -33,15 +33,13 @@ const Player: React.FC<PlayerProps> = ({
   resetAlgorithm,
   setSpeed,
   speed,
-  handleAlgorithmRun,
+  handlePlay,
   selectedAlgorithm,
   algorithmState,
   playerState,
 }) => {
   const intervalRef = useRef<number | null>(null);
-
   const speedOptions = [1, 2, 3, 4, 5];
-
   const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
       intervalRef.current = setInterval(() => {
@@ -90,6 +88,7 @@ const Player: React.FC<PlayerProps> = ({
         />
         <div className="step-buttons">
           <Button
+            isDisabled={algorithmState === 'notStarted'}
             onMouseDown={() => handleMouseDown(goToPreviousStep)}
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseUpOrLeave}
@@ -99,9 +98,10 @@ const Player: React.FC<PlayerProps> = ({
           >
             <PreviousStepIcon />
           </Button>
-          <Button onClick={handleAlgorithmRun}>{getButtonIcon()}</Button>
+          <Button onClick={handlePlay}>{getButtonIcon()}</Button>
 
           <Button
+            isDisabled={algorithmState === 'notStarted'}
             onMouseDown={() => handleMouseDown(goToNextStep)}
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseUpOrLeave}

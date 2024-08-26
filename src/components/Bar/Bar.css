@@ -9,13 +9,13 @@
   z-index: 100;
 }
 
-.bar.active {
+.active {
   background-color: rgb(254, 0, 0);
   z-index: 1000;
 }
 
-.bar.compare {
-  background-color: rgb(40, 250, 250);
+.compare {
+  background-color: yellow;
   z-index: 1000;
 }
 .bar.pivot {
