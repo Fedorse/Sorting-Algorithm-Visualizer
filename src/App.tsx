@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { usePlayer, useHistory, useAlgorithm } from './hooks';
+import type { AlgorithmHistory } from './hooks';
 
 import { disableScroll } from './utils/disableScroll';
 
@@ -8,7 +9,7 @@ import BarContainer from './components/BarContainer/BarContainer';
 import Player from './components/Player/Player';
 
 const App = () => {
-    const history = useHistory();
+    const history: AlgorithmHistory = useHistory();
 
     const player = usePlayer();
 
