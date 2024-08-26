@@ -39,7 +39,9 @@ const Player: React.FC<PlayerProps> = ({
   playerState,
 }) => {
   const intervalRef = useRef<number | null>(null);
+
   const speedOptions = [1, 2, 3, 4, 5];
+
   const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
       intervalRef.current = setInterval(() => {

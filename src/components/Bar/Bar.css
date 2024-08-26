@@ -19,5 +19,6 @@
   z-index: 1000;
 }
 .bar.pivot {
-  background-color: blue;
+  background-color: rgb(16, 16, 248);
+  z-index: 1000;
 }

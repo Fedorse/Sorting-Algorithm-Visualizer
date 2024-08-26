@@ -13,7 +13,6 @@ const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
 
   //Calculate width each column in array
   const barWidth = window.screen.width / array.length;
-
   return (
     <div className="arr">
       {array.map((heightPx, index) => (

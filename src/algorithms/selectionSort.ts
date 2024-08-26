@@ -10,6 +10,8 @@ export const selectionSort: AlgorithmFunction = async ({
 }) => {
   for (let i = 0; i < array.length; i++) {
     let indexMin = i;
+    updateTracking({ pivotIndex: indexMin });
+
     for (let j = i + 1; j < array.length; j++) {
       await pause({ history, player });
       updateTracking({ activeIndex: indexMin, compareIndex: j });
@@ -17,7 +19,6 @@ export const selectionSort: AlgorithmFunction = async ({
         indexMin = j;
       }
     }
-
     let tmp = array[i];
     array[i] = array[indexMin];
     array[indexMin] = tmp;

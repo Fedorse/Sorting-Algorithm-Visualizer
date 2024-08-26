@@ -23,18 +23,18 @@ export const useAlgorithm = ({
   player: Player;
 }) => {
   const [selectedAlgorithm, setSelectedAlgorithm] =
-    useState<AlgorithmKeys>('bubble');
+    useState<AlgorithmKeys>('quick');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [array, setArray] = useState(generateRandomArray(50, 150, 650));
+  const [array, setArray] = useState(generateRandomArray(30, 150, 650));
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
     compareIndex: null,
     pivotIndex: null,
   });
-
+  console.log(array);
   const resetAlgorithm = useCallback(() => {
-    setArray(generateRandomArray(50, 150, 650));
+    setArray(generateRandomArray(30, 150, 650));
     setAlgorithmState('notStarted');
     setTracking({
       activeIndex: null,
