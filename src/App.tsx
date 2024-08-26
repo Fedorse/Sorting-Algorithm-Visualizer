@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { usePlayer, useHistory, useAlgorithm } from './hooks';
+import type { AlgorithmHistory } from './hooks';
 
 import { disableScroll } from './utils/disableScroll';
 
@@ -8,7 +9,7 @@ import BarContainer from './components/BarContainer/BarContainer';
 import Player from './components/Player/Player';
 
 const App = () => {
-  const history = useHistory();
+  const history: AlgorithmHistory = useHistory();
 
   const player = usePlayer();
   const {
@@ -35,7 +36,6 @@ const App = () => {
     }
   }, [player, runAlgorithm, resetAll, algorithmState]);
 
-  // refactor - use CSS instead of JS logic  (hint: media queries, dvh units)
   disableScroll();
 
   const step = getCurrentStep();
@@ -53,7 +53,6 @@ const App = () => {
         setSpeed={(speed) => player.setSpeed(speed)}
         handleAlgorithmRun={handleAlgorithmRun}
         selectedAlgorithm={selectedAlgorithm}
-        currentTrack={history.currentTrack}
         algorithmState={algorithmState}
         playerState={player.playerState}
       />

@@ -7,14 +7,14 @@ import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
 import PauseIcon from '../icon/PauseIcon';
 import DropDown from '../DropDown/DropDown';
-import { AlgorithmState } from '../../hooks';
+import type { AlgorithmState } from '../../hooks';
 import { PlayerState } from '../../hooks';
 import { AlgorithmKeys } from '../../algorithms';
 
 import './Player.css';
 
 type PlayerProps = {
-  selectAlgorithm: (algorithm: string) => void;
+  selectAlgorithm: (algorithm: AlgorithmKeys) => void;
   goToNextStep: () => void;
   goToPreviousStep: () => void;
   resetAlgorithm: () => void;
