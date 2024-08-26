@@ -1,4 +1,17 @@
+import { AlgorithmHistory, Player } from '../hooks';
+import { Tracking } from '../hooks';
 import { pause } from '../utils/pause';
+import { AlgorithmFunction } from './types';
+
+type PartitonArg = {
+  arr: number[];
+  start: number;
+  end: number;
+  updateArray: (array: number[]) => void;
+  updateTracking: (tracking: Tracking) => void;
+  history: AlgorithmHistory['historyRef'];
+  player: Player['playerRef'];
+};
 
 const partition = async ({
   arr,
@@ -8,7 +21,7 @@ const partition = async ({
   updateTracking,
   history,
   player,
-}) => {
+}: PartitonArg): Promise<number> => {
   const pivotElement = arr[end];
   let partitionIndex = start;
 
@@ -37,7 +50,7 @@ const quickSortRecursive = async ({
   updateTracking,
   history,
   player,
-}) => {
+}: PartitonArg): Promise<void> => {
   if (start >= end) {
     return;
   }
@@ -73,7 +86,7 @@ const quickSortRecursive = async ({
   });
 };
 
-export const quickSort = async ({
+export const quickSort: AlgorithmFunction = async ({
   array,
   updateArray,
   updateTracking,

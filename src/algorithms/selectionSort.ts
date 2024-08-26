@@ -1,6 +1,7 @@
 import { pause } from '../utils/pause';
+import { AlgorithmFunction } from './types';
 
-export const selectionSort = async ({
+export const selectionSort: AlgorithmFunction = async ({
   array,
   updateArray,
   updateTracking,

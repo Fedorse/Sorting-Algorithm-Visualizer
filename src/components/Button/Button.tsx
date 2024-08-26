@@ -2,17 +2,17 @@ import React, { ReactNode } from 'react';
 
 import './Button.css';
 
-type ButtonProps = {
-  onClick?: () => void;
-  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onMouseUp?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onMouseLeave?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onTouchCancel?: (event: React.TouchEvent<HTMLButtonElement>) => void;
-  onTouchStart?: (event: React.TouchEvent<HTMLButtonElement>) => void;
-  onTouchEnd?: (event: React.TouchEvent<HTMLButtonElement>) => void;
-  children?: ReactNode;
-  className?: string;
-};
+type ButtonProps = Partial<{
+  onClick: () => void;
+  onMouseDown: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseUp: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseLeave: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onTouchCancel: (event: React.TouchEvent<HTMLButtonElement>) => void;
+  onTouchStart: (event: React.TouchEvent<HTMLButtonElement>) => void;
+  onTouchEnd: (event: React.TouchEvent<HTMLButtonElement>) => void;
+  children: ReactNode;
+  className: string;
+}>;
 
 const Button: React.FC<ButtonProps> = ({
   onClick,

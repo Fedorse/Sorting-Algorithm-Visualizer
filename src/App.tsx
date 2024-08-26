@@ -12,7 +12,6 @@ const App = () => {
 
   const player = usePlayer();
   const {
-    array,
     algorithmState,
     selectedAlgorithm,
     selectAlgorithm,
@@ -40,7 +39,6 @@ const App = () => {
   disableScroll();
 
   const step = getCurrentStep();
-  console.log(step);
 
   return (
     <section>

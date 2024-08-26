@@ -1,5 +1,5 @@
 import Bar from '../Bar/Bar';
-import { Tracking } from '../../types';
+import { Tracking } from '../../hooks';
 
 import './BarContainer.css';
 

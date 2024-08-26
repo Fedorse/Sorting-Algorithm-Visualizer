@@ -1,6 +1,7 @@
 import { pause } from '../utils/pause';
+import { AlgorithmFunction } from './types';
 
-export const insertionSort = async ({
+export const insertionSort: AlgorithmFunction = async ({
   array,
   updateArray,
   updateTracking,

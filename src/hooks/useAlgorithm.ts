@@ -1,14 +1,33 @@
 import { useCallback, useState } from 'react';
 import { generateRandomArray } from '../utils/generateRandomArray';
 import { algorithms } from '../algorithms';
-import { AlgorithmState } from '../types';
+import type { AlgorithmKeys } from '../algorithms';
+import type { Player } from './usePlayer';
+import type { History } from './useHistory';
 
-export const useAlgorithm = ({ history, player }) => {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState('quick');
+export type AlgorithmState = 'notStarted' | 'started' | 'finished';
+
+export type Tracking = Partial<{
+  activeIndex: number | null;
+  compareIndex: number | null;
+  pivotIndex: number | null;
+}>;
+
+export type AlgorithmHistory = History<{ tracking: Tracking; array: number[] }>;
+
+export const useAlgorithm = ({
+  history,
+  player,
+}: {
+  history: AlgorithmHistory;
+  player: Player;
+}) => {
+  const [selectedAlgorithm, setSelectedAlgorithm] =
+    useState<AlgorithmKeys>('quick');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
   const [array, setArray] = useState(generateRandomArray(10, 150, 650));
-  const [tracking, setTracking] = useState({
+  const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
     compareIndex: null,
     pivotIndex: null,
@@ -31,7 +50,7 @@ export const useAlgorithm = ({ history, player }) => {
   }, [resetAlgorithm, history, player]);
 
   const updateArray = useCallback(
-    (newArray) => {
+    (newArray: number[]) => {
       setArray([...newArray]);
       history.updateHistory({ array: [...newArray], tracking });
     },
@@ -39,7 +58,7 @@ export const useAlgorithm = ({ history, player }) => {
   );
 
   const updateTracking = useCallback(
-    (newTracking) => {
+    (newTracking: Tracking) => {
       setTracking((current) => {
         const nextTracking = { ...current, ...newTracking };
         history.updateHistory({ array: [...array], tracking: nextTracking });
@@ -50,7 +69,7 @@ export const useAlgorithm = ({ history, player }) => {
   );
 
   const selectAlgorithm = useCallback(
-    (name) => {
+    (name: AlgorithmKeys) => {
       resetAll();
       setSelectedAlgorithm(name);
     },

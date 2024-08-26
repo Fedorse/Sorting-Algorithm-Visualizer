@@ -1,14 +1,14 @@
 import { useCallback, useState } from 'react';
 import useClickOutside from '../../actions/useClickOutside';
-import { algorithms } from '../../constants';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
+import { algorithmNames, type AlgorithmKeys } from '../../algorithms';
 import DropDownIcon from '../icon/DropDownIcon';
 
 import './DropDown.css';
 
 type DropDowmProps = {
-  selectAlgorithm: (select: string) => void;
-  selectedAlgorithm: string;
+  selectAlgorithm: (select: AlgorithmKeys) => void;
+  selectedAlgorithm: AlgorithmKeys;
 };
 
 const DropDown: React.FC<DropDowmProps> = ({
@@ -22,7 +22,7 @@ const DropDown: React.FC<DropDowmProps> = ({
   };
 
   const handleSelect = useCallback(
-    (algorithm: string) => {
+    (algorithm: AlgorithmKeys) => {
       selectAlgorithm(algorithm);
       setIsOpen(false);
     },
@@ -42,7 +42,7 @@ const DropDown: React.FC<DropDowmProps> = ({
         <DropDownIcon />
       </span>
       <ul className="dropdown-content">
-        {algorithms.map((algorithm, index) => (
+        {algorithmNames.map((algorithm, index) => (
           <li
             key={index}
             onClick={() => handleSelect(algorithm)}

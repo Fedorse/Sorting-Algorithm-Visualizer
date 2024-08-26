@@ -1,8 +1,16 @@
 import { sleep } from './sleep';
+import type { Player } from '../hooks/usePlayer';
+import type { AlgorithmHistory } from '../hooks/useAlgorithm';
 
-export const pause = async ({ player, history }) => {
+export const pause = async ({
+  player,
+  history,
+}: {
+  player: Player['playerRef'];
+  history: AlgorithmHistory['historyRef'];
+}): Promise<void> => {
   await sleep(player.current.speed);
-  console.log('speed in pause', player.current.speed);
+
   if (player.current.playerState === 'play') {
     return;
   } else {

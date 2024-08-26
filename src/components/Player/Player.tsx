@@ -1,5 +1,4 @@
 import { useCallback, useRef } from 'react';
-import { speedOptions } from '../../constants';
 import ResetIcon from '../icon/ResetIcon';
 import NextStepIcon from '../icon/NextStepIcon';
 import PreviousStepIcon from '../icon/PreviousStepIcon';
@@ -8,8 +7,9 @@ import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
 import PauseIcon from '../icon/PauseIcon';
 import DropDown from '../DropDown/DropDown';
-import { AlgorithmState } from '../../types';
+import { AlgorithmState } from '../../hooks';
 import { PlayerState } from '../../hooks';
+import { AlgorithmKeys } from '../../algorithms';
 
 import './Player.css';
 
@@ -21,7 +21,7 @@ type PlayerProps = {
   setSpeed: (speed: number) => void;
   handleAlgorithmRun: () => void;
   speed: number;
-  selectedAlgorithm: string;
+  selectedAlgorithm: AlgorithmKeys;
   algorithmState: AlgorithmState;
   playerState: PlayerState;
 };
@@ -39,7 +39,7 @@ const Player: React.FC<PlayerProps> = ({
   playerState,
 }) => {
   const intervalRef = useRef<number | null>(null);
-
+  const speedOptions = [1, 2, 3, 4, 5];
   const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
       intervalRef.current = setInterval(() => {
