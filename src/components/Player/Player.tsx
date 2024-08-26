@@ -14,118 +14,120 @@ import { AlgorithmKeys } from '../../algorithms';
 import './Player.css';
 
 type PlayerProps = {
-  selectAlgorithm: (algorithm: string) => void;
-  goToNextStep: () => void;
-  goToPreviousStep: () => void;
-  resetAlgorithm: () => void;
-  setSpeed: (speed: number) => void;
-  handleAlgorithmRun: () => void;
-  speed: number;
-  selectedAlgorithm: AlgorithmKeys;
-  algorithmState: AlgorithmState;
-  playerState: PlayerState;
+    selectAlgorithm: (algorithm: AlgorithmKeys) => void;
+    goToNextStep: () => void;
+    goToPreviousStep: () => void;
+    resetAlgorithm: () => void;
+    setSpeed: (speed: number) => void;
+    handlePlay: () => void;
+    speed: number;
+    selectedAlgorithm: AlgorithmKeys;
+    algorithmState: AlgorithmState;
+    playerState: PlayerState;
 };
 
 const Player: React.FC<PlayerProps> = ({
-  selectAlgorithm,
-  goToNextStep,
-  goToPreviousStep,
-  resetAlgorithm,
-  setSpeed,
-  speed,
-  handleAlgorithmRun,
-  selectedAlgorithm,
-  algorithmState,
-  playerState,
+    selectAlgorithm,
+    goToNextStep,
+    goToPreviousStep,
+    resetAlgorithm,
+    setSpeed,
+    speed,
+    handlePlay,
+    selectedAlgorithm,
+    algorithmState,
+    playerState,
 }) => {
-  const intervalRef = useRef<number | null>(null);
-  const speedOptions = [1, 2, 3, 4, 5];
-  const startInterval = (action: () => void) => {
-    if (intervalRef.current === null) {
-      intervalRef.current = setInterval(() => {
+    const intervalRef = useRef<number | null>(null);
+    const speedOptions = [1, 2, 3, 4, 5];
+    const startInterval = (action: () => void) => {
+        if (intervalRef.current === null) {
+            intervalRef.current = setInterval(() => {
+                action();
+            }, 100);
+        }
+    };
+
+    const clearTimer = () => {
+        if (intervalRef.current !== null) {
+            clearInterval(intervalRef.current);
+        }
+        intervalRef.current = null;
+    };
+
+    const handleMouseDown = (action: () => void) => {
         action();
-      }, 100);
-    }
-  };
+        startInterval(action);
+    };
+    const handleMouseUpOrLeave = () => {
+        clearTimer();
+    };
 
-  const clearTimer = () => {
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = null;
-  };
+    const getButtonIcon = useCallback(() => {
+        if (algorithmState === 'notStarted') {
+            return <PlayIcon />;
+        }
+        if (algorithmState === 'finished') {
+            return <ResetIcon />;
+        }
 
-  const handleMouseDown = (action: () => void) => {
-    action();
-    startInterval(action);
-  };
-  const handleMouseUpOrLeave = () => {
-    clearTimer();
-  };
+        if (playerState === 'play') {
+            return <PauseIcon />;
+        }
+        {
+            return <PlayIcon />;
+        }
+    }, [algorithmState, playerState]);
 
-  const getButtonIcon = useCallback(() => {
-    if (algorithmState === 'notStarted') {
-      return <PlayIcon />;
-    }
-    if (algorithmState === 'finished') {
-      return <ResetIcon />;
-    }
+    return (
+        <div className="player-container">
+            <div className="controls">
+                <DropDown
+                    selectAlgorithm={selectAlgorithm}
+                    selectedAlgorithm={selectedAlgorithm}
+                />
+                <div className="step-buttons">
+                    <Button
+                        isDisabled={algorithmState === 'notStarted'}
+                        onMouseDown={() => handleMouseDown(goToPreviousStep)}
+                        onMouseUp={handleMouseUpOrLeave}
+                        onMouseLeave={handleMouseUpOrLeave}
+                        onTouchStart={() => handleMouseDown(goToPreviousStep)}
+                        onTouchEnd={handleMouseUpOrLeave}
+                        onTouchCancel={handleMouseUpOrLeave}
+                    >
+                        <PreviousStepIcon />
+                    </Button>
+                    <Button onClick={handlePlay}>{getButtonIcon()}</Button>
 
-    if (playerState === 'play') {
-      return <PauseIcon />;
-    }
-    {
-      return <PlayIcon />;
-    }
-  }, [algorithmState, playerState]);
-
-  return (
-    <div className="player-container">
-      <div className="controls">
-        <DropDown
-          selectAlgorithm={selectAlgorithm}
-          selectedAlgorithm={selectedAlgorithm}
-        />
-        <div className="step-buttons">
-          <Button
-            onMouseDown={() => handleMouseDown(goToPreviousStep)}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-            onTouchStart={() => handleMouseDown(goToPreviousStep)}
-            onTouchEnd={handleMouseUpOrLeave}
-            onTouchCancel={handleMouseUpOrLeave}
-          >
-            <PreviousStepIcon />
-          </Button>
-          <Button onClick={handleAlgorithmRun}>{getButtonIcon()}</Button>
-
-          <Button
-            onMouseDown={() => handleMouseDown(goToNextStep)}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-            onTouchStart={() => handleMouseDown(goToNextStep)}
-            onTouchEnd={handleMouseUpOrLeave}
-            onTouchCancel={handleMouseUpOrLeave}
-          >
-            <NextStepIcon />
-          </Button>
+                    <Button
+                        isDisabled={algorithmState === 'notStarted'}
+                        onMouseDown={() => handleMouseDown(goToNextStep)}
+                        onMouseUp={handleMouseUpOrLeave}
+                        onMouseLeave={handleMouseUpOrLeave}
+                        onTouchStart={() => handleMouseDown(goToNextStep)}
+                        onTouchEnd={handleMouseUpOrLeave}
+                        onTouchCancel={handleMouseUpOrLeave}
+                    >
+                        <NextStepIcon />
+                    </Button>
+                </div>
+                <Button onClick={resetAlgorithm}>
+                    <ResetIcon />
+                </Button>
+            </div>
+            <div className="controls-speed">
+                <div>
+                    <InputRange speed={speed} setSpeed={setSpeed} />
+                    <div className="speed-scale">
+                        {speedOptions.map((option) => (
+                            <span key={option}>{option}x</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
-        <Button onClick={resetAlgorithm}>
-          <ResetIcon />
-        </Button>
-      </div>
-      <div className="controls-speed">
-        <div>
-          <InputRange speed={speed} setSpeed={setSpeed} />
-          <div className="speed-scale">
-            {speedOptions.map((option) => (
-              <span key={option}>{option}x</span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Player;

@@ -8,57 +8,72 @@ import BarContainer from './components/BarContainer/BarContainer';
 import Player from './components/Player/Player';
 
 const App = () => {
-  const history = useHistory();
+    const history = useHistory();
 
-  const player = usePlayer();
-  const {
-    algorithmState,
-    selectedAlgorithm,
-    selectAlgorithm,
-    resetAll,
-    runAlgorithm,
-    getCurrentStep,
-  } = useAlgorithm({ history, player });
+    const player = usePlayer();
 
-  // Handles Play button
-  const handleAlgorithmRun = useCallback(async () => {
-    if (algorithmState === 'notStarted') {
-      await runAlgorithm();
-    } else if (algorithmState === 'finished') {
-      return resetAll();
-    }
+    const {
+        algorithmState,
+        selectedAlgorithm,
+        selectAlgorithm,
+        resetAll,
+        runAlgorithm,
+        getCurrentStep,
+    } = useAlgorithm({ history, player });
 
-    if (player.playerState === 'play') {
-      player.setPlayerState('pause');
-    } else if (player.playerState === 'pause') {
-      player.setPlayerState('play');
-    }
-  }, [player, runAlgorithm, resetAll, algorithmState]);
+    const handlePlay = useCallback(async () => {
+        if (algorithmState === 'finished') {
+            return resetAll();
+        }
 
-  // refactor - use CSS instead of JS logic  (hint: media queries, dvh units)
-  disableScroll();
+        if (algorithmState === 'notStarted') {
+            return runAlgorithm();
+        }
 
-  const step = getCurrentStep();
+        if (player.playerState === 'play') {
+            player.setPlayerState('pause');
+        } else if (player.playerState === 'pause') {
+            player.setPlayerState('play');
+        }
+    }, [player, runAlgorithm, resetAll, algorithmState]);
 
-  return (
-    <section>
-      <span className="title-algorithm">{selectedAlgorithm} Sort</span>
-      <BarContainer {...step} />
-      <Player
-        selectAlgorithm={selectAlgorithm}
-        goToNextStep={() => player.setPlayerState('forward')}
-        goToPreviousStep={() => player.setPlayerState('backward')}
-        speed={player.speed}
-        resetAlgorithm={resetAll}
-        setSpeed={(speed) => player.setSpeed(speed)}
-        handleAlgorithmRun={handleAlgorithmRun}
-        selectedAlgorithm={selectedAlgorithm}
-        currentTrack={history.currentTrack}
-        algorithmState={algorithmState}
-        playerState={player.playerState}
-      />
-    </section>
-  );
+    const handleBack = useCallback(() => {
+        player.setPlayerState('backward');
+        if (algorithmState === 'finished') {
+            history.decrementTrack();
+        }
+    }, [player, history, algorithmState]);
+
+    const handleForward = useCallback(() => {
+        player.setPlayerState('forward');
+        if (algorithmState === 'finished') {
+            history.incrementTrack();
+        }
+    }, [player, history, algorithmState]);
+
+    // refactor - use CSS instead of JS logic  (hint: media queries, dvh units)
+    disableScroll();
+
+    const step = getCurrentStep();
+
+    return (
+        <section>
+            <span className="title-algorithm">{selectedAlgorithm} Sort</span>
+            <BarContainer {...step} />
+            <Player
+                selectAlgorithm={selectAlgorithm}
+                goToNextStep={handleForward}
+                goToPreviousStep={handleBack}
+                speed={player.speed}
+                resetAlgorithm={resetAll}
+                setSpeed={(speed) => player.setSpeed(speed)}
+                handlePlay={handlePlay}
+                selectedAlgorithm={selectedAlgorithm}
+                algorithmState={algorithmState}
+                playerState={player.playerState}
+            />
+        </section>
+    );
 };
 
 export default App;
