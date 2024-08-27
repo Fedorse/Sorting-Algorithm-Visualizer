@@ -26,11 +26,16 @@ const partition = async ({
   let partitionIndex = start;
 
   for (let i = start; i < end; i++) {
-    await pause({ history, player });
-    updateTracking({ activeIndex: partitionIndex, pivotIndex: end });
+    updateTracking({ pivotIndex: end });
 
     if (arr[i] < pivotElement) {
+      updateTracking({
+        activeIndex: i,
+        compareIndex: partitionIndex,
+      });
+
       [arr[i], arr[partitionIndex]] = [arr[partitionIndex], arr[i]];
+      await pause({ history, player });
 
       partitionIndex++;
     }

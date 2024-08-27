@@ -10,7 +10,6 @@ export const bubbleSort: AlgorithmFunction = async ({
 }) => {
   for (let i = 0; i < array.length; i++) {
     let swapped = false;
-
     for (let j = 0; j < array.length - i - 1; j++) {
       await pause({ history, player });
 
