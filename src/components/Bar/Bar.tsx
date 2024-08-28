@@ -1,29 +1,20 @@
 import './Bar.css';
 
-type IndexType = 'active' | 'compare' | 'pivot' | null;
+type IndexType = 'active' | 'compare' | 'pivot' | 'sorted' | null;
 
 type BarProps = {
-    width: number;
-    height: number;
-    indexType: IndexType;
+  width: number;
+  height: number;
+  indexType: IndexType;
 };
 
-const Bar: React.FC<BarProps> = ({
-    width,
-    height,
-    indexType
-}) => {
-    const barStyles = {
-        height: `${height}px`,
-        width: `${width}px`,
-    };
+const Bar: React.FC<BarProps> = ({ width, height, indexType }) => {
+  const barStyles = {
+    height: `${height}px`,
+    width: `${width}px`,
+  };
 
-    return (
-        <div
-            className={`bar ${indexType ?? ''}`}
-            style={barStyles}
-        />
-    );
+  return <div className={`bar ${indexType ?? ''}`} style={barStyles} />;
 };
 
 export default Bar;

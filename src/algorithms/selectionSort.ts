@@ -24,5 +24,6 @@ export const selectionSort: AlgorithmFunction = async ({
     array[indexMin] = tmp;
 
     updateArray(array);
+    updateTracking({ sortedIndices: [i] });
   }
 };

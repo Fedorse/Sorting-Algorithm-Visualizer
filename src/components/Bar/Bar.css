@@ -5,20 +5,24 @@
   margin: 0 0.1rem;
   border: 0.01rem solid #3c3a3a;
   border-radius: 3px;
-  background-color: rgba(165, 165, 231, 0.976);
-  z-index: 100;
+  background-color: rgba(216, 216, 235, 0.976);
+  z-index: 10;
 }
 
-.active {
+.bar.active {
   background-color: rgb(254, 0, 0);
   z-index: 1000;
 }
 
-.compare {
+.bar.compare {
   background-color: yellow;
   z-index: 1000;
 }
 .bar.pivot {
   background-color: rgb(16, 16, 248);
   z-index: 1000;
+}
+.bar.sorted {
+  background-color: hsla(240, 67%, 74%, 0.976);
+  z-index: 50;
 }

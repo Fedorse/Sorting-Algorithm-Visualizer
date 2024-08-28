@@ -23,5 +23,6 @@ export const insertionSort: AlgorithmFunction = async ({
     }
     array[j + 1] = temp;
     updateArray(array);
+    updateTracking({ sortedIndices: [i - 1] });
   }
 };

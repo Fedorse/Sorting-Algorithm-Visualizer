@@ -71,6 +71,8 @@ const quickSortRecursive = async ({
     player,
   });
 
+  updateTracking({ sortedIndices: [index] });
+  // left part arr
   await quickSortRecursive({
     arr,
     start,
@@ -80,6 +82,7 @@ const quickSortRecursive = async ({
     history,
     player,
   });
+  //right part arr
   await quickSortRecursive({
     arr,
     start: index + 1,
@@ -107,5 +110,7 @@ export const quickSort: AlgorithmFunction = async ({
     history,
     player,
   });
+  updateTracking({ sortedIndices: array.map((_, idx) => idx) });
+
   return array;
 };

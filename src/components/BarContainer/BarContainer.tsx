@@ -1,7 +1,7 @@
 import Bar from '../Bar/Bar';
 import { Tracking } from '../../hooks';
 
-import './BarContainer.css';
+import clasess from './BarContainer.module.css';
 
 type BarContainerProps = {
   array: number[];
@@ -15,6 +15,8 @@ const getIndexType = (index: number, tracking: Tracking) => {
     return 'compare';
   } else if (index === tracking.pivotIndex) {
     return 'pivot';
+  } else if (tracking.sortedIndices?.includes(index)) {
+    return 'sorted';
   } else {
     return null;
   }
@@ -25,7 +27,7 @@ const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
   const barWidth = window.screen.width / array.length;
 
   return (
-    <div className="arr">
+    <div className={clasess.arr}>
       {array.map((heightPx, index) => (
         <Bar
           key={index}

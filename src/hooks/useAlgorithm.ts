@@ -11,6 +11,7 @@ export type Tracking = Partial<{
   activeIndex: number | null;
   compareIndex: number | null;
   pivotIndex: number | null;
+  sortedIndices: number[];
 }>;
 
 export type AlgorithmHistory = History<{ tracking: Tracking; array: number[] }>;
@@ -31,6 +32,7 @@ export const useAlgorithm = ({
     activeIndex: null,
     compareIndex: null,
     pivotIndex: null,
+    sortedIndices: [],
   });
 
   const resetAlgorithm = useCallback(() => {
@@ -40,6 +42,7 @@ export const useAlgorithm = ({
       activeIndex: null,
       compareIndex: null,
       pivotIndex: null,
+      sortedIndices: [],
     });
   }, [setArray, setAlgorithmState, setTracking]);
 
@@ -60,8 +63,19 @@ export const useAlgorithm = ({
   const updateTracking = useCallback(
     (newTracking: Tracking) => {
       setTracking((current) => {
-        const nextTracking = { ...current, ...newTracking };
+        const nextSortedIndices = [
+          ...(current.sortedIndices || []),
+          ...(newTracking.sortedIndices || []),
+        ];
+
+        const nextTracking = {
+          ...current,
+          ...newTracking,
+          sortedIndices: nextSortedIndices,
+        };
+
         history.updateHistory({ array: [...array], tracking: nextTracking });
+
         return nextTracking;
       });
     },
