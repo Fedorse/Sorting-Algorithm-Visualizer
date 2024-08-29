@@ -3,7 +3,7 @@
   height: auto;
   position: fixed;
   inset: auto 0 0 30%;
-  z-index: 1000;
+  z-index: 900;
   background-color: black;
   opacity: 85%;
   border-top-right-radius: 20px;

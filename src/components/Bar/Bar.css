@@ -11,16 +11,16 @@
 
 .bar.active {
   background-color: rgb(254, 0, 0);
-  z-index: 1000;
+  z-index: 800;
 }
 
 .bar.compare {
   background-color: yellow;
-  z-index: 1000;
+  z-index: 800;
 }
 .bar.pivot {
   background-color: rgb(16, 16, 248);
-  z-index: 1000;
+  z-index: 800;
 }
 .bar.sorted {
   background-color: hsla(240, 67%, 74%, 0.976);

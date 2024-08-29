@@ -7,6 +7,7 @@ import { disableScroll } from './utils/disableScroll';
 
 import BarContainer from './components/BarContainer/BarContainer';
 import Player from './components/Player/Player';
+import Modal from './components/Modal/Modal';
 
 const App = () => {
   const history: AlgorithmHistory = useHistory();
@@ -52,13 +53,13 @@ const App = () => {
     }
   }, [player, history, algorithmState]);
 
-  // refactor - use CSS instead of JS logic  (hint: media queries, dvh units)
   disableScroll();
 
   const step = getCurrentStep();
 
   return (
     <section>
+      <Modal />
       <span className="title-algorithm">{selectedAlgorithm} Sort</span>
       <BarContainer {...step} />
       <Player

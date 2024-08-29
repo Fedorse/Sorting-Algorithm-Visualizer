@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=SUSE:wght@100..800&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -5,6 +6,8 @@
 }
 body {
   background-color: rgb(98, 97, 97);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 section {
@@ -20,7 +23,7 @@ section {
   margin-top: 50px;
   font-size: xx-large;
   text-transform: capitalize;
-  z-index: 1100;
+  z-index: 900;
 }
 .pause-icon {
   width: 2.5rem;
