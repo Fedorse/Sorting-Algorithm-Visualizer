@@ -15,6 +15,8 @@ const App = () => {
   const player = usePlayer();
 
   const {
+    arrayLength,
+    updateArrayLength,
     algorithmState,
     selectedAlgorithm,
     selectAlgorithm,
@@ -22,7 +24,6 @@ const App = () => {
     runAlgorithm,
     getCurrentStep,
   } = useAlgorithm({ history, player });
-
   const handlePlay = useCallback(async () => {
     if (algorithmState === 'finished') {
       return resetAll();
@@ -66,9 +67,9 @@ const App = () => {
         selectAlgorithm={selectAlgorithm}
         goToNextStep={handleForward}
         goToPreviousStep={handleBack}
-        speed={player.speed}
+        arrayLength={arrayLength}
         resetAlgorithm={resetAll}
-        setSpeed={(speed) => player.setSpeed(speed)}
+        updateArrayLength={updateArrayLength}
         handlePlay={handlePlay}
         selectedAlgorithm={selectedAlgorithm}
         algorithmState={algorithmState}

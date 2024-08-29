@@ -1,20 +1,24 @@
 import './InputRange.css';
+import type { ArrayLength } from '../../hooks';
 
 type InputRangeType = {
-  speed: number;
-  setSpeed: (speed: number) => void;
+  arrayLength: ArrayLength;
+  updateArrayLength: (length: ArrayLength) => void;
 };
 
-const InputRange: React.FC<InputRangeType> = ({ speed, setSpeed }) => {
+const InputRange: React.FC<InputRangeType> = ({
+  arrayLength,
+  updateArrayLength,
+}) => {
   return (
     <input
+      id="length"
       type="range"
-      id="speed"
-      value={speed}
+      value={arrayLength}
       min={10}
-      max={30}
-      step={0.1}
-      onChange={(e) => setSpeed(parseFloat(e.target.value))}
+      max={50}
+      step={10}
+      onChange={(e) => updateArrayLength(Number(e.target.value) as ArrayLength)}
     />
   );
 };

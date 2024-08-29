@@ -16,6 +16,8 @@ export type Tracking = Partial<{
 
 export type AlgorithmHistory = History<{ tracking: Tracking; array: number[] }>;
 
+export type ArrayLength = 10 | 20 | 30 | 40 | 50;
+
 export const useAlgorithm = ({
   history,
   player,
@@ -27,7 +29,11 @@ export const useAlgorithm = ({
     useState<AlgorithmKeys>('quick');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [array, setArray] = useState(generateRandomArray(30, 150, 650));
+  const [arrayLength, setArrayLength] = useState<ArrayLength>(30);
+  const [array, setArray] = useState(
+    generateRandomArray(arrayLength, 150, 650),
+  );
+
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
     compareIndex: null,
@@ -36,7 +42,10 @@ export const useAlgorithm = ({
   });
 
   const resetAlgorithm = useCallback(() => {
-    setArray(generateRandomArray(30, 150, 650));
+    setArrayLength((prevCurrent) => {
+      setArray(generateRandomArray(prevCurrent, 150, 650));
+      return prevCurrent;
+    });
     setAlgorithmState('notStarted');
     setTracking({
       activeIndex: null,
@@ -44,7 +53,15 @@ export const useAlgorithm = ({
       pivotIndex: null,
       sortedIndices: [],
     });
-  }, [setArray, setAlgorithmState, setTracking]);
+  }, [arrayLength, setArray, setAlgorithmState, setTracking]);
+
+  const updateArrayLength = useCallback(
+    (newLength: ArrayLength) => {
+      setArrayLength(newLength);
+      resetAll();
+    },
+    [resetAlgorithm],
+  );
 
   const resetAll = useCallback(() => {
     resetAlgorithm();
@@ -129,6 +146,9 @@ export const useAlgorithm = ({
   }, [array, tracking, history, player]);
 
   return {
+    updateArrayLength,
+    arrayLength,
+    setArrayLength,
     array,
     selectedAlgorithm,
     algorithmState,

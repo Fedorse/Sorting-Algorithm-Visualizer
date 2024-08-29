@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 import PauseIcon from '../icon/PauseIcon';
 import DropDown from '../DropDown/DropDown';
 import type { AlgorithmState } from '../../hooks';
+import type { ArrayLength } from '../../hooks';
 import { PlayerState } from '../../hooks';
 import { AlgorithmKeys } from '../../algorithms';
 
@@ -18,9 +19,11 @@ type PlayerProps = {
   goToNextStep: () => void;
   goToPreviousStep: () => void;
   resetAlgorithm: () => void;
-  setSpeed: (speed: number) => void;
+  // setSpeed: (speed: number) => void;
   handlePlay: () => void;
-  speed: number;
+  // speed: number;
+  updateArrayLength: (arrayLength: ArrayLength) => void;
+  arrayLength: ArrayLength;
   selectedAlgorithm: AlgorithmKeys;
   algorithmState: AlgorithmState;
   playerState: PlayerState;
@@ -31,15 +34,15 @@ const Player: React.FC<PlayerProps> = ({
   goToNextStep,
   goToPreviousStep,
   resetAlgorithm,
-  setSpeed,
-  speed,
+  updateArrayLength,
+  arrayLength,
   handlePlay,
   selectedAlgorithm,
   algorithmState,
   playerState,
 }) => {
   const intervalRef = useRef<number | null>(null);
-  const speedOptions = [1, 2, 3, 4, 5];
+  const speedOptions = [10, 20, 30, 40, 50];
   const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
       intervalRef.current = setInterval(() => {
@@ -118,10 +121,13 @@ const Player: React.FC<PlayerProps> = ({
       </div>
       <div className="controls-speed">
         <div>
-          <InputRange speed={speed} setSpeed={setSpeed} />
+          <InputRange
+            arrayLength={arrayLength}
+            updateArrayLength={updateArrayLength}
+          />
           <div className="speed-scale">
             {speedOptions.map((option) => (
-              <span key={option}>{option}x</span>
+              <span key={option}>{option} el</span>
             ))}
           </div>
         </div>
