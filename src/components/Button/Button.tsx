@@ -17,27 +17,15 @@ type ButtonProps = Partial<{
 
 const Button: React.FC<ButtonProps> = ({
   isDisabled,
-  onClick,
-  onMouseDown,
-  onMouseUp,
-  onMouseLeave,
-  onTouchCancel,
-  onTouchStart,
-  onTouchEnd,
   children,
   className,
+  ...props
 }) => {
   return (
     <button
       disabled={isDisabled}
       className={`${classes.button} ${className}`}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      onTouchEnd={onTouchEnd}
-      onTouchCancel={onTouchCancel}
-      onTouchStart={onTouchStart}
+      {...props}
     >
       {children}
     </button>
