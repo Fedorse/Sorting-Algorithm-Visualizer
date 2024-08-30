@@ -41,33 +41,29 @@ export const useAlgorithm = ({
     sortedIndices: [],
   });
 
-  const resetAlgorithm = useCallback(() => {
-    setArrayLength((prevCurrent) => {
-      setArray(generateRandomArray(prevCurrent, 150, 650));
-      return prevCurrent;
-    });
-    setAlgorithmState('notStarted');
-    setTracking({
-      activeIndex: null,
-      compareIndex: null,
-      pivotIndex: null,
-      sortedIndices: [],
-    });
-  }, [arrayLength, setArray, setAlgorithmState, setTracking]);
-
-  const updateArrayLength = useCallback(
-    (newLength: ArrayLength) => {
+  const resetAndInitAlgorithm = useCallback(
+    (newLength: ArrayLength = arrayLength) => {
       setArrayLength(newLength);
-      resetAll();
+      setArray(generateRandomArray(newLength, 150, 650));
+      setAlgorithmState('notStarted');
+      setTracking({
+        activeIndex: null,
+        compareIndex: null,
+        pivotIndex: null,
+        sortedIndices: [],
+      });
     },
-    [resetAlgorithm],
+    [arrayLength, setArray, setAlgorithmState, setTracking],
   );
 
-  const resetAll = useCallback(() => {
-    resetAlgorithm();
-    history.resetHistory();
-    player.setPlayerState(null);
-  }, [resetAlgorithm, history, player]);
+  const resetAll = useCallback(
+    (newLength: ArrayLength = arrayLength) => {
+      resetAndInitAlgorithm(newLength);
+      history.resetHistory();
+      player.setPlayerState(null);
+    },
+    [resetAndInitAlgorithm, history, player],
+  );
 
   const updateArray = useCallback(
     (newArray: number[]) => {
@@ -146,14 +142,12 @@ export const useAlgorithm = ({
   }, [array, tracking, history, player]);
 
   return {
-    updateArrayLength,
     arrayLength,
     setArrayLength,
     array,
     selectedAlgorithm,
     algorithmState,
     selectAlgorithm,
-    resetAlgorithm,
     resetAll,
     runAlgorithm,
     getCurrentStep,

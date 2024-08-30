@@ -18,11 +18,10 @@ type PlayerProps = {
   selectAlgorithm: (algorithm: AlgorithmKeys) => void;
   goToNextStep: () => void;
   goToPreviousStep: () => void;
-  resetAlgorithm: () => void;
+  resetAlgorithm: (arrayLength?: ArrayLength) => void;
   // setSpeed: (speed: number) => void;
   handlePlay: () => void;
   // speed: number;
-  updateArrayLength: (arrayLength: ArrayLength) => void;
   arrayLength: ArrayLength;
   selectedAlgorithm: AlgorithmKeys;
   algorithmState: AlgorithmState;
@@ -34,7 +33,6 @@ const Player: React.FC<PlayerProps> = ({
   goToNextStep,
   goToPreviousStep,
   resetAlgorithm,
-  updateArrayLength,
   arrayLength,
   handlePlay,
   selectedAlgorithm,
@@ -123,7 +121,7 @@ const Player: React.FC<PlayerProps> = ({
         <div>
           <InputRange
             arrayLength={arrayLength}
-            updateArrayLength={updateArrayLength}
+            updateArrayLength={resetAlgorithm}
           />
           <div className="speed-scale">
             {speedOptions.map((option) => (

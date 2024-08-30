@@ -16,7 +16,6 @@ const App = () => {
 
   const {
     arrayLength,
-    updateArrayLength,
     algorithmState,
     selectedAlgorithm,
     selectAlgorithm,
@@ -69,7 +68,6 @@ const App = () => {
         goToPreviousStep={handleBack}
         arrayLength={arrayLength}
         resetAlgorithm={resetAll}
-        updateArrayLength={updateArrayLength}
         handlePlay={handlePlay}
         selectedAlgorithm={selectedAlgorithm}
         algorithmState={algorithmState}
