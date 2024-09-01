@@ -10,21 +10,21 @@ body {
   font-weight: 300;
 }
 
-section {
+/* section {
   display: flex;
   height: 100vh;
   flex-direction: column;
   position: relative;
-}
+} */
 
-.title-algorithm {
+/* .title-algorithm {
   color: rgb(255, 253, 253);
   text-align: center;
   margin-top: 50px;
   font-size: xx-large;
   text-transform: capitalize;
   z-index: 900;
-}
+} */
 .pause-icon {
   width: 2.5rem;
   height: 2.5rem;
@@ -60,32 +60,32 @@ section {
     margin-top: 30px;
   }
   .pause-icon {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .play-icon {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
   .resume-play-icon {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
   .prev-step-icon {
-    width: 0.7rem;
-    height: 0.7rem;
-  }
-  .next-step-icon {
-    width: 0.7rem;
-    height: 0.7rem;
-  }
-  .reset-icon {
     width: 1rem;
     height: 1rem;
   }
-  .drop-down-icon {
+  .next-step-icon {
     width: 1rem;
-    height: 0.8rem;
+    height: 1rem;
+  }
+  .reset-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .drop-down-icon {
+    width: 1.5rem;
+    height: 1.1rem;
   }
 }

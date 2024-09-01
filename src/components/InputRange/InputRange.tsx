@@ -1,24 +1,28 @@
 import './InputRange.css';
-import type { ArrayLength } from '../../hooks';
 
 type InputRangeType = {
-  arrayLength: ArrayLength;
-  updateArrayLength: (length: ArrayLength) => void;
+  arrayLength: number;
+  handleArrayLengthChange: (length: number) => void;
 };
 
 const InputRange: React.FC<InputRangeType> = ({
   arrayLength,
-  updateArrayLength,
+  handleArrayLengthChange,
 }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLength = parseFloat(e.target.value);
+    handleArrayLengthChange(newLength);
+  };
+
   return (
     <input
       id="length"
       type="range"
       value={arrayLength}
       min={10}
-      max={50}
-      step={10}
-      onChange={(e) => updateArrayLength(Number(e.target.value) as ArrayLength)}
+      max={60}
+      step={1}
+      onChange={handleChange}
     />
   );
 };

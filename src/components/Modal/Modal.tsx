@@ -8,7 +8,7 @@ const Modal = () => {
     setIsModalOpen(false);
   };
   return (
-    <section>
+    <>
       {isModalOpen && (
         <div className={classes.modal} onClick={closeModal}>
           <div className={classes.modalContent}>
@@ -32,7 +32,7 @@ const Modal = () => {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 };
 

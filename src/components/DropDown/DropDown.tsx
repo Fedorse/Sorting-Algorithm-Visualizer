@@ -38,9 +38,10 @@ const DropDown: React.FC<DropDowmProps> = ({
 
   return (
     <div className={`dropdown ${isOpen ? 'open' : ''}`}>
-      <span className="dropdown-span" onClick={toggleDropDown}>
-        <DropDownIcon />
-      </span>
+      <div className="dropdown-span" onClick={toggleDropDown}>
+        {capitalizeFirstLetter(selectedAlgorithm)}
+      </div>
+
       <ul className="dropdown-content">
         {algorithmNames.map((algorithm, index) => (
           <li
@@ -48,7 +49,7 @@ const DropDown: React.FC<DropDowmProps> = ({
             onClick={() => handleSelect(algorithm)}
             className={algorithm === selectedAlgorithm ? 'selected' : ''}
           >
-            {capitalizeFirstLetter(algorithm)} Sort
+            {capitalizeFirstLetter(algorithm)}
           </li>
         ))}
       </ul>

@@ -16,8 +16,6 @@ export type Tracking = Partial<{
 
 export type AlgorithmHistory = History<{ tracking: Tracking; array: number[] }>;
 
-export type ArrayLength = 10 | 20 | 30 | 40 | 50;
-
 export const useAlgorithm = ({
   history,
   player,
@@ -26,13 +24,10 @@ export const useAlgorithm = ({
   player: Player;
 }) => {
   const [selectedAlgorithm, setSelectedAlgorithm] =
-    useState<AlgorithmKeys>('quick');
+    useState<AlgorithmKeys>('selection');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [arrayLength, setArrayLength] = useState<ArrayLength>(30);
-  const [array, setArray] = useState(
-    generateRandomArray(arrayLength, 150, 650),
-  );
+  const [array, setArray] = useState(generateRandomArray(30, 250, 720));
 
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
@@ -42,9 +37,9 @@ export const useAlgorithm = ({
   });
 
   const resetAndInitAlgorithm = useCallback(
-    (newLength: ArrayLength = arrayLength) => {
-      setArrayLength(newLength);
-      setArray(generateRandomArray(newLength, 150, 650));
+    (newLength?: number) => {
+      const length = newLength ?? array.length;
+      setArray(generateRandomArray(length, 250, 720));
       setAlgorithmState('notStarted');
       setTracking({
         activeIndex: null,
@@ -53,11 +48,11 @@ export const useAlgorithm = ({
         sortedIndices: [],
       });
     },
-    [arrayLength, setArray, setAlgorithmState, setTracking],
+    [setArray, setAlgorithmState, setTracking],
   );
 
   const resetAll = useCallback(
-    (newLength: ArrayLength = arrayLength) => {
+    (newLength?: number) => {
       resetAndInitAlgorithm(newLength);
       history.resetHistory();
       player.setPlayerState(null);
@@ -97,7 +92,7 @@ export const useAlgorithm = ({
 
   const selectAlgorithm = useCallback(
     (name: AlgorithmKeys) => {
-      resetAll();
+      resetAll(array.length);
       setSelectedAlgorithm(name);
     },
     [setSelectedAlgorithm, resetAll],
@@ -142,8 +137,6 @@ export const useAlgorithm = ({
   }, [array, tracking, history, player]);
 
   return {
-    arrayLength,
-    setArrayLength,
     array,
     selectedAlgorithm,
     algorithmState,

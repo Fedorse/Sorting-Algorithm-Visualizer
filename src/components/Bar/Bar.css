@@ -3,26 +3,28 @@
     background-color 0.5s,
     transform 0.5s;
   margin: 0 0.1rem;
-  border: 0.01rem solid #3c3a3a;
-  border-radius: 3px;
-  background-color: rgba(216, 216, 235, 0.976);
-  z-index: 10;
+  border: 0.02rem solid #000000;
+  border-radius: 4px;
+  background-color: rgba(1, 1, 100, 0.204);
+  transform-style: preserve-3d;
 }
 
 .bar.active {
-  background-color: rgb(254, 0, 0);
-  z-index: 800;
+  background-color: rgb(194, 36, 36);
+  /* transform: rotateY(180deg) translateZ(10px); */
 }
 
 .bar.compare {
-  background-color: yellow;
-  z-index: 800;
+  background-color: rgb(24, 206, 91);
+  /* transform: rotateY(180deg); */
 }
 .bar.pivot {
   background-color: rgb(16, 16, 248);
-  z-index: 800;
 }
 .bar.sorted {
-  background-color: hsla(240, 67%, 74%, 0.976);
-  z-index: 50;
+  background-color: rgba(1, 1, 100, 0.494);
 }
+
+/* .bar:hover {
+  transform: rotateY(180deg) translateZ(10px);
+} */

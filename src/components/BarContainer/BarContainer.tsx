@@ -27,16 +27,18 @@ const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
   const barWidth = window.screen.width / array.length;
 
   return (
-    <div className={clasess.arr}>
-      {array.map((heightPx, index) => (
-        <Bar
-          key={index}
-          width={barWidth}
-          height={heightPx}
-          indexType={getIndexType(index, tracking)}
-        />
-      ))}
-    </div>
+    <section>
+      <div className={clasess.arr}>
+        {array.map((heightPx, index) => (
+          <Bar
+            key={index}
+            width={barWidth}
+            height={heightPx}
+            indexType={getIndexType(index, tracking)}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 

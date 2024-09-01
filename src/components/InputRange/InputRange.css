@@ -1,11 +1,10 @@
 input {
-    width: 450px;
-    opacity: 60%;
+  width: 450px;
+  opacity: 50%;
 }
 
-@media (max-width:768px) {
-    input {
-        width: 320px;
- 
-    }
+@media (max-width: 768px) {
+  input {
+    width: 320px;
+  }
 }

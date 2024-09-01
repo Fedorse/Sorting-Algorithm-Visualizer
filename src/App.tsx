@@ -15,7 +15,7 @@ const App = () => {
   const player = usePlayer();
 
   const {
-    arrayLength,
+    array,
     algorithmState,
     selectedAlgorithm,
     selectAlgorithm,
@@ -23,9 +23,10 @@ const App = () => {
     runAlgorithm,
     getCurrentStep,
   } = useAlgorithm({ history, player });
+
   const handlePlay = useCallback(async () => {
     if (algorithmState === 'finished') {
-      return resetAll();
+      return resetAll(array.length);
     }
 
     if (algorithmState === 'notStarted') {
@@ -58,22 +59,23 @@ const App = () => {
   const step = getCurrentStep();
 
   return (
-    <section>
+    <main>
       <Modal />
-      <span className="title-algorithm">{selectedAlgorithm} Sort</span>
+      {/* <span className="title-algorithm">{selectedAlgorithm} Sort</span> */}
       <BarContainer {...step} />
       <Player
+        speed={player.speed}
+        setSpeed={player.setSpeed}
         selectAlgorithm={selectAlgorithm}
         goToNextStep={handleForward}
         goToPreviousStep={handleBack}
-        arrayLength={arrayLength}
         resetAlgorithm={resetAll}
         handlePlay={handlePlay}
         selectedAlgorithm={selectedAlgorithm}
         algorithmState={algorithmState}
         playerState={player.playerState}
       />
-    </section>
+    </main>
   );
 };
 
