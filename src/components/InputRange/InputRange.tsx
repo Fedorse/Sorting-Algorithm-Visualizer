@@ -16,7 +16,6 @@ const InputRange: React.FC<InputRangeType> = ({
 
   return (
     <input
-      id="length"
       type="range"
       value={arrayLength}
       min={10}

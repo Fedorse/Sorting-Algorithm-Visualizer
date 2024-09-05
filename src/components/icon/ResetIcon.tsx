@@ -1,9 +1,16 @@
-const ResetIcon = () => {
+type ResetIconProps = {
+  className?: string;
+  isRotating?: boolean;
+};
+const ResetIcon: React.FC<ResetIconProps> = ({
+  className,
+  isRotating = false,
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className="reset-icon"
+      className={`${className} ${isRotating ? 'rotating' : ''}`}
     >
       <g fill="none">
         <g clipPath="url(#solarRestartBroken0)">

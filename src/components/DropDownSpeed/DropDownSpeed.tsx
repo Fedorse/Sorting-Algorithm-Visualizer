@@ -2,6 +2,8 @@ import { useState } from 'react';
 import useClickOutside from '../../actions/useClickOutside';
 
 import classes from './DropDownSpeed.module.css';
+import SpeedIcon from '../icon/SpeedIcon';
+import Button from '../Button/Button';
 
 type DropDowmProps = {
   setSpeed: (speed: number) => void;
@@ -23,22 +25,24 @@ const DropDownSpeed: React.FC<DropDowmProps> = ({ speed, setSpeed }) => {
   };
 
   useClickOutside({
-    callback: (): void => {
-      if (isOpen) setIsOpen(false);
-    },
+    callback: () => setIsOpen(false),
     targetClass: classes.dropdown,
   });
 
   return (
-    <div className={`${classes.dropdown} ${isOpen ? classes.open : ''}`}>
-      <div className={classes.dropdownSpan} onClick={toggleDropDown}>
-        {speed / 10}x
-      </div>
-
+    <div
+      className={
+        isOpen ? `${classes.dropdown} ${classes.open}` : classes.dropdown
+      }
+    >
+      <Button className={classes.dropdownButton} onClick={toggleDropDown}>
+        <SpeedIcon speed={speed} />
+        <span>Speed </span>
+      </Button>
       <ul className={classes.dropdownContent}>
-        {speedList.map((s, index) => (
+        {speedList.map((s) => (
           <li
-            key={index}
+            key={s}
             onClick={() => handleSelect(s)}
             className={s === speed ? classes.selected : ''}
           >

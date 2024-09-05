@@ -1,7 +1,17 @@
 .button {
-  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  background-color: black;
+  background-color: var(--primary-color);
   border: none;
-  color: white;
+  color: var(--text-color);
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  touch-action: manipulation;
+  user-select: none;
 }

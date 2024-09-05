@@ -23,6 +23,7 @@ const getIndexType = (index: number, tracking: Tracking) => {
 };
 
 const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
+  
   //Calculate width each column in array
   const barWidth = window.screen.width / array.length;
 

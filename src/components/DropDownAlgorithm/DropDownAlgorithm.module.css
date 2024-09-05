@@ -2,26 +2,44 @@
   color: var(--text-color);
 }
 
+.dropdownButton {
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+  font-weight: 400;
+}
+
 .dropdownContent {
   visibility: hidden;
   position: absolute;
   background-color: black;
+  min-width: 12.5rem;
   border: 1px solid var(--primary-color);
   border-radius: 0.5rem;
-  bottom: 50%;
-  right: 2%;
+  bottom: 55%;
+  left: 0;
+  z-index: 1;
   transition:
     opacity 0.1s ease,
     visibility 0.1s ease;
 }
 
 .dropdownContent li {
-  padding: 10px 15px;
+  padding: 0.6rem 1rem;
   text-decoration: none;
   display: block;
   transition: background-color 0.3s;
   cursor: pointer;
   font-size: x-large;
+}
+
+.dropdownContent a:hover {
+  background-color: var(--secondary-color);
+}
+
+.dropdown.open .dropdownContent {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdownContent li.selected {
@@ -31,17 +49,15 @@
 .dropdownContent li:hover {
   background-color: var(--secondary-text-color);
 }
-
-.dropdown.open .dropdownContent {
-  opacity: 1;
-  visibility: visible;
-}
-
 .dropdownButton:hover {
   color: var(--secondary-text-color);
 }
+
 @media (max-width: 768px) {
   .dropdownButton {
-    font-size: small;
+    font-size: x-large;
+  }
+  .dropdownContent {
+    min-width: 8rem;
   }
 }

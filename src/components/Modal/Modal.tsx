@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import classes from './Modal.module.css';
 
-const Modal = () => {
+const Modal = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const closeModal = () => {
     setIsModalOpen(false);
@@ -13,22 +13,46 @@ const Modal = () => {
         <div className={classes.modal} onClick={closeModal}>
           <div className={classes.modalContent}>
             <h2 className={classes.modalTitle}>Sorting Algorithm Visualizer</h2>
+            <h3>Pick an algorithm.</h3>
             <p>
-              This is an interactive application for visualizing popular sorting
-              algorithms such as Bubble Sort, Insertion Sort, Quick Sort and
-              Selection Sort.
+              Select an <span className={classes.textColor}> Algorithm</span> ,
+              adjust the array size using the slider and select speed.
             </p>
+            <p>Use the play/pause button to control the visualization.</p>
             <p>
-              <span style={{ color: 'yellow' }}>Control the Execution:</span>{' '}
-              Use the controls to start, pause, and navigate through the sorting
-              process.
+              Use the Player to control the execution of the a
+              <span className={classes.textColor}> Algorithm</span> and navigate
+              through the history.
             </p>
-            <p>
-              <span style={{ color: 'green' }}>Understand the Process:</span>{' '}
-              Watch as the array is sorted step by step, with visual cues for
-              active, compared, and sorted elements.
-            </p>
-            <h3>Pick an Algorithm.</h3>
+            <div className={classes.colorGuide}>
+              <h3 className={classes.titleColor}>Color Guide</h3>
+              <div className={classes.colorContainer}>
+                <div className={classes.colorItem}>
+                  <div
+                    className={`${classes.colorBox} ${classes.colorActive}`}
+                  ></div>
+                  <span>Active Element</span>
+                </div>
+                <div className={classes.colorItem}>
+                  <div
+                    className={`${classes.colorBox} ${classes.colorCompared}`}
+                  ></div>
+                  <span>Compared Element</span>
+                </div>
+                <div className={classes.colorItem}>
+                  <div
+                    className={`${classes.colorBox} ${classes.colorPivot}`}
+                  ></div>
+                  <span>Pivot Element</span>
+                </div>
+                <div className={classes.colorItem}>
+                  <div
+                    className={`${classes.colorBox} ${classes.colorSorted}`}
+                  ></div>
+                  <span>Sorted Elements</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

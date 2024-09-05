@@ -1,91 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=SUSE:wght@100..800&display=swap');
+@import 'variables.css';
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  background-color: rgb(98, 97, 97);
+  background-color: var(--background-color);
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
 
-/* section {
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  position: relative;
-} */
+.play-icon,
+.pause-icon,
+.git-icon,
+.help-icon {
+  width: var(--icon-width-large);
+  height: var(--icon-width-large);
+}
+.reset-icon,
+.speed-icon {
+  width: var(--icon-width-medium);
+  height: var(--icon-width-medium);
+}
 
-/* .title-algorithm {
-  color: rgb(255, 253, 253);
-  text-align: center;
-  margin-top: 50px;
-  font-size: xx-large;
-  text-transform: capitalize;
-  z-index: 900;
-} */
-.pause-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-.play-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-.resume-play-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-.prev-step-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
+.prev-step-icon,
 .next-step-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-.reset-icon {
-  width: 2rem;
-  height: 2rem;
-}
-.drop-down-icon {
-  width: 2rem;
-  height: 1.5rem;
+  width: var(--icon-width-small);
+  height: var(--icon-width-small);
 }
 
+.play-icon:hover,
+.pause-icon:hover {
+  transform: scale(1.1);
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reset-icon.rotating {
+  animation: rotate360 0.3s linear;
+}
 @media (max-width: 768px) {
-  .title-algorithm {
-    font-size: large;
-    margin-top: 30px;
-  }
-  .pause-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .play-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .resume-play-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+  .next-step-icon,
   .prev-step-icon {
-    width: 1rem;
-    height: 1rem;
+    width: var(--icon-width-small);
+    height: var(--icon-width-small);
   }
-  .next-step-icon {
-    width: 1rem;
-    height: 1rem;
-  }
-  .reset-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .drop-down-icon {
-    width: 1.5rem;
-    height: 1.1rem;
+  .reset-icon,
+  .speed-icon {
+    width: 2rem;
+    height: 2rem;
   }
 }

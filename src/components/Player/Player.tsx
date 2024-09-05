@@ -6,13 +6,14 @@ import PlayIcon from '../icon/PlayIcon';
 import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
 import PauseIcon from '../icon/PauseIcon';
-import DropDown from '../DropDown/DropDown';
+import DropDown from '../DropDownAlgorithm/DropDownAlgorithm';
 import DropDownSpeed from '../DropDownSpeed/DropDownSpeed';
-import type { AlgorithmState } from '../../hooks';
-import { PlayerState } from '../../hooks';
-import { AlgorithmKeys } from '../../algorithms';
 
-import './Player.css';
+import type { PlayerState } from '../../hooks';
+import type { AlgorithmKeys } from '../../algorithms';
+import type { AlgorithmState } from '../../hooks';
+
+import classes from './Player.module.css';
 
 type PlayerProps = {
   selectAlgorithm: (algorithm: AlgorithmKeys) => void;
@@ -39,15 +40,20 @@ const Player: React.FC<PlayerProps> = ({
   algorithmState,
   playerState,
 }) => {
-  const [arrayLength, setArrayLength] = useState(30);
+  const [arrayLength, setArrayLength] = useState(20);
+  const [isRotating, setIsRotating] = useState(false);
   const intervalRef = useRef<number | null>(null);
-
-  const speedOptions = [10, 20, 30, 40, 50];
 
   const handleArrayLengthChange = (newLength: number) => {
     setArrayLength(newLength);
     resetAlgorithm(newLength);
   };
+
+  const handleResetAlgorithm = useCallback(() => {
+    resetAlgorithm(arrayLength);
+    setIsRotating(true);
+    setTimeout(() => setIsRotating(false), 500);
+  }, [arrayLength, resetAlgorithm]);
 
   const startInterval = (action: () => void) => {
     if (intervalRef.current === null) {
@@ -77,7 +83,7 @@ const Player: React.FC<PlayerProps> = ({
       return <PlayIcon />;
     }
     if (algorithmState === 'finished') {
-      return <ResetIcon />;
+      return <ResetIcon className="reset-icon" />;
     }
 
     if (playerState === 'play') {
@@ -90,17 +96,13 @@ const Player: React.FC<PlayerProps> = ({
 
   return (
     <section>
-      <div className="player-container">
-        <div className="controls">
-          <div className="algorithSelector">
-            <DropDown
-              selectAlgorithm={selectAlgorithm}
-              selectedAlgorithm={selectedAlgorithm}
-            />
-          </div>
-
-          <div className="step-buttons">
-            <DropDownSpeed speed={speed} setSpeed={setSpeed} />
+      <div className={classes.playerContainer}>
+        <div className={classes.controls}>
+          <DropDown
+            selectAlgorithm={selectAlgorithm}
+            selectedAlgorithm={selectedAlgorithm}
+          />
+          <div className={classes.controlButtons}>
             <Button
               isDisabled={algorithmState === 'notStarted'}
               onMouseDown={() => handleMouseDown(goToPreviousStep)}
@@ -125,23 +127,22 @@ const Player: React.FC<PlayerProps> = ({
             >
               <NextStepIcon />
             </Button>
-            <Button onClick={() => resetAlgorithm(arrayLength)}>
-              <ResetIcon />
-            </Button>
+          </div>
+          <div className={classes.speedButton}>
+            <DropDownSpeed speed={speed} setSpeed={setSpeed} />
           </div>
         </div>
-        <div className="controls-speed">
-          <div>
-            <InputRange
-              arrayLength={arrayLength}
-              handleArrayLengthChange={handleArrayLengthChange}
-            />
-            <div className="speed-scale">
-              {speedOptions.map((option) => (
-                <span key={option}>{option} el</span>
-              ))}
-            </div>
-          </div>
+        <div className={classes.controlSpeed}>
+          <div>Size {arrayLength}</div>
+          <InputRange
+            arrayLength={arrayLength}
+            handleArrayLengthChange={handleArrayLengthChange}
+          />
+
+          <Button onClick={handleResetAlgorithm}>
+            <ResetIcon className="reset-icon" isRotating={isRotating} />
+            <span>Reset</span>
+          </Button>
         </div>
       </div>
     </section>

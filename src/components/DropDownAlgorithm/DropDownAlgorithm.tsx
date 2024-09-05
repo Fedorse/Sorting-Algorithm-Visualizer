@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 import useClickOutside from '../../actions/useClickOutside';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { algorithmNames, type AlgorithmKeys } from '../../algorithms';
-import DropDownIcon from '../icon/DropDownIcon';
 
-import './DropDown.css';
+import classes from './DropDownAlgorithm.module.css';
+import Button from '../Button/Button';
 
 type DropDowmProps = {
   selectAlgorithm: (select: AlgorithmKeys) => void;
@@ -30,24 +30,26 @@ const DropDown: React.FC<DropDowmProps> = ({
   );
 
   useClickOutside({
-    callback: (): void => {
-      if (isOpen) setIsOpen(false);
-    },
-    targetClass: 'dropdown',
+    callback: () => setIsOpen(false),
+    targetClass: classes.dropdown,
   });
 
   return (
-    <div className={`dropdown ${isOpen ? 'open' : ''}`}>
-      <div className="dropdown-span" onClick={toggleDropDown}>
+    <div
+      className={
+        isOpen ? `${classes.open} ${classes.dropdown}` : classes.dropdown
+      }
+    >
+      <Button className={classes.dropdownButton} onClick={toggleDropDown}>
         {capitalizeFirstLetter(selectedAlgorithm)}
-      </div>
+      </Button>
 
-      <ul className="dropdown-content">
-        {algorithmNames.map((algorithm, index) => (
+      <ul className={classes.dropdownContent}>
+        {algorithmNames.map((algorithm) => (
           <li
-            key={index}
+            key={algorithm}
             onClick={() => handleSelect(algorithm)}
-            className={algorithm === selectedAlgorithm ? 'selected' : ''}
+            className={algorithm === selectedAlgorithm ? classes.selected : ''}
           >
             {capitalizeFirstLetter(algorithm)}
           </li>

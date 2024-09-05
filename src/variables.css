@@ -1,0 +1,14 @@
+:root {
+  --background-color: #d9d9d9;
+  --primary-color: #282c40;
+  --text-color: #f9f8f8;
+  --secondary-text-color: #87a1c2;
+  --active-color: #6f92bf;
+  --highlight-active-color: #f26419;
+  --highlight-compare-color: #f6ae2d;
+  --highlight-pivot-color: #731d0a;
+  --icon-width-large: 3rem;
+  --icon-width-medium: 2.5rem;
+  --icon-width-small: 1.5rem;
+}
+

@@ -6,6 +6,7 @@ import type { AlgorithmHistory } from './hooks';
 import { disableScroll } from './utils/disableScroll';
 
 import BarContainer from './components/BarContainer/BarContainer';
+import Navbar from './components/Navbar/Navbar';
 import Player from './components/Player/Player';
 import Modal from './components/Modal/Modal';
 
@@ -61,7 +62,7 @@ const App = () => {
   return (
     <main>
       <Modal />
-      {/* <span className="title-algorithm">{selectedAlgorithm} Sort</span> */}
+      <Navbar />
       <BarContainer {...step} />
       <Player
         speed={player.speed}

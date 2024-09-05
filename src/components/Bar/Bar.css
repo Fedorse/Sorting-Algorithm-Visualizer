@@ -2,27 +2,26 @@
   transition:
     background-color 0.5s,
     transform 0.5s;
-  margin: 0 0.1rem;
-  border: 0.02rem solid #000000;
-  border-radius: 4px;
-  background-color: rgba(1, 1, 100, 0.204);
+  margin: 1px;
+  border: 1px solid var(--primary-color);
+  border-radius: 3px;
+  background-color: #3c497343;
   transform-style: preserve-3d;
 }
-
 .bar.active {
-  background-color: rgb(194, 36, 36);
+  background-color: var(--highlight-active-color);
   /* transform: rotateY(180deg) translateZ(10px); */
 }
 
 .bar.compare {
-  background-color: rgb(24, 206, 91);
+  background-color: var(--highlight-compare-color);
   /* transform: rotateY(180deg); */
 }
 .bar.pivot {
-  background-color: rgb(16, 16, 248);
+  background-color: var(--highlight-pivot-color);
 }
 .bar.sorted {
-  background-color: rgba(1, 1, 100, 0.494);
+  background-color: var(--active-color);
 }
 
 /* .bar:hover {
