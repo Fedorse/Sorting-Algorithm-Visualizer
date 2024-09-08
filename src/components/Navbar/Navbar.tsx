@@ -42,7 +42,7 @@ const Navbar = () => {
     <nav>
       <div className={classes.navContainer}>
         <Button onClick={toggleTheme} className={classes.navButton}>
-          {theme === 'light' ? <LightThemeIcon /> : <DarkThemeIcon />}
+          {theme === 'light' ? <DarkThemeIcon /> : <LightThemeIcon />}
         </Button>
         <div className={classes.buttonInfo}>
           <Button onClick={openModal} className={classes.navButton}>

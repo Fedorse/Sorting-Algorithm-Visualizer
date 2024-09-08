@@ -6,6 +6,7 @@ type BarProps = {
   width: number;
   height: number;
   indexType: IndexType;
+  isNotStarted: boolean;
 };
 
 const Bar: React.FC<BarProps> = ({ width, height, indexType }) => {

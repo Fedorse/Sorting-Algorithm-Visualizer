@@ -24,10 +24,10 @@ export const useAlgorithm = ({
   player: Player;
 }) => {
   const [selectedAlgorithm, setSelectedAlgorithm] =
-    useState<AlgorithmKeys>('selection');
+    useState<AlgorithmKeys>('bubble');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [array, setArray] = useState(generateRandomArray(20, 370, 900));
+  const [array, setArray] = useState(generateRandomArray(10, 370, 900));
 
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,

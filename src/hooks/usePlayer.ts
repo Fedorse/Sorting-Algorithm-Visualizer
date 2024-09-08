@@ -4,7 +4,7 @@ export type PlayerState = 'forward' | 'backward' | 'pause' | 'play' | null;
 
 export const usePlayer = () => {
   const [playerState, setPlayerState] = useState<PlayerState>(null);
-  const [speed, setSpeed] = useState(10);
+  const [speed, setSpeed] = useState(100);
 
   const playerRef = useRef({
     playerState,

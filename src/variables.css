@@ -1,13 +1,7 @@
 :root {
-  --background-color: #d9d9d9;
-  --primary-color: #282c40;
-  --text-color: #f9f8f8;
-  --secondary-text-color: #87a1c2;
-
-  --active-color: #6f92bf;
-  --highlight-active-color: #f26419;
-  --highlight-compare-color: #f6ae2d;
-  --highlight-pivot-color: #731d0a;
+  --primary-color: hsl(230, 23%, 20%);
+  --text-color: hsl(0, 8%, 97%);
+  --secondary-text-color: hsl(214, 33%, 65%);
 
   --icon-width-large: 3rem;
   --icon-width-medium: 2.5rem;
@@ -16,23 +10,22 @@
 
 /* light mode */
 :root[data-theme='light'] {
-  --background-color: #d9d9d9;
-  --bar-color: #74757b;
-  --color-button: #282c40;
-  /* --text-color: #f9f8f8;
-  --primary-color: #282c40;
-  --secondary-text-color: #87a1c2;
-  --active-color: #6f92bf; */
+  --background-color: hsl(210, 36%, 96%);
+  --active-color: hsl(228, 31%, 34%);
+  --bar-color: hsla(230, 10%, 46%, 0.1);
+  --color-button: hsl(230, 23%, 20%);
+  --highlight-compare-color: hsla(27, 87%, 67%, 0.8);
+  --highlight-active-color: hsla(11, 58%, 45%, 0.8);
+  --highlight-pivot-color: hsla(248, 54%, 67%, 0.8);
 }
 
 /* dark mode */
 :root[data-theme='dark'] {
-  --background-color: #282c40;
-  --bar-color: #adadae;
-  --color-button: #f9f8f8;
-
-  /* --text-color: #222222;
-  --primary-color: #282c40;
-  --secondary-text-color: #5c7eab;
-  --active-color: #6f92bf; */
+  --background-color: hsl(230, 23%, 20%);
+  --active-color: hsl(226, 31%, 34%);
+  --bar-color: hsla(232, 10%, 46%, 0.2);
+  --color-button: hsl(0, 8%, 97%);
+  --highlight-compare-color: hsl(27, 87%, 67%);
+  --highlight-active-color: hsl(11, 58%, 45%);
+  --highlight-pivot-color: hsl(248, 54%, 67%);
 }

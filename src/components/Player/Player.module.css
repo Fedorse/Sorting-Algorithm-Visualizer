@@ -35,7 +35,9 @@
   align-items: center;
 }
 .controlButtons button:disabled {
-  opacity: 50%;
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .speedButton {
@@ -48,6 +50,8 @@
   .playerContainer {
     width: 100%;
     padding: 0 0.5rem;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
   .controlButtons {
     padding-left: 2rem;

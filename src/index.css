@@ -15,7 +15,8 @@ body {
 }
 
 .play-icon,
-.pause-icon {
+.pause-icon,
+.reset-player-icon {
   width: var(--icon-width-large);
   height: var(--icon-width-large);
 }
@@ -52,6 +53,7 @@ body {
 .reset-icon.rotating {
   animation: rotate360 0.3s linear;
 }
+
 @media (max-width: 768px) {
   .next-step-icon,
   .prev-step-icon {
@@ -59,7 +61,11 @@ body {
     height: var(--icon-width-small);
   }
   .reset-icon,
-  .speed-icon {
+  .speed-icon,
+  .light-theme-icon,
+  .dark-theme-icon,
+  .git-icon,
+  .help-icon {
     width: 2rem;
     height: 2rem;
   }

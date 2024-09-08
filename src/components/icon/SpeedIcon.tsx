@@ -1,10 +1,12 @@
-import React from 'react';
+import { speedDisplayMap } from '../DropDownSpeed/index';
 
 type SpeedIconProps = {
   speed: number;
 };
 
 const SpeedIcon: React.FC<SpeedIconProps> = ({ speed }) => {
+  const displaySpeed = speedDisplayMap[speed] || `1x`;
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +32,7 @@ const SpeedIcon: React.FC<SpeedIconProps> = ({ speed }) => {
         fontSize="8"
         dy=".3em"
       >
-        {speed / 10}x
+        {displaySpeed}
       </text>
     </svg>
   );

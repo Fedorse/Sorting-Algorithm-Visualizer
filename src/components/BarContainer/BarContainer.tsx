@@ -8,7 +8,14 @@ type BarContainerProps = {
   tracking: Tracking;
 };
 
-const getIndexType = (index: number, tracking: Tracking) => {
+const getIndexType = (
+  index: number,
+  tracking: Tracking,
+  algorithmState: string,
+) => {
+  if (algorithmState === 'notStarted') {
+    return 'notStarted';
+  }
   if (index === tracking.activeIndex) {
     return 'active';
   } else if (index === tracking.compareIndex) {
@@ -22,8 +29,11 @@ const getIndexType = (index: number, tracking: Tracking) => {
   }
 };
 
-const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
-  
+const BarContainer: React.FC<BarContainerProps> = ({
+  array,
+  tracking,
+  algorithmState,
+}) => {
   //Calculate width each column in array
   const barWidth = window.screen.width / array.length;
 
@@ -35,7 +45,7 @@ const BarContainer: React.FC<BarContainerProps> = ({ array, tracking }) => {
             key={index}
             width={barWidth}
             height={heightPx}
-            indexType={getIndexType(index, tracking)}
+            indexType={getIndexType(index, tracking, algorithmState)}
           />
         ))}
       </div>

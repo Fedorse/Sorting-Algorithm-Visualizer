@@ -37,9 +37,6 @@
   visibility: visible;
 }
 
-.dropdownButton:hover {
-  color: var(--secondary-text-color);
-}
 @media (max-width: 768px) {
   .dropdownButton {
     font-size: small;

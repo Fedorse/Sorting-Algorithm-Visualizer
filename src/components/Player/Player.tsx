@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import ResetIcon from '../icon/ResetIcon';
 import NextStepIcon from '../icon/NextStepIcon';
 import PreviousStepIcon from '../icon/PreviousStepIcon';
+import ResetPlayerIcon from '../icon/ResetPlayerIcon';
 import PlayIcon from '../icon/PlayIcon';
 import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
@@ -40,7 +41,7 @@ const Player: React.FC<PlayerProps> = ({
   algorithmState,
   playerState,
 }) => {
-  const [arrayLength, setArrayLength] = useState(20);
+  const [arrayLength, setArrayLength] = useState(10);
   const [isRotating, setIsRotating] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
@@ -83,7 +84,7 @@ const Player: React.FC<PlayerProps> = ({
       return <PlayIcon />;
     }
     if (algorithmState === 'finished') {
-      return <ResetIcon className="reset-icon" />;
+      return <ResetPlayerIcon />;
     }
 
     if (playerState === 'play') {
@@ -114,6 +115,7 @@ const Player: React.FC<PlayerProps> = ({
             >
               <PreviousStepIcon />
             </Button>
+
             <Button onClick={handlePlay}>{getButtonIcon()}</Button>
 
             <Button

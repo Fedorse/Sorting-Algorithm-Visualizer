@@ -4,13 +4,25 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background-color: var(--primary-color);
+  background-color: transparent;
   border: none;
   color: var(--text-color);
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+  padding: 2px;
 }
+
+.button svg {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.267));
+  transition: filter 0.3s ease;
+}
+
+.button:hover svg {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+}
+
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;

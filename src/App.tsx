@@ -61,7 +61,7 @@ const App = () => {
   return (
     <main>
       <Navbar />
-      <BarContainer {...step} />
+      <BarContainer {...step} algorithmState={algorithmState} />
       <Player
         speed={player.speed}
         setSpeed={player.setSpeed}
