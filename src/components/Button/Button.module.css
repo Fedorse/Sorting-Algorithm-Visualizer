@@ -7,6 +7,9 @@
   background-color: var(--primary-color);
   border: none;
   color: var(--text-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 button,
 a {

@@ -3,12 +3,36 @@
   --primary-color: #282c40;
   --text-color: #f9f8f8;
   --secondary-text-color: #87a1c2;
+
   --active-color: #6f92bf;
   --highlight-active-color: #f26419;
   --highlight-compare-color: #f6ae2d;
   --highlight-pivot-color: #731d0a;
+
   --icon-width-large: 3rem;
   --icon-width-medium: 2.5rem;
   --icon-width-small: 1.5rem;
 }
 
+/* light mode */
+:root[data-theme='light'] {
+  --background-color: #d9d9d9;
+  --bar-color: #74757b;
+  --color-button: #282c40;
+  /* --text-color: #f9f8f8;
+  --primary-color: #282c40;
+  --secondary-text-color: #87a1c2;
+  --active-color: #6f92bf; */
+}
+
+/* dark mode */
+:root[data-theme='dark'] {
+  --background-color: #282c40;
+  --bar-color: #adadae;
+  --color-button: #f9f8f8;
+
+  /* --text-color: #222222;
+  --primary-color: #282c40;
+  --secondary-text-color: #5c7eab;
+  --active-color: #6f92bf; */
+}

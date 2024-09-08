@@ -27,7 +27,7 @@ export const useAlgorithm = ({
     useState<AlgorithmKeys>('selection');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [array, setArray] = useState(generateRandomArray(20, 240, 720));
+  const [array, setArray] = useState(generateRandomArray(20, 370, 900));
 
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
@@ -39,7 +39,7 @@ export const useAlgorithm = ({
   const resetAndInitAlgorithm = useCallback(
     (newLength?: number) => {
       const length = newLength ?? array.length;
-      setArray(generateRandomArray(length, 240, 720));
+      setArray(generateRandomArray(length, 370, 900));
       setAlgorithmState('notStarted');
       setTracking({
         activeIndex: null,

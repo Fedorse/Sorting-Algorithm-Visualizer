@@ -8,15 +8,15 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
-  backdrop-filter: blur(5px);
-  background-color: hsla(0, 0%, 0%, 0.799);
+  backdrop-filter: blur(10px);
+  background-color: hsla(0, 0%, 0%, 0.834);
   color: var(--text-color);
 }
 .modalContent {
   background-color: var(--primary-color);
-  padding: 2rem;
-  width: 60%;
-  height: 50%;
+  padding: 3rem;
+  width: auto;
+  height: auto;
   border-radius: 1rem;
   gap: 0.8rem;
   display: flex;
@@ -30,15 +30,20 @@
   margin-bottom: 1rem;
 }
 
-p,
-h3 {
-  font-size: x-large;
+p {
+  font-size: large;
   font-weight: 300;
 }
 
-.titleColor {
+.colorTitle {
   text-align: center;
-  margin-bottom: 1rem;
+  font-size: x-large;
+  font-weight: 300;
+  padding: 1.2rem;
+}
+.subTitle {
+  font-size: x-large;
+  font-weight: 300;
 }
 .colorContainer {
   display: grid;

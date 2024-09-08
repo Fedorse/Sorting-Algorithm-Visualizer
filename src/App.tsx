@@ -8,7 +8,6 @@ import { disableScroll } from './utils/disableScroll';
 import BarContainer from './components/BarContainer/BarContainer';
 import Navbar from './components/Navbar/Navbar';
 import Player from './components/Player/Player';
-import Modal from './components/Modal/Modal';
 
 const App = () => {
   const history: AlgorithmHistory = useHistory();
@@ -61,7 +60,6 @@ const App = () => {
 
   return (
     <main>
-      <Modal />
       <Navbar />
       <BarContainer {...step} />
       <Player

@@ -1,10 +1,14 @@
 .navContainer {
   display: flex;
-  gap: 10px;
-  justify-content: right;
-  padding: 10px;
+  gap: 0.7rem;
+  justify-content: space-between;
+  padding: 0.7rem;
 }
 .navButton {
   background-color: var(--background-color);
-  color: var(--primary-color);
+  color: var(--color-button);
+}
+.buttonInfo {
+  display: flex;
+  gap: 0.2rem;
 }

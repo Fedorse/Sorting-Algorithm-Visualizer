@@ -5,7 +5,7 @@
   margin: 1px;
   border: 1px solid var(--primary-color);
   border-radius: 3px;
-  background-color: #3c497343;
+  background-color: var(--bar-color);
   transform-style: preserve-3d;
 }
 .bar.active {
