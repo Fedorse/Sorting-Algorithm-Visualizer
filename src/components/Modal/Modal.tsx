@@ -7,7 +7,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
     <>
       <div className={classes.modal} onClick={onClose}>
         <div className={classes.modalContent}>
-          <h2 className={classes.modalTitle}>Sorting Algorithm Visualizer</h2>
+          <h1 className={classes.modalTitle}>Sorting Algorithm Visualizer</h1>
           <h3 className={classes.subTitle}>
             <span className={classes.textColor}>Pick an Algorithm .</span>
           </h3>
