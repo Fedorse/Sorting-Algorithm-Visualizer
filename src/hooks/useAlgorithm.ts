@@ -92,6 +92,10 @@ export const useAlgorithm = ({
 
   const selectAlgorithm = useCallback(
     (name: AlgorithmKeys) => {
+      if (algorithmState === 'notStarted') {
+        setSelectedAlgorithm(name);
+        return;
+      }
       resetAll(array.length);
       setSelectedAlgorithm(name);
     },

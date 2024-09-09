@@ -23,7 +23,7 @@
 :root[data-theme='dark'] {
   --background-color: hsl(230, 23%, 20%);
   --active-color: hsl(226, 31%, 34%);
-  --bar-color: hsla(232, 10%, 46%, 0.2);
+  --bar-color: hsla(232, 10%, 46%, 0.3);
   --color-button: hsl(0, 8%, 97%);
   --highlight-compare-color: hsl(27, 87%, 67%);
   --highlight-active-color: hsl(11, 58%, 45%);

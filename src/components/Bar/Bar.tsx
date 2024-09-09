@@ -1,12 +1,17 @@
 import './Bar.css';
 
-type IndexType = 'active' | 'compare' | 'pivot' | 'sorted' | null;
+type IndexType =
+  | 'active'
+  | 'compare'
+  | 'pivot'
+  | 'sorted'
+  | 'notStarted'
+  | null;
 
 type BarProps = {
   width: number;
   height: number;
   indexType: IndexType;
-  isNotStarted: boolean;
 };
 
 const Bar: React.FC<BarProps> = ({ width, height, indexType }) => {

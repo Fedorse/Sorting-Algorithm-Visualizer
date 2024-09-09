@@ -1,22 +1,23 @@
 import Bar from '../Bar/Bar';
-import { Tracking } from '../../hooks';
+import type { Tracking } from '../../hooks';
+import type { AlgorithmState } from '../../hooks';
 
 import clasess from './BarContainer.module.css';
 
 type BarContainerProps = {
   array: number[];
   tracking: Tracking;
+  algorithmState: AlgorithmState;
 };
 
 const getIndexType = (
   index: number,
   tracking: Tracking,
-  algorithmState: string,
+  algorithmState: AlgorithmState,
 ) => {
   if (algorithmState === 'notStarted') {
     return 'notStarted';
-  }
-  if (index === tracking.activeIndex) {
+  } else if (index === tracking.activeIndex) {
     return 'active';
   } else if (index === tracking.compareIndex) {
     return 'compare';
