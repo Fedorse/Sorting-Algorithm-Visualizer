@@ -7,12 +7,12 @@ import type { History } from './useHistory';
 
 export type AlgorithmState = 'notStarted' | 'started' | 'finished';
 
-export type Tracking = Partial<{
+export type Tracking = {
   activeIndex: number | null;
   compareIndex: number | null;
   pivotIndex: number | null;
   sortedIndices: number[];
-}>;
+};
 
 export type AlgorithmHistory = History<{ tracking: Tracking; array: number[] }>;
 
@@ -27,7 +27,7 @@ export const useAlgorithm = ({
     useState<AlgorithmKeys>('bubble');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [array, setArray] = useState(generateRandomArray(20, 370, 900));
+  const [array, setArray] = useState(generateRandomArray(10, 370, 900));
 
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
@@ -60,34 +60,25 @@ export const useAlgorithm = ({
     [resetAndInitAlgorithm, history, player],
   );
 
-  const updateArray = useCallback(
-    (newArray: number[]) => {
+  const updateUI = useCallback(
+    (newArray: number[], newTracking: Partial<Tracking> = {}) => {
       setArray([...newArray]);
-      history.updateHistory({ array: [...newArray], tracking });
-    },
-    [setArray, history, tracking],
-  );
-
-  const updateTracking = useCallback(
-    (newTracking: Tracking) => {
       setTracking((current) => {
-        const nextSortedIndices = [
-          ...(current.sortedIndices || []),
-          ...(newTracking.sortedIndices || []),
-        ];
-
         const nextTracking = {
           ...current,
           ...newTracking,
-          sortedIndices: nextSortedIndices,
+          sortedIndices: [
+            ...current.sortedIndices,
+            ...(newTracking.sortedIndices || []),
+          ],
         };
 
-        history.updateHistory({ array: [...array], tracking: nextTracking });
+        history.updateHistory({ array: [...newArray], tracking: nextTracking });
 
         return nextTracking;
       });
     },
-    [setTracking, history, array, tracking],
+    [setArray, setTracking, history],
   );
 
   const selectAlgorithm = useCallback(
@@ -112,8 +103,7 @@ export const useAlgorithm = ({
 
     await algorithm({
       array,
-      updateArray,
-      updateTracking,
+      updateUI,
       history: historyRef,
       player: playerRef,
     });
@@ -124,15 +114,7 @@ export const useAlgorithm = ({
       pivotIndex: null,
     }));
     setAlgorithmState('finished');
-  }, [
-    selectedAlgorithm,
-    array,
-    history,
-    player,
-    updateArray,
-    setAlgorithmState,
-    updateTracking,
-  ]);
+  }, [selectedAlgorithm, array, history, player, setAlgorithmState, updateUI]);
 
   const getCurrentStep = useCallback(() => {
     const { getCurrentHistoryItem } = history;

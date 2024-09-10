@@ -1,94 +1,83 @@
-import { AlgorithmHistory, Player } from '../hooks';
-import { Tracking } from '../hooks';
 import { pause } from '../utils/pause';
-import { AlgorithmFunction } from './types';
+import { AlgorithmArgs, AlgorithmFunction } from './types';
 
-type PartitonArg = {
-  arr: number[];
+type PartitionArg = {
+  array: number[];
   start: number;
   end: number;
-  updateArray: (array: number[]) => void;
-  updateTracking: (tracking: Tracking) => void;
-  history: AlgorithmHistory['historyRef'];
-  player: Player['playerRef'];
-};
+} & AlgorithmArgs;
 
 const partition = async ({
-  arr,
+  array,
   start,
   end,
-  updateArray,
-  updateTracking,
+  updateUI,
   history,
   player,
-}: PartitonArg): Promise<number> => {
-  const pivotElement = arr[end];
+}: PartitionArg): Promise<number> => {
+  const pivotElement = array[end];
   let partitionIndex = start;
 
   for (let i = start; i < end; i++) {
-    updateTracking({ pivotIndex: end });
+    updateUI(array, { pivotIndex: end });
 
-    if (arr[i] < pivotElement) {
-      updateTracking({
+    if (array[i] < pivotElement) {
+      updateUI(array, {
         activeIndex: i,
         compareIndex: partitionIndex,
       });
 
-      [arr[i], arr[partitionIndex]] = [arr[partitionIndex], arr[i]];
+      [array[i], array[partitionIndex]] = [array[partitionIndex], array[i]];
       await pause({ history, player });
 
       partitionIndex++;
     }
   }
 
-  [arr[partitionIndex], arr[end]] = [arr[end], arr[partitionIndex]];
-  updateArray(arr);
+  [array[partitionIndex], array[end]] = [array[end], array[partitionIndex]];
+  updateUI(array);
 
   return partitionIndex;
 };
 
 const quickSortRecursive = async ({
-  arr,
+  array,
   start,
   end,
-  updateArray,
-  updateTracking,
+  updateUI,
   history,
   player,
-}: PartitonArg): Promise<void> => {
+}: PartitionArg): Promise<void> => {
   if (start >= end) {
     return;
   }
   await pause({ history, player });
 
   const index = await partition({
-    arr,
+    array,
     start,
     end,
-    updateArray,
-    updateTracking,
+    updateUI,
     history,
     player,
   });
 
-  updateTracking({ sortedIndices: [index] });
-  // left part arr
+  updateUI(array, { sortedIndices: [index] });
+
   await quickSortRecursive({
-    arr,
+    array,
     start,
     end: index - 1,
-    updateArray,
-    updateTracking,
+    updateUI,
     history,
     player,
   });
-  //right part arr
+
   await quickSortRecursive({
-    arr,
+    array,
     start: index + 1,
     end,
-    updateArray,
-    updateTracking,
+    updateUI,
     history,
     player,
   });
@@ -96,21 +85,19 @@ const quickSortRecursive = async ({
 
 export const quickSort: AlgorithmFunction = async ({
   array,
-  updateArray,
-  updateTracking,
+  updateUI,
   history,
   player,
 }) => {
   await quickSortRecursive({
-    arr: array,
+    array,
     start: 0,
     end: array.length - 1,
-    updateArray,
-    updateTracking,
+    updateUI,
     history,
     player,
   });
-  updateTracking({ sortedIndices: array.map((_, idx) => idx) });
+  updateUI(array, { sortedIndices: array.map((_, idx) => idx) });
 
   return array;
 };

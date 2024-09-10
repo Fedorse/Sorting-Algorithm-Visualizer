@@ -1,10 +1,13 @@
 import type { Player } from '../hooks/usePlayer';
 import type { AlgorithmHistory, Tracking } from '../hooks/useAlgorithm';
 
-export type AlgorithmFunction = (args: {
+export type AlgorithmArgs = {
   array: number[];
-  updateArray: (array: number[]) => void;
-  updateTracking: (tracking: Tracking) => void;
+  updateUI: (array: number[], tracking?: Partial<Tracking>) => void;
   history: AlgorithmHistory['historyRef'];
   player: Player['playerRef'];
-}) => Promise<void | number[]>;
+};
+
+export type AlgorithmFunction = (
+  args: AlgorithmArgs,
+) => Promise<void | number[]>;
