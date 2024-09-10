@@ -8,9 +8,9 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
       <div className={classes.modal} onClick={onClose}>
         <div className={classes.modalContent}>
           <h1 className={classes.modalTitle}>Sorting Algorithm Visualizer</h1>
-          <h3 className={classes.subTitle}>
+          <h2 className={classes.subTitle}>
             <span className={classes.textColor}>Pick an Algorithm .</span>
-          </h3>
+          </h2>
           <p>
             Select an <span className={classes.textColor}> Algorithm</span> ,
             adjust the array size using the slider and select speed.
@@ -22,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
             through the history.
           </p>
           <div className={classes.colorGuide}>
-            <h3 className={classes.colorTitle}>Color Guide</h3>
+            <h2 className={classes.colorTitle}>Color Guide</h2>
             <div className={classes.colorContainer}>
               <div className={classes.colorItem}>
                 <div

@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState } from 'react';
-import ResetIcon from '../icon/ResetIcon';
-import NextStepIcon from '../icon/NextStepIcon';
-import PreviousStepIcon from '../icon/PreviousStepIcon';
-import ResetPlayerIcon from '../icon/ResetPlayerIcon';
-import PlayIcon from '../icon/PlayIcon';
+import ResetIcon from '../Icons/ResetIcon';
+import NextStepIcon from '../Icons/NextStepIcon';
+import PreviousStepIcon from '../Icons/PreviousStepIcon';
+import ResetPlayerIcon from '../Icons/ResetPlayerIcon';
+import PlayIcon from '../Icons/PlayIcon';
 import InputRange from '../InputRange/InputRange';
 import Button from '../Button/Button';
-import PauseIcon from '../icon/PauseIcon';
+import PauseIcon from '../Icons/PauseIcon';
 import DropDown from '../DropDownAlgorithm/DropDownAlgorithm';
 import DropDownSpeed from '../DropDownSpeed/DropDownSpeed';
 
@@ -41,7 +41,7 @@ const Player: React.FC<PlayerProps> = ({
   algorithmState,
   playerState,
 }) => {
-  const [arrayLength, setArrayLength] = useState(10);
+  const [arrayLength, setArrayLength] = useState(20);
   const [isRotating, setIsRotating] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
@@ -105,6 +105,7 @@ const Player: React.FC<PlayerProps> = ({
           />
           <div className={classes.controlButtons}>
             <Button
+              aria-label="Previous step"
               isDisabled={algorithmState === 'notStarted'}
               onMouseDown={() => handleMouseDown(goToPreviousStep)}
               onMouseUp={handleMouseUpOrLeave}
@@ -116,9 +117,12 @@ const Player: React.FC<PlayerProps> = ({
               <PreviousStepIcon />
             </Button>
 
-            <Button onClick={handlePlay}>{getButtonIcon()}</Button>
+            <Button aria-label="Play/Pause" onClick={handlePlay}>
+              {getButtonIcon()}
+            </Button>
 
             <Button
+              aria-label="Next step"
               isDisabled={algorithmState === 'notStarted'}
               onMouseDown={() => handleMouseDown(goToNextStep)}
               onMouseUp={handleMouseUpOrLeave}
@@ -135,13 +139,12 @@ const Player: React.FC<PlayerProps> = ({
           </div>
         </div>
         <div className={classes.controlSpeed}>
-          <div>Size {arrayLength}</div>
           <InputRange
             arrayLength={arrayLength}
             handleArrayLengthChange={handleArrayLengthChange}
           />
 
-          <Button onClick={handleResetAlgorithm}>
+          <Button aria-label="Reset" onClick={handleResetAlgorithm}>
             <ResetIcon className="reset-icon" isRotating={isRotating} />
             <span>Reset</span>
           </Button>
