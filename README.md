@@ -4,7 +4,8 @@ Interactive tool for visualizing sorting algorithms with player functionality. Y
 
 Check out the [Sorting Algorithm Visualizer](https://algorithms-virid.vercel.app/) for a live demo.
 
-![chrome-capture-2024-09-10 (1)](./images/demo.gif)
+![demo](https://github.com/user-attachments/assets/efba11d2-415d-41bf-83d2-0b7b4d30bd3f)
+
 
 ## Technologies
 
