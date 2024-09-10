@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import useClickOutside from '../../actions/useClickOutside';
+import useClickOutside from '../../hooks/useClickOutside';
 import { speedDisplayMap } from './index';
 import classes from './DropDownSpeed.module.css';
-import SpeedIcon from '../icon/SpeedIcon';
+import SpeedIcon from '../Icons/SpeedIcon';
 import Button from '../Button/Button';
 
 type DropDowmProps = {
@@ -35,7 +35,7 @@ const DropDownSpeed: React.FC<DropDowmProps> = ({ speed, setSpeed }) => {
         isOpen ? `${classes.dropdown} ${classes.open}` : classes.dropdown
       }
     >
-      <Button onClick={toggleDropDown}>
+      <Button aria-label="Speed menu" onClick={toggleDropDown}>
         <SpeedIcon speed={speed} />
         <span>Speed </span>
       </Button>

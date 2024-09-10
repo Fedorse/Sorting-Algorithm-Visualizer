@@ -15,14 +15,18 @@ const InputRange: React.FC<InputRangeType> = ({
   };
 
   return (
-    <input
-      type="range"
-      value={arrayLength}
-      min={10}
-      max={60}
-      step={1}
-      onChange={handleChange}
-    />
+    <>
+      <label htmlFor="arrayRange">Size {arrayLength}</label>
+      <input
+        id="arrayRange"
+        type="range"
+        value={arrayLength}
+        min={10}
+        max={60}
+        step={1}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 

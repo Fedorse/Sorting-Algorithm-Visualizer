@@ -2,7 +2,7 @@ import Bar from '../Bar/Bar';
 import type { Tracking } from '../../hooks';
 import type { AlgorithmState } from '../../hooks';
 
-import clasess from './BarContainer.module.css';
+import classes from './BarContainer.module.css';
 
 type BarContainerProps = {
   array: number[];
@@ -40,7 +40,7 @@ const BarContainer: React.FC<BarContainerProps> = ({
 
   return (
     <section>
-      <div className={clasess.arr}>
+      <div className={classes.arr}>
         {array.map((heightPx, index) => (
           <Bar
             key={index}

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import useClickOutside from '../../actions/useClickOutside';
+import useClickOutside from '../../hooks/useClickOutside';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { algorithmNames, type AlgorithmKeys } from '../../algorithms';
 
@@ -40,7 +40,11 @@ const DropDown: React.FC<DropDowmProps> = ({
         isOpen ? `${classes.open} ${classes.dropdown}` : classes.dropdown
       }
     >
-      <Button className={classes.dropdownButton} onClick={toggleDropDown}>
+      <Button
+        aria-label="Algorithm menu"
+        className={classes.dropdownButton}
+        onClick={toggleDropDown}
+      >
         {capitalizeFirstLetter(selectedAlgorithm)}
       </Button>
 

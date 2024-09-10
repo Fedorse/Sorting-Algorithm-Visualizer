@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
-import GitHubIcon from '../icon/GitHubIcon';
-import InfoIcon from '../icon/InfoIcon';
+import GitHubIcon from '../Icons/GitHubIcon';
+import InfoIcon from '../Icons/InfoIcon';
 import Modal from '../Modal/Modal';
 
 import classes from './Navbar.module.css';
-import LightThemeIcon from '../icon/LightThemeIcon';
-import DarkThemeIcon from '../icon/DarkThemeIcon';
+import LightThemeIcon from '../Icons/LightThemeIcon';
+import DarkThemeIcon from '../Icons/DarkThemeIcon';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -41,11 +41,19 @@ const Navbar = () => {
   return (
     <nav>
       <div className={classes.navContainer}>
-        <Button onClick={toggleTheme} className={classes.navButton}>
+        <Button
+          aria-label="Toggle theme"
+          onClick={toggleTheme}
+          className={classes.navButton}
+        >
           {theme === 'light' ? <DarkThemeIcon /> : <LightThemeIcon />}
         </Button>
         <div className={classes.buttonInfo}>
-          <Button onClick={openModal} className={classes.navButton}>
+          <Button
+            aria-label="Info"
+            onClick={openModal}
+            className={classes.navButton}
+          >
             <InfoIcon />
           </Button>
           <a
@@ -53,7 +61,7 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button className={classes.navButton}>
+            <Button aria-label="GitHub" className={classes.navButton}>
               <GitHubIcon />
             </Button>
           </a>
