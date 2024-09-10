@@ -1,8 +1,13 @@
 .navContainer {
+  height: 10dvh;
+  max-height: 10dvh;
+  min-height: 10dvh;
+
   display: flex;
-  gap: 0.7rem;
+  gap: 1rem;
   justify-content: space-between;
-  padding: 0.7rem;
+  align-items: center;
+  padding: 1rem 0.7rem;
 }
 .navButton {
   background-color: var(--background-color);

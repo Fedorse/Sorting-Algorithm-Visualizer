@@ -16,7 +16,7 @@ type BarProps = {
 
 const Bar: React.FC<BarProps> = ({ width, height, indexType }) => {
   const barStyles = {
-    height: `${height}px`,
+    height: `${height}%`,
     width: `${width}px`,
   };
 

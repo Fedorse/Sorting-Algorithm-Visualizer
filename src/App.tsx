@@ -59,7 +59,7 @@ const App = () => {
   const step = getCurrentStep();
 
   return (
-    <main>
+    <>
       <Navbar />
       <BarContainer {...step} algorithmState={algorithmState} />
       <Player
@@ -74,7 +74,7 @@ const App = () => {
         algorithmState={algorithmState}
         playerState={player.playerState}
       />
-    </main>
+    </>
   );
 };
 

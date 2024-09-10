@@ -1,5 +1,7 @@
 .arr {
-  min-height: 100vh;
+  height: 90dvh;
+  max-height: 90dvh;
+  min-height: 90dvh;
   width: 100%;
   display: flex;
   align-items: flex-end;

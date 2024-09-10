@@ -96,59 +96,57 @@ const Player: React.FC<PlayerProps> = ({
   }, [algorithmState, playerState]);
 
   return (
-    <section>
-      <div className={classes.playerContainer}>
-        <div className={classes.controls}>
-          <DropDown
-            selectAlgorithm={selectAlgorithm}
-            selectedAlgorithm={selectedAlgorithm}
-          />
-          <div className={classes.controlButtons}>
-            <Button
-              aria-label="Previous step"
-              isDisabled={algorithmState === 'notStarted'}
-              onMouseDown={() => handleMouseDown(goToPreviousStep)}
-              onMouseUp={handleMouseUpOrLeave}
-              onMouseLeave={handleMouseUpOrLeave}
-              onTouchStart={() => handleMouseDown(goToPreviousStep)}
-              onTouchEnd={handleMouseUpOrLeave}
-              onTouchCancel={handleMouseUpOrLeave}
-            >
-              <PreviousStepIcon />
-            </Button>
+    <section className={classes.playerContainer}>
+      <div className={classes.controls}>
+        <DropDown
+          selectAlgorithm={selectAlgorithm}
+          selectedAlgorithm={selectedAlgorithm}
+        />
+        <div className={classes.controlButtons}>
+          <Button
+            aria-label="Previous step"
+            isDisabled={algorithmState === 'notStarted'}
+            onMouseDown={() => handleMouseDown(goToPreviousStep)}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
+            onTouchStart={() => handleMouseDown(goToPreviousStep)}
+            onTouchEnd={handleMouseUpOrLeave}
+            onTouchCancel={handleMouseUpOrLeave}
+          >
+            <PreviousStepIcon />
+          </Button>
 
-            <Button aria-label="Play/Pause" onClick={handlePlay}>
-              {getButtonIcon()}
-            </Button>
+          <Button aria-label="Play/Pause" onClick={handlePlay}>
+            {getButtonIcon()}
+          </Button>
 
-            <Button
-              aria-label="Next step"
-              isDisabled={algorithmState === 'notStarted'}
-              onMouseDown={() => handleMouseDown(goToNextStep)}
-              onMouseUp={handleMouseUpOrLeave}
-              onMouseLeave={handleMouseUpOrLeave}
-              onTouchStart={() => handleMouseDown(goToNextStep)}
-              onTouchEnd={handleMouseUpOrLeave}
-              onTouchCancel={handleMouseUpOrLeave}
-            >
-              <NextStepIcon />
-            </Button>
-          </div>
-          <div className={classes.speedButton}>
-            <DropDownSpeed speed={speed} setSpeed={setSpeed} />
-          </div>
-        </div>
-        <div className={classes.controlSpeed}>
-          <InputRange
-            arrayLength={arrayLength}
-            handleArrayLengthChange={handleArrayLengthChange}
-          />
-
-          <Button aria-label="Reset" onClick={handleResetAlgorithm}>
-            <ResetIcon className="reset-icon" isRotating={isRotating} />
-            <span>Reset</span>
+          <Button
+            aria-label="Next step"
+            isDisabled={algorithmState === 'notStarted'}
+            onMouseDown={() => handleMouseDown(goToNextStep)}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
+            onTouchStart={() => handleMouseDown(goToNextStep)}
+            onTouchEnd={handleMouseUpOrLeave}
+            onTouchCancel={handleMouseUpOrLeave}
+          >
+            <NextStepIcon />
           </Button>
         </div>
+        <div className={classes.speedButton}>
+          <DropDownSpeed speed={speed} setSpeed={setSpeed} />
+        </div>
+      </div>
+      <div className={classes.controlSpeed}>
+        <InputRange
+          arrayLength={arrayLength}
+          handleArrayLengthChange={handleArrayLengthChange}
+        />
+
+        <Button aria-label="Reset" onClick={handleResetAlgorithm}>
+          <ResetIcon className="reset-icon" isRotating={isRotating} />
+          <span>Reset</span>
+        </Button>
       </div>
     </section>
   );

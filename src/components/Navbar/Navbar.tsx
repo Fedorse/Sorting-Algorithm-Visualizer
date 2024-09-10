@@ -39,8 +39,8 @@ const Navbar = () => {
     localStorage.setItem('app-theme', newTheme);
   };
   return (
-    <nav>
-      <div className={classes.navContainer}>
+    <>
+      <nav className={classes.navContainer}>
         <Button
           aria-label="Toggle theme"
           onClick={toggleTheme}
@@ -66,9 +66,9 @@ const Navbar = () => {
             </Button>
           </a>
         </div>
-      </div>
+      </nav>
       {isModalOpen && <Modal onClose={closeModal} />}
-    </nav>
+    </>
   );
 };
 
