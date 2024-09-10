@@ -27,7 +27,7 @@ export const useAlgorithm = ({
     useState<AlgorithmKeys>('bubble');
   const [algorithmState, setAlgorithmState] =
     useState<AlgorithmState>('notStarted');
-  const [array, setArray] = useState(generateRandomArray(10, 370, 900));
+  const [array, setArray] = useState(generateRandomArray(10, 420, 900));
 
   const [tracking, setTracking] = useState<Tracking>({
     activeIndex: null,
@@ -39,7 +39,7 @@ export const useAlgorithm = ({
   const resetAndInitAlgorithm = useCallback(
     (newLength?: number) => {
       const length = newLength ?? array.length;
-      setArray(generateRandomArray(length, 370, 900));
+      setArray(generateRandomArray(length, 420, 900));
       setAlgorithmState('notStarted');
       setTracking({
         activeIndex: null,
