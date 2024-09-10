@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://algorithms-virid.vercel.app/sitemap.xml
