@@ -1,4 +1,34 @@
-@import 'variables.css';
+:root {
+  --primary-color: hsl(230, 23%, 20%);
+  --text-color: hsl(0, 8%, 97%);
+  --secondary-text-color: hsl(214, 33%, 65%);
+  --icon-width-large: 3rem;
+  --icon-width-medium: 2.5rem;
+  --icon-width-small: 1.5rem;
+}
+
+/* light mode */
+:root[data-theme='light'] {
+  --background-color: hsl(210, 36%, 96%);
+  --active-color: hsl(228, 31%, 34%);
+  --bar-color: hsla(230, 10%, 46%, 0.1);
+  --color-button: hsl(230, 23%, 20%);
+  --highlight-compare-color: hsla(27, 87%, 67%, 0.8);
+  --highlight-active-color: hsla(11, 58%, 45%, 0.8);
+  --highlight-pivot-color: hsla(248, 54%, 67%, 0.8);
+}
+
+/* dark mode */
+:root[data-theme='dark'] {
+  --background-color: hsl(230, 23%, 20%);
+  --active-color: hsl(226, 31%, 34%);
+  --bar-color: hsla(232, 10%, 46%, 0.3);
+  --color-button: hsl(0, 8%, 97%);
+  --highlight-compare-color: hsl(27, 87%, 67%);
+  --highlight-active-color: hsl(11, 58%, 45%);
+  --highlight-pivot-color: hsl(248, 54%, 67%);
+}
+
 * {
   margin: 0;
   padding: 0;
