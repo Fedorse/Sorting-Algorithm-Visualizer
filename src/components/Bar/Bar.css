@@ -1,5 +1,5 @@
 .bar {
-  transition: background-color 0.1s;
+  transition: background-color 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   margin: 1px;
   border: 1px solid var(--active-color);
   border-radius: 3px;
@@ -17,6 +17,7 @@
 }
 .bar.sorted {
   background-color: var(--active-color);
+  transition: background-color 0.2s cubic-bezier(0, 0, 0.58, 1);
 }
 .bar.notStarted {
   transition: height 0.5s ease-in-out;

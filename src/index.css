@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 body {
   background-color: var(--background-color);
@@ -41,17 +42,20 @@ body {
   transform: scale(1.1);
 }
 
-@keyframes rotate360 {
-  from {
-    transform: rotate(0deg);
+@keyframes rotateAndScale {
+  0% {
+    transform: rotate(0deg) scale(0.8);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: rotate(180deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
   }
 }
 
 .reset-icon.rotating {
-  animation: rotate360 0.3s linear;
+  animation: rotateAndScale 0.3s ease-in-out;
 }
 
 @media (max-width: 768px) {

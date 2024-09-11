@@ -9,7 +9,7 @@ export const selectionSort: AlgorithmFunction = async ({
 }) => {
   for (let i = 0; i < array.length; i++) {
     let indexMin = i;
-    updateUI(array, { pivotIndex: indexMin });
+    updateUI(array, { activeIndex: indexMin });
 
     for (let j = i + 1; j < array.length; j++) {
       await pause({ history, player });

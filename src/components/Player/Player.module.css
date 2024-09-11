@@ -37,7 +37,6 @@
 .controlButtons button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  pointer-events: none;
 }
 
 .speedButton {
@@ -62,5 +61,9 @@
 
   .playerContainer {
     height: 8rem;
+  }
+  .controlButtons button:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
   }
 }
